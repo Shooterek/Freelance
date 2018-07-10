@@ -4,12 +4,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freelance", "Freelance\Freelance.csproj", "{95762B67-C66F-4B73-80ED-BEFB90C6361D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C37B4166-89CA-4167-818A-385237C2D419} = {C37B4166-89CA-4167-818A-385237C2D419}
+		{11C8FBBB-1C4B-4B66-A156-F9AB5EB0205E} = {11C8FBBB-1C4B-4B66-A156-F9AB5EB0205E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freelance.Tests", "Freelance.Tests\Freelance.Tests.csproj", "{EAB29934-E9E6-49D2-B2D6-4E6295676EC6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C37B4166-89CA-4167-818A-385237C2D419} = {C37B4166-89CA-4167-818A-385237C2D419}
+		{11C8FBBB-1C4B-4B66-A156-F9AB5EB0205E} = {11C8FBBB-1C4B-4B66-A156-F9AB5EB0205E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freelance.Core", "Freelance.Core\Freelance.Core.csproj", "{11C8FBBB-1C4B-4B66-A156-F9AB5EB0205E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freelance.Infrastructure", "Freelance.Infrastructure\Freelance.Infrastructure.csproj", "{C37B4166-89CA-4167-818A-385237C2D419}"
+	ProjectSection(ProjectDependencies) = postProject
+		{11C8FBBB-1C4B-4B66-A156-F9AB5EB0205E} = {11C8FBBB-1C4B-4B66-A156-F9AB5EB0205E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
