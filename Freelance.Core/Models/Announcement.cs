@@ -22,8 +22,8 @@ namespace Freelance.Core.Models
 
         public string Location { get; set; }
 
-        public int IndustryId { get; set; }
+        public int ServiceTypeId { get; set; }
 
-        public Industry Industry { get; set; }
+        public virtual ServiceType ServiceType { get; set; }
     }
 }

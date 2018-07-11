@@ -57,12 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IEntity.cs" />
-    <Compile Include="Models\Industry.cs" />
+    <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
