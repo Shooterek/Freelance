@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Freelance.Core.Models;
 using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Repositories;
+using Freelance.Infrastructure.Services.Implementations;
+using Freelance.Infrastructure.Services.Interfaces;
 using Ninject;
 using Ninject.Web.Common;
 
@@ -35,6 +37,7 @@ namespace Freelance.Infrastructure
         {
             kernel.Bind<IAnnouncementRepository>().To<AnnouncementRepository>().InRequestScope();
             kernel.Bind<IServiceTypeRepository>().To<ServiceTypeRepository>().InRequestScope();
+            kernel.Bind<IAnnouncementService>().To<AnnouncementService>().InRequestScope();
 
             kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
         }

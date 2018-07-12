@@ -1,0 +1,15 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Freelance.Core.Models;
+using Freelance.Infrastructure.ViewModels;
+
+namespace Freelance.Infrastructure.Services.Interfaces
+{
+    public interface IAnnouncementService
+    {
+        Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount);
+        Task<AnnouncementsListViewModel> GetAnnouncementsByUserIdAsync(string userId, int page, int amount);
+        Task UpdateAnnouncementAsync(Announcement announcement);
+        Task RemoveAnnouncementAsync(int announcementId);
+    }
+}
