@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Freelance.Core.Repositories;
 
 namespace Freelance.Controllers
 {
+    //TODO Set logger.
     public class HomeController : Controller
     {
         private IServiceTypeRepository _serviceTypeRepository;
@@ -16,9 +18,9 @@ namespace Freelance.Controllers
             _serviceTypeRepository = serviceTypeRepository;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            _serviceTypeRepository.GetAllAsync();
+            await _serviceTypeRepository.GetAllAsync();
             return View();
         }
 

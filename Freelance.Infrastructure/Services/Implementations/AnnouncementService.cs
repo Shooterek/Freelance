@@ -46,6 +46,13 @@ namespace Freelance.Infrastructure.Services.Implementations
             return new AnnouncementsListViewModel() { Announcements = announcements, PagingInfo = pagingInfo };
         }
 
+        public async Task<Announcement> GetAnnouncementById(int announcementId)
+        {
+            var result = await _announcementRepository.GetByIdAsync(announcementId);
+
+            return result.Entity;
+        }
+
         public async Task UpdateAnnouncementAsync(Announcement announcement)
         {
             var result = await _announcementRepository.UpdateAsync(announcement);
