@@ -14,10 +14,10 @@ namespace Freelance.Controllers
 {
     public class AnnouncementsController : Controller
     {
-        private IAnnouncementService _announcementService;
+        private IAnnouncementsService _announcementService;
         private const int PageSize = 5;
 
-        public AnnouncementsController(IAnnouncementService announcementService)
+        public AnnouncementsController(IAnnouncementsService announcementService)
         {
             _announcementService = announcementService;
         }

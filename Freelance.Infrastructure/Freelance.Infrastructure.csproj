@@ -59,10 +59,10 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AnnouncementRepository.cs" />
-    <Compile Include="Repositories\ServiceTypeRepository.cs" />
-    <Compile Include="Services\Implementations\AnnouncementService.cs" />
-    <Compile Include="Services\Interfaces\IAnnouncementService.cs" />
+    <Compile Include="Repositories\AnnouncementsRepository.cs" />
+    <Compile Include="Repositories\ServiceTypesRepository.cs" />
+    <Compile Include="Services\Implementations\AnnouncementsService.cs" />
+    <Compile Include="Services\Interfaces\IAnnouncementsService.cs" />
     <Compile Include="Utils\PagingInfo.cs" />
     <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />
   </ItemGroup>

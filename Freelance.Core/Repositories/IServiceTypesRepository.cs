@@ -6,7 +6,7 @@ using Freelance.Core.Models;
 
 namespace Freelance.Core.Repositories
 {
-    public interface IServiceTypeRepository : IRepository
+    public interface IServiceTypesRepository : IRepository
     {
         Task<RepositoryActionResult<ICollection<ServiceType>>> GetAllAsync();
         Task<RepositoryActionResult<ServiceType>> GetByIdAsync(int id);

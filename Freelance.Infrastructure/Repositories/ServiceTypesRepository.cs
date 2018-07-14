@@ -9,11 +9,11 @@ using Freelance.Core.Repositories;
 
 namespace Freelance.Infrastructure.Repositories
 {
-    public class ServiceTypeRepository : IServiceTypeRepository
+    public class ServiceTypesRepository : IServiceTypesRepository
     {
         private ApplicationDbContext _context;
 
-        public ServiceTypeRepository(ApplicationDbContext context)
+        public ServiceTypesRepository(ApplicationDbContext context)
         {
             _context = context;
         }

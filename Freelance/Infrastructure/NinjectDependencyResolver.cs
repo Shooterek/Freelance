@@ -35,9 +35,9 @@ namespace Freelance.Infrastructure
 
         private void AddBindings()
         {
-            kernel.Bind<IAnnouncementRepository>().To<AnnouncementRepository>().InRequestScope();
-            kernel.Bind<IServiceTypeRepository>().To<ServiceTypeRepository>().InRequestScope();
-            kernel.Bind<IAnnouncementService>().To<AnnouncementService>().InRequestScope();
+            kernel.Bind<IAnnouncementsRepository>().To<AnnouncementsRepository>().InRequestScope();
+            kernel.Bind<IServiceTypesRepository>().To<ServiceTypesRepository>().InRequestScope();
+            kernel.Bind<IAnnouncementsService>().To<AnnouncementsService>().InRequestScope();
 
             kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
         }

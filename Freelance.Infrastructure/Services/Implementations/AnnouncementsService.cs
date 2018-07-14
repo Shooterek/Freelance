@@ -11,11 +11,11 @@ using Freelance.Infrastructure.ViewModels;
 
 namespace Freelance.Infrastructure.Services.Implementations
 {
-    public class AnnouncementService : IAnnouncementService
+    public class AnnouncementsService : IAnnouncementsService
     {
-        private IAnnouncementRepository _announcementRepository;
+        private IAnnouncementsRepository _announcementRepository;
 
-        public AnnouncementService(IAnnouncementRepository announcementRepository)
+        public AnnouncementsService(IAnnouncementsRepository announcementRepository)
         {
             _announcementRepository = announcementRepository;
         }

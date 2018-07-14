@@ -8,11 +8,11 @@ using Freelance.Core.Repositories;
 
 namespace Freelance.Infrastructure.Repositories
 {
-    public class AnnouncementRepository : IAnnouncementRepository
+    public class AnnouncementsRepository : IAnnouncementsRepository
     {
         private ApplicationDbContext _context;
 
-        public AnnouncementRepository(ApplicationDbContext context)
+        public AnnouncementsRepository(ApplicationDbContext context)
         {
             _context = context;
         }

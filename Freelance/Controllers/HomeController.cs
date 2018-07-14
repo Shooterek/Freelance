@@ -11,9 +11,9 @@ namespace Freelance.Controllers
     //TODO Set logger.
     public class HomeController : Controller
     {
-        private IServiceTypeRepository _serviceTypeRepository;
+        private IServiceTypesRepository _serviceTypeRepository;
 
-        public HomeController(IServiceTypeRepository serviceTypeRepository)
+        public HomeController(IServiceTypesRepository serviceTypeRepository)
         {
             _serviceTypeRepository = serviceTypeRepository;
         }

@@ -6,7 +6,7 @@ using Freelance.Core.Models;
 
 namespace Freelance.Core.Repositories
 {
-    public interface IAnnouncementRepository : IRepository
+    public interface IAnnouncementsRepository : IRepository
     {
         Task<RepositoryActionResult<ICollection<Announcement>>> GetAllAsync();
         Task<RepositoryActionResult<Announcement>> GetByIdAsync(int id);

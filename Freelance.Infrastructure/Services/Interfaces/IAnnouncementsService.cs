@@ -5,7 +5,7 @@ using Freelance.Infrastructure.ViewModels;
 
 namespace Freelance.Infrastructure.Services.Interfaces
 {
-    public interface IAnnouncementService
+    public interface IAnnouncementsService
     {
         Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount);
         Task<AnnouncementsListViewModel> GetAnnouncementsByUserIdAsync(string userId, int page, int amount);
