@@ -116,10 +116,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\UnitTest1.cs" />
     <Compile Include="DbAsyncQueryProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AnnouncementRepositoryTests.cs" />
+    <Compile Include="Repositories\AnnouncementsRepositoryTests.cs" />
+    <Compile Include="Repositories\ServiceTypesRepositoryTests.cs" />
+    <Compile Include="Services\AnnouncementsServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -141,7 +142,9 @@
       <Name>Freelance</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
