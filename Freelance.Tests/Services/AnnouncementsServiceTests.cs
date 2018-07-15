@@ -32,9 +32,9 @@ namespace Freelance.Tests.Services
 
             var data = new List<Announcement>()
             {
-                new Announcement() {AnnouncementId = _existingId, Summary = "Announcement1"},
-                new Announcement() {AnnouncementId = 2, Summary = "Announcement2"},
-                new Announcement() {AnnouncementId = 3, Summary = "Announcement3"}
+                new Announcement() {AnnouncementId = _existingId, Summary = "Announcement1", ServiceTypeId = 1, AdvertiserId = "User1"},
+                new Announcement() {AnnouncementId = 2, Summary = "Announcement2", ServiceTypeId = 1, AdvertiserId = "User2"},
+                new Announcement() {AnnouncementId = 3, Summary = "Announcement3", ServiceTypeId = 2, AdvertiserId = "User1"}
             };
 
             _initialAmount = data.Count;
@@ -49,6 +49,14 @@ namespace Freelance.Tests.Services
                     var status = entity != null ? RepositoryStatus.Ok : RepositoryStatus.NotFound;
 
                     return new RepositoryActionResult<Announcement>(entity, status);
+                });
+
+            announcementsRepositoryMock.Setup(r => r.GetByServiceTypeAsync(It.IsAny<ServiceType>()))
+                .ReturnsAsync((ServiceType x) =>
+                {
+                    var entities = data.Where(a => a.ServiceTypeId == x.ServiceTypeId).ToList();
+
+                    return new RepositoryActionResult<ICollection<Announcement>>(entities, RepositoryStatus.Ok);
                 });
 
             announcementsRepositoryMock.Setup(r => r.AddAsync(It.IsNotNull<Announcement>()))
@@ -112,6 +120,42 @@ namespace Freelance.Tests.Services
             Assert.AreEqual(amountOfItemsToGet, result.PagingInfo.ItemsPerPage);
             Assert.AreEqual(page, result.PagingInfo.CurrentPage);
             Assert.AreEqual(_initialAmount, result.PagingInfo.TotalItems);
+        }
+
+        [TestMethod]
+        public async Task GetByIdAsync_ShouldReturnItemWithSpecifiedId_IfContainsItemWithSpecifiedId()
+        {
+            var result = await _announcementsService.GetAnnouncementByIdAsync(_existingId);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(_existingId, result.AnnouncementId);
+        }
+
+        [TestMethod]
+        public async Task GetByServiceType_ShouldReturnItemsFromServiceType()
+        {
+            int amountOfItemsToGet = 5;
+            int page = 1;
+            var result = await _announcementsService.GetAnnouncementsByServiceTypeAsync(new ServiceType() {ServiceTypeId = 1},
+                page, amountOfItemsToGet);
+
+            foreach (var announcement in result.Announcements)
+            {
+                Assert.AreEqual(1, announcement.ServiceTypeId);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddAsync_ShouldAddSpecifiedElement()
+        {
+            var result =
+                await _announcementsService.AddAnnouncementAsync(new Announcement() {AnnouncementId = _notExistingId});
+
+            var entity = await _announcementsService.GetAnnouncementByIdAsync(_notExistingId);
+            var allEntities = await _announcementsService.GetAnnouncementsAsync(1, _initialAmount + 1);
+
+            Assert.AreEqual(result, entity);
+            Assert.AreEqual(_initialAmount + 1, allEntities.Announcements.Count);
         }
     }
 }

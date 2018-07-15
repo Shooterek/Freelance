@@ -37,7 +37,7 @@ namespace Freelance.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Announcement announcement = await _announcementService.GetAnnouncementById(id.Value);
+            Announcement announcement = await _announcementService.GetAnnouncementByIdAsync(id.Value);
             if (announcement == null)
             {
                 return HttpNotFound();

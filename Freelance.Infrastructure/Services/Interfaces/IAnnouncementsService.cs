@@ -8,8 +8,10 @@ namespace Freelance.Infrastructure.Services.Interfaces
     public interface IAnnouncementsService
     {
         Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount);
+        Task<AnnouncementsListViewModel> GetAnnouncementsByServiceTypeAsync(ServiceType serviceType, int page, int amount);
         Task<AnnouncementsListViewModel> GetAnnouncementsByUserIdAsync(string userId, int page, int amount);
-        Task<Announcement> GetAnnouncementById(int announcementId);
+        Task<Announcement> GetAnnouncementByIdAsync(int announcementId);
+        Task<Announcement> AddAnnouncementAsync(Announcement announcement);
         Task UpdateAnnouncementAsync(Announcement announcement);
         Task RemoveAnnouncementAsync(int announcementId);
     }

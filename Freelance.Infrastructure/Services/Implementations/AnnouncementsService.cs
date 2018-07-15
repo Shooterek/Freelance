@@ -32,6 +32,19 @@ namespace Freelance.Infrastructure.Services.Implementations
             return new AnnouncementsListViewModel() {Announcements = announcements, PagingInfo = pagingInfo};
         }
 
+        public async Task<AnnouncementsListViewModel> GetAnnouncementsByServiceTypeAsync(ServiceType serviceType, int page, int amount)
+        {
+            var result = await _announcementRepository.GetAllAsync();
+
+            var entitiesByServiceType = result.Entity.Where(a => a.ServiceTypeId == serviceType.ServiceTypeId).ToList();
+
+            var totalItems = result.Entity.Count;
+            var pagingInfo = new PagingInfo(page, amount, totalItems);
+
+            var entities = entitiesByServiceType.Skip((page - 1) * amount).Take(amount).ToList();
+            return new AnnouncementsListViewModel() {Announcements = entities, PagingInfo = pagingInfo};
+        }
+
         public async Task<AnnouncementsListViewModel> GetAnnouncementsByUserIdAsync(string userId, int page, int amount)
         {
             var result = await _announcementRepository.GetAllAsync();
@@ -46,11 +59,23 @@ namespace Freelance.Infrastructure.Services.Implementations
             return new AnnouncementsListViewModel() { Announcements = announcements, PagingInfo = pagingInfo };
         }
 
-        public async Task<Announcement> GetAnnouncementById(int announcementId)
+        public async Task<Announcement> GetAnnouncementByIdAsync(int announcementId)
         {
             var result = await _announcementRepository.GetByIdAsync(announcementId);
 
             return result.Entity;
+        }
+
+        public async Task<Announcement> AddAnnouncementAsync(Announcement announcement)
+        {
+            var result = await _announcementRepository.AddAsync(announcement);
+
+            if (result.Status == RepositoryStatus.Created)
+            {
+                return result.Entity;
+            }
+
+            return null;
         }
 
         public async Task UpdateAnnouncementAsync(Announcement announcement)
