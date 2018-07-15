@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 using Freelance.Core.Models;
 using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Repositories;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 
 namespace Freelance.Tests.Repositories
 {
-    [TestClass]
+    [TestFixture]
     public class ServiceTypesRepositoryTests
     {
         private Mock<ApplicationDbContext> _dbContextMock;
@@ -23,7 +23,7 @@ namespace Freelance.Tests.Repositories
         private int _existingId;
 
         #region Initialize
-        [TestInitialize]
+        [SetUp]
         public void Prepare()
         {
             _existingId = 1;
@@ -58,7 +58,7 @@ namespace Freelance.Tests.Repositories
         #endregion
 
         #region CleanUp
-        [TestCleanup]
+        [TearDown]
         public void CleanUp()
         {
             _dbContextMock = null;
@@ -70,7 +70,7 @@ namespace Freelance.Tests.Repositories
         }
         #endregion
 
-        [TestMethod]
+        [Test]
         public async Task AddAsync_ShouldCallAddAndSaveChangesAsyncOnce()
         {
             var repository = new ServiceTypesRepository(_dbContextMock.Object);
@@ -80,7 +80,7 @@ namespace Freelance.Tests.Repositories
             _dbContextMock.Verify(m => m.SaveChangesAsync(), Times.Once());
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetAllAsync_ShouldReturnAllAnnouncements()
         {
             var result = await new ServiceTypesRepository(_dbContextMock.Object).GetAllAsync();
@@ -88,7 +88,7 @@ namespace Freelance.Tests.Repositories
             Assert.AreEqual(_initialAmount, result.Entity.Count);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetByIdAsync_ShouldReturnRepositoryStatusNotFound_WhenNotContainingEntityWithSpecifiedId()
         {
             var repository = new ServiceTypesRepository(_dbContextMock.Object);
@@ -98,7 +98,7 @@ namespace Freelance.Tests.Repositories
             Assert.AreEqual(RepositoryStatus.NotFound, result.Status);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetByIdAsync_ShouldReturnRepositoryStatusOk_WhenContainingEntityWithSpecifiedId()
         {
             var repository = new ServiceTypesRepository(_dbContextMock.Object);
@@ -108,7 +108,7 @@ namespace Freelance.Tests.Repositories
             Assert.AreEqual(RepositoryStatus.Ok, result.Status);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetByIdAsync_ShouldReturnEntityWithCorrectId_WhenContainingEntityWithSpecifiedId()
         {
             var repository = new ServiceTypesRepository(_dbContextMock.Object);
@@ -118,7 +118,7 @@ namespace Freelance.Tests.Repositories
             Assert.AreEqual(_existingId, result.Entity.ServiceTypeId);
         }
 
-        [TestMethod]
+        [Test]
         public async Task RemoveAsync_ShouldCallRemoveAndSaveChangesAsyncOnce_WhenContainingEntityWithSpecifiedId()
         {
             var repository = new ServiceTypesRepository(_dbContextMock.Object);
@@ -129,7 +129,7 @@ namespace Freelance.Tests.Repositories
             _dbContextMock.Verify(m => m.SaveChangesAsync(), Times.Once());
         }
 
-        [TestMethod]
+        [Test]
         public async Task RemoveAsync_ShouldReturnRepositoryStatusDeleted_WhenContainingEntityWithSpecifiedId()
         {
             var repository = new ServiceTypesRepository(_dbContextMock.Object);
@@ -139,7 +139,7 @@ namespace Freelance.Tests.Repositories
             Assert.AreEqual(RepositoryStatus.Deleted, result.Status);
         }
 
-        [TestMethod]
+        [Test]
         public async Task RemoveAsync_ShouldReturnRepositoryStatusNotFound_WhenNotContainingEntityWithSpecifiedId()
         {
             var repository = new ServiceTypesRepository(_dbContextMock.Object);
@@ -149,7 +149,7 @@ namespace Freelance.Tests.Repositories
             Assert.AreEqual(RepositoryStatus.NotFound, result.Status);
         }
 
-        [TestMethod]
+        [Test]
         public async Task RemoveAsync_ShouldNotCallRemoveAndSaveChangesAsync_WhenNotContainingEntityWithSpecifiedId()
         {
             var repository = new ServiceTypesRepository(_dbContextMock.Object);

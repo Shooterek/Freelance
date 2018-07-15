@@ -9,12 +9,12 @@ using Freelance.Core.Models;
 using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Services.Implementations;
 using Freelance.Infrastructure.Services.Interfaces;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 
 namespace Freelance.Tests.Services
 {
-    [TestClass]
+    [TestFixture]
     public class AnnouncementsServiceTests
     {
         private AnnouncementsService _announcementsService;
@@ -24,7 +24,7 @@ namespace Freelance.Tests.Services
 
         #region Initialize
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             _existingId = 1;
@@ -86,7 +86,7 @@ namespace Freelance.Tests.Services
 
         #endregion
 
-        [TestMethod]
+        [Test]
         public async Task
             GetAnnouncements_ShouldReturnAllItems_WhenAmountParameterIsGreaterOrEqualToTotalAmountOfItems()
         {
@@ -98,7 +98,7 @@ namespace Freelance.Tests.Services
             Assert.AreEqual(_initialAmount, result.Announcements.Count);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetAnnouncements_ShouldntReturnMoreItemsThanSpecified()
         {
             int amountOfItemsToGet = 2;
@@ -109,7 +109,7 @@ namespace Freelance.Tests.Services
             Assert.AreEqual(amountOfItemsToGet, result.Announcements.Count);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetAnnouncements_ShouldReturnCorrectPaginationInfo()
         {
             int amountOfItemsToGet = 2;
@@ -122,7 +122,7 @@ namespace Freelance.Tests.Services
             Assert.AreEqual(_initialAmount, result.PagingInfo.TotalItems);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetByIdAsync_ShouldReturnItemWithSpecifiedId_IfContainsItemWithSpecifiedId()
         {
             var result = await _announcementsService.GetAnnouncementByIdAsync(_existingId);
@@ -131,7 +131,7 @@ namespace Freelance.Tests.Services
             Assert.AreEqual(_existingId, result.AnnouncementId);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetByServiceType_ShouldReturnItemsFromServiceType()
         {
             int amountOfItemsToGet = 5;
@@ -145,7 +145,7 @@ namespace Freelance.Tests.Services
             }
         }
 
-        [TestMethod]
+        [Test]
         public async Task AddAsync_ShouldAddSpecifiedElement()
         {
             var result =
