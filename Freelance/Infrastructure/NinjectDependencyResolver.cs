@@ -38,6 +38,7 @@ namespace Freelance.Infrastructure
             kernel.Bind<IAnnouncementsRepository>().To<AnnouncementsRepository>().InRequestScope();
             kernel.Bind<IServiceTypesRepository>().To<ServiceTypesRepository>().InRequestScope();
             kernel.Bind<IAnnouncementsService>().To<AnnouncementsService>().InRequestScope();
+            kernel.Bind<IServiceTypesService>().To<ServiceTypesService>().InRequestScope();
 
             kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
         }

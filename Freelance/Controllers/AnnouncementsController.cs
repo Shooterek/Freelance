@@ -9,17 +9,20 @@ using System.Web;
 using System.Web.Mvc;
 using Freelance.Core.Models;
 using Freelance.Infrastructure.Services.Interfaces;
+using Freelance.Infrastructure.ViewModels;
 
 namespace Freelance.Controllers
 {
     public class AnnouncementsController : Controller
     {
         private IAnnouncementsService _announcementService;
+        private IServiceTypesService _serviceTypesService;
         private const int PageSize = 5;
 
-        public AnnouncementsController(IAnnouncementsService announcementService)
+        public AnnouncementsController(IAnnouncementsService announcementService, IServiceTypesService serviceTypesService)
         {
             _announcementService = announcementService;
+            _serviceTypesService = serviceTypesService;
         }
 
         // GET: Announcements
@@ -43,6 +46,13 @@ namespace Freelance.Controllers
                 return HttpNotFound();
             }
             return View(announcement);
+        }
+
+        public async Task<ActionResult> Add()
+        {
+            var serviceTypes = await _serviceTypesService.GetServiceTypesAsync();
+
+            return View(new AddAnnouncementViewModel {ServiceTypes = new List<ServiceType>(serviceTypes)});
         }
     }
 }
