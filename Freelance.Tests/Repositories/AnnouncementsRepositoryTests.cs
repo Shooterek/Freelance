@@ -29,9 +29,9 @@ namespace Freelance.Tests.Repositories
 
             var data = new List<Announcement>
             {
-                new Announcement() {AnnouncementId = _existingId, Summary = "Announcement1"},
-                new Announcement() {AnnouncementId = 2, Summary = "Announcement2"},
-                new Announcement() {AnnouncementId = 3, Summary = "Announcement3"}
+                new Announcement() {AnnouncementId = _existingId, Title = "Announcement1"},
+                new Announcement() {AnnouncementId = 2, Title = "Announcement2"},
+                new Announcement() {AnnouncementId = 3, Title = "Announcement3"}
             }.AsQueryable();
 
             _initialAmount = data.Count();

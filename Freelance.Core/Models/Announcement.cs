@@ -11,10 +11,9 @@ namespace Freelance.Core.Models
         public int AnnouncementId { get; set; }
 
         public string AdvertiserId { get; set; }
-
         public virtual ApplicationUser Advertiser { get; set; }
 
-        public string Summary { get; set; }
+        public string Title { get; set; }
 
         public string Description { get; set; }
 

@@ -32,9 +32,9 @@ namespace Freelance.Tests.Services
 
             var data = new List<Announcement>()
             {
-                new Announcement() {AnnouncementId = _existingId, Summary = "Announcement1", ServiceTypeId = 1, AdvertiserId = "User1"},
-                new Announcement() {AnnouncementId = 2, Summary = "Announcement2", ServiceTypeId = 1, AdvertiserId = "User2"},
-                new Announcement() {AnnouncementId = 3, Summary = "Announcement3", ServiceTypeId = 2, AdvertiserId = "User1"}
+                new Announcement() {AnnouncementId = _existingId, Title = "Announcement1", ServiceTypeId = 1, AdvertiserId = "User1"},
+                new Announcement() {AnnouncementId = 2, Title = "Announcement2", ServiceTypeId = 1, AdvertiserId = "User2"},
+                new Announcement() {AnnouncementId = 3, Title = "Announcement3", ServiceTypeId = 2, AdvertiserId = "User1"}
             };
 
             _initialAmount = data.Count;

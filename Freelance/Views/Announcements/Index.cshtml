@@ -1,63 +1,89 @@
-﻿@model IEnumerable<Freelance.Core.Models.Announcement>
+﻿@model Freelance.Infrastructure.ViewModels.AnnouncementsListViewModel
 
 @{
     ViewBag.Title = "Index";
+    var announcements = Model.Announcements;
+    var pagingInfo = Model.PagingInfo;
 }
+<div class="row blue-strip">
+    <div class="col-sm-12">
+        <section id="header">
+            <h2><b>Oferty Pracy</b></h2>
+        </section>
+    </div>
+</div>
 
-<h2>Index</h2>
+<div class="spacer"></div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Advertiser.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ServiceType.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Summary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpectedHourlyWage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th></th>
-    </tr>
+@Html.Action("SearchBar", "Navigation")
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Advertiser.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ServiceType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Summary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpectedHourlyWage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AnnouncementId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AnnouncementId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AnnouncementId })
-        </td>
-    </tr>
-}
+<div class="spacer"></div>
 
-</table>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="col-sm-12 menu">
+            @Html.Action("Menu", "Navigation")
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="row">
+            <div class="col-sm-12 menu">
+                <div class="spacer"></div>
+                <div class="row">
+                    <div id="sorting" class="col-sm-12" align="center">
+                        <select>
+                            <option> halohaloha</option>
+                            <option> halohaloha</option>
+                            <option> halohaloha</option>
+                        </select>
+                        <span class="pull-right">
+                            @if (pagingInfo.CurrentPage > 1)
+                            {
+                                <a href=@Url.Action("Index", "Announcements", new {page = pagingInfo.CurrentPage - 1})>
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                            }
+                            <input id="page-number" type="number" value=@pagingInfo.CurrentPage min="1" max=@pagingInfo.TotalPages data-url=@Url.Action("Index", "Announcements")/>
+                            <span>z @pagingInfo.TotalPages</span>
+                            @if (pagingInfo.CurrentPage < pagingInfo.TotalPages)
+                            {
+
+                                <a href=@Url.Action("Index", "Announcements", new {page = pagingInfo.CurrentPage + 1})>
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            }
+                        </span>
+                    </div>
+                </div>
+                <div class="spacer"></div>
+                @for (int i = 0; i < Model.Announcements.Count; i++)
+                {
+                    <div class="row item">
+                        <div class="col-md-9">
+                            <div>   
+                                <h4>@Html.ActionLink(announcements[i].Title, "Details", new {id = announcements[i].AnnouncementId})</h4>
+                            </div>
+                            <div>
+                                <p>@announcements[i].Description</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div>
+                                Oczekiwana stawka: @announcements[i].ExpectedHourlyWage zł
+                            </div>
+                            <div class="text-center">
+                                @Html.ActionLink("Zatrudnij", "Details", new {id = announcements[i].AnnouncementId},
+                                    new {@style = "display: none;", @class = "btn btn-primary", @id = "hire-button"})
+                            </div>
+                        </div>
+                    </div>
+                    if (i < announcements.Count - 1)
+                    {
+                        <hr/>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

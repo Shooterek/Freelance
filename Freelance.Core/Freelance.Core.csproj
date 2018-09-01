@@ -61,14 +61,29 @@
     <Compile Include="Migrations\201807111623330_AddAnnouncementsAndServiceTypesTables.Designer.cs">
       <DependentUpon>201807111623330_AddAnnouncementsAndServiceTypesTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807231845268_AddJobsAndOffersTables.cs" />
+    <Compile Include="Migrations\201807231845268_AddJobsAndOffersTables.Designer.cs">
+      <DependentUpon>201807231845268_AddJobsAndOffersTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808191908007_AddPublicationDateAndTitleProperties.cs" />
+    <Compile Include="Migrations\201808191908007_AddPublicationDateAndTitleProperties.Designer.cs">
+      <DependentUpon>201808191908007_AddPublicationDateAndTitleProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808191921212_RenameSummaryProperty.cs" />
+    <Compile Include="Migrations\201808191921212_RenameSummaryProperty.Designer.cs">
+      <DependentUpon>201808191921212_RenameSummaryProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IEntity.cs" />
+    <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\Offer.cs" />
     <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAnnouncementsRepository.cs" />
+    <Compile Include="Repositories\IJobsRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Repositories\RepositoryActionResult.cs" />
@@ -81,6 +96,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807111623330_AddAnnouncementsAndServiceTypesTables.resx">
       <DependentUpon>201807111623330_AddAnnouncementsAndServiceTypesTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807231845268_AddJobsAndOffersTables.resx">
+      <DependentUpon>201807231845268_AddJobsAndOffersTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808191908007_AddPublicationDateAndTitleProperties.resx">
+      <DependentUpon>201808191908007_AddPublicationDateAndTitleProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808191921212_RenameSummaryProperty.resx">
+      <DependentUpon>201808191921212_RenameSummaryProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

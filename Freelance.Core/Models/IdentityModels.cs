@@ -8,8 +8,9 @@ namespace Freelance.Core.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<Announcement> Announcements { get; set; }
-
         public virtual DbSet<ServiceType> ServiceTypes { get; set; }
+        public virtual DbSet<Job> Jobs { get; set; }
+        public virtual DbSet<Offer> Offers{ get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

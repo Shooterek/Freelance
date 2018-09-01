@@ -26,10 +26,10 @@ namespace Freelance.Controllers
         }
 
         // GET: Announcements
-        public async Task<ActionResult> Index()
-        {
-            var result = await _announcementService.GetAnnouncementsAsync(1, PageSize);
-            return View(result.Announcements);
+        public async Task<ActionResult> Index(int page)
+        {   
+            var result = await _announcementService.GetAnnouncementsAsync(page, PageSize);
+            return View(result);
         }
 
         // GET: Announcements/Details/5

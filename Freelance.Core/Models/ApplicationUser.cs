@@ -11,10 +11,14 @@ namespace Freelance.Core.Models
     public class ApplicationUser : IdentityUser
     {
         public virtual ICollection<Announcement> PublishedAnnouncements { get; set; }
+        public virtual ICollection<Job> PublishedJobs { get; set; }
+        public virtual ICollection<Offer> ProposedOffers { get; set; }
 
         public ApplicationUser()
         {
             PublishedAnnouncements = new List<Announcement>();
+            PublishedJobs = new List<Job>();
+            ProposedOffers = new List<Offer>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
