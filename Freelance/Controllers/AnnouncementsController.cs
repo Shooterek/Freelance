@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Freelance.Core.Models;
 using Freelance.Infrastructure.Services.Interfaces;
 using Freelance.Infrastructure.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace Freelance.Controllers
 {
@@ -33,14 +34,9 @@ namespace Freelance.Controllers
         }
 
         // GET: Announcements/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Announcement announcement = await _announcementService.GetAnnouncementByIdAsync(id.Value);
+            Announcement announcement = await _announcementService.GetAnnouncementByIdAsync(id);
             if (announcement == null)
             {
                 return HttpNotFound();
@@ -53,6 +49,22 @@ namespace Freelance.Controllers
             var serviceTypes = await _serviceTypesService.GetServiceTypesAsync();
 
             return View(new AddAnnouncementViewModel {ServiceTypes = new List<ServiceType>(serviceTypes)});
+        }
+
+        [ChildActionOnly]
+        public ActionResult AddOffer(int id)
+        {
+            return PartialView(
+                new AnnouncementOffer() {AnnouncementId = id, OffererId = User.Identity.GetUserId()});
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddOffer(AnnouncementOffer offer)
+        {
+            offer.OffererId = User.Identity.GetUserId();
+            offer.SubmissionDate = DateTime.Today;
+            var result = await _announcementService.AddOfferAsync(offer);
+            return View("Index", "Home");
         }
     }
 }

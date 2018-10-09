@@ -7,7 +7,7 @@ namespace Freelance.Core.Models
     {
         public Job()
         {
-            Offers = new List<Offer>();
+            Offers = new List<JobOffer>();
             PublicationDate = DateTime.Now;
         }
 
@@ -28,6 +28,6 @@ namespace Freelance.Core.Models
         public decimal MinimumWage { get; set; }
         public decimal MaximumWage { get; set; }
 
-        public ICollection<Offer> Offers { get; set; }
+        public ICollection<JobOffer> Offers { get; set; }
     }
 }

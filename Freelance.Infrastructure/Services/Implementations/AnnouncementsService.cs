@@ -14,10 +14,12 @@ namespace Freelance.Infrastructure.Services.Implementations
     public class AnnouncementsService : IAnnouncementsService
     {
         private IAnnouncementsRepository _announcementRepository;
+        private IEmailService _emailService;
 
-        public AnnouncementsService(IAnnouncementsRepository announcementRepository)
+        public AnnouncementsService(IAnnouncementsRepository announcementRepository, IEmailService emailService)
         {
             _announcementRepository = announcementRepository;
+            _emailService = emailService;
         }
 
         public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount)
@@ -86,6 +88,31 @@ namespace Freelance.Infrastructure.Services.Implementations
         public async Task RemoveAnnouncementAsync(int announcementId)
         {
             var result = await _announcementRepository.RemoveAsync(announcementId);
+        }
+
+        public async Task<ICollection<AnnouncementOffer>> GetOffersAsync(string userId)
+        {
+            var result = await _announcementRepository.GetOffersAsync(userId);
+
+            return result.Entity;
+        }
+
+        public async Task<AnnouncementOffer> AddOfferAsync(AnnouncementOffer offer)
+        {
+            var result = await _announcementRepository.AddOfferAsync(offer);
+
+            if (result.Status == RepositoryStatus.Created)
+            {
+                _emailService.Notify(result.Entity);
+                return result.Entity;
+            }
+
+            return null;
+        }
+
+        public async Task RemoveOfferAsync(int id)
+        {
+            var result = await _announcementRepository.RemoveOfferAsync(id);
         }
     }
 }

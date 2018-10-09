@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Freelance.Core.Models;
 using Freelance.Core.Repositories;
@@ -83,6 +85,30 @@ namespace Freelance.Infrastructure.Services.Implementations
         public async Task RemoveJobAsync(int jobId)
         {
             var result = await _jobRepository.RemoveAsync(jobId);
+        }
+
+        public async Task<ICollection<JobOffer>> GetOffersAsync(string userId)
+        {
+            var result = await _jobRepository.GetOffersAsync(userId);
+
+            return result.Entity;
+        }
+
+        public async Task<JobOffer> AddOfferAsync(JobOffer offer)
+        {
+            var result = await _jobRepository.AddOfferAsync(offer);
+
+            if (result.Status == RepositoryStatus.Created)
+            {
+                return result.Entity;
+            }
+
+            return null;
+        }
+
+        public async Task RemoveOfferAsync(int id)
+        {
+            var result = await _jobRepository.RemoveAsync(id);
         }
     }
 }

@@ -15,7 +15,8 @@ namespace Freelance
 
             routes.MapRoute(
                 name: "Announcements",
-                url: "{controller}/{action}/{page}"
+                url: "{controller}/index/{page}",
+                defaults: new {action = "Index"}
             );
 
             routes.MapRoute(

@@ -39,6 +39,7 @@ namespace Freelance.Tests.Services
 
             _initialAmount = data.Count;
 
+            var emailServiceMock = new Mock<IEmailService>();
             var announcementsRepositoryMock = new Mock<IAnnouncementsRepository>();
             announcementsRepositoryMock.Setup(r => r.GetAllAsync()).ReturnsAsync(new RepositoryActionResult<ICollection<Announcement>>(data, RepositoryStatus.Ok));
 
@@ -81,7 +82,7 @@ namespace Freelance.Tests.Services
                     } 
                 });
 
-            _announcementsService = new AnnouncementsService(announcementsRepositoryMock.Object);
+            _announcementsService = new AnnouncementsService(announcementsRepositoryMock.Object, emailServiceMock.Object);
         }
 
         #endregion

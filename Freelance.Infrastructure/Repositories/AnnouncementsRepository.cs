@@ -93,5 +93,49 @@ namespace Freelance.Infrastructure.Repositories
                 return new RepositoryActionResult<Announcement>(entity, RepositoryStatus.Error);
             }
         }
+
+        public async Task<RepositoryActionResult<AnnouncementOffer>> AddOfferAsync(AnnouncementOffer entity)
+        {
+            try
+            {
+                var offer = _context.AnnouncementOffers.Add(entity);
+                await _context.SaveChangesAsync();
+
+                return new RepositoryActionResult<AnnouncementOffer>(offer, RepositoryStatus.Created);
+            }
+            catch (Exception e)
+            {
+                return new RepositoryActionResult<AnnouncementOffer>(entity, RepositoryStatus.Error);
+            }
+        }
+
+        public async Task<RepositoryActionResult<ICollection<AnnouncementOffer>>> GetOffersAsync(string userId)
+        {
+            var offers = await _context.AnnouncementOffers.Where(o => o.Announcement.AdvertiserId == userId).ToListAsync();
+
+            return new RepositoryActionResult<ICollection<AnnouncementOffer>>(offers, RepositoryStatus.Ok);
+        }
+
+        public async Task<RepositoryActionResult<AnnouncementOffer>> RemoveOfferAsync(int id)
+        {
+            try
+            {
+                var offer = await _context.AnnouncementOffers.FirstOrDefaultAsync(a => a.AnnouncementOfferId == id);
+
+                if (offer == null)
+                {
+                    return new RepositoryActionResult<AnnouncementOffer>(null, RepositoryStatus.NotFound);
+                }
+
+                _context.AnnouncementOffers.Remove(offer);
+                await _context.SaveChangesAsync();
+
+                return new RepositoryActionResult<AnnouncementOffer>(offer, RepositoryStatus.Deleted);
+            }
+            catch (Exception e)
+            {
+                return new RepositoryActionResult<AnnouncementOffer>(null, RepositoryStatus.Error);
+            }
+        }
     }
 }

@@ -264,8 +264,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Announcements\Index.cshtml" />
     <Content Include="Views\Navigation\Menu.cshtml" />
-    <Content Include="Views\Announcements\View.cshtml" />
     <Content Include="Views\Navigation\SearchBar.cshtml" />
+    <Content Include="Views\Announcements\Details.cshtml" />
+    <Content Include="Views\Announcements\AddOffer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

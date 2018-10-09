@@ -48,6 +48,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -63,9 +64,11 @@
     <Compile Include="Repositories\JobsRepository.cs" />
     <Compile Include="Repositories\ServiceTypesRepository.cs" />
     <Compile Include="Services\Implementations\AnnouncementsService.cs" />
+    <Compile Include="Services\Implementations\EmailService.cs" />
     <Compile Include="Services\Implementations\JobsService.cs" />
     <Compile Include="Services\Implementations\ServiceTypesService.cs" />
     <Compile Include="Services\Interfaces\IAnnouncementsService.cs" />
+    <Compile Include="Services\Interfaces\IEmailService.cs" />
     <Compile Include="Services\Interfaces\IJobsService.cs" />
     <Compile Include="Services\Interfaces\IServiceTypesService.cs" />
     <Compile Include="Utils\PagingInfo.cs" />

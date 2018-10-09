@@ -94,5 +94,49 @@ namespace Freelance.Infrastructure.Repositories
                 return new RepositoryActionResult<Job>(entity, RepositoryStatus.Error);
             }
         }
+
+        public async Task<RepositoryActionResult<JobOffer>> AddOfferAsync(JobOffer entity)
+        {
+            try
+            {
+                var job = _context.JobOffers.Add(entity);
+                await _context.SaveChangesAsync();
+
+                return new RepositoryActionResult<JobOffer>(entity, RepositoryStatus.Created);
+            }
+            catch (Exception e)
+            {
+                return new RepositoryActionResult<JobOffer>(entity, RepositoryStatus.Error);
+            }
+        }
+
+        public async Task<RepositoryActionResult<ICollection<JobOffer>>> GetOffersAsync(string userId)
+        {
+            var offers = await _context.JobOffers.Where(o => o.Job.EmployerId == userId).ToListAsync();
+        
+            return new RepositoryActionResult<ICollection<JobOffer>>(offers, RepositoryStatus.Ok);
+        }
+
+        public async Task<RepositoryActionResult<JobOffer>> RemoveOfferAsync(int id)
+        {
+            try
+            {
+                var offer = await _context.JobOffers.FirstOrDefaultAsync(a => a.JobOfferId== id);
+
+                if (offer == null)
+                {
+                    return new RepositoryActionResult<JobOffer>(null, RepositoryStatus.NotFound);
+                }
+
+                _context.JobOffers.Remove(offer);
+                await _context.SaveChangesAsync();
+
+                return new RepositoryActionResult<JobOffer>(offer, RepositoryStatus.Deleted);
+            }
+            catch (Exception e)
+            {
+                return new RepositoryActionResult<JobOffer>(null, RepositoryStatus.Error);
+            }
+        }
     }
 }

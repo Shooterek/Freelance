@@ -12,13 +12,13 @@ namespace Freelance.Core.Models
     {
         public virtual ICollection<Announcement> PublishedAnnouncements { get; set; }
         public virtual ICollection<Job> PublishedJobs { get; set; }
-        public virtual ICollection<Offer> ProposedOffers { get; set; }
+        public virtual ICollection<JobOffer> ProposedOffers { get; set; }
 
         public ApplicationUser()
         {
             PublishedAnnouncements = new List<Announcement>();
             PublishedJobs = new List<Job>();
-            ProposedOffers = new List<Offer>();
+            ProposedOffers = new List<JobOffer>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

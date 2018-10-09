@@ -17,5 +17,8 @@ namespace Freelance.Infrastructure.Services.Interfaces
         Task<Job> AddJobAsync(Job job);
         Task UpdateJobAsync(Job job);
         Task RemoveJobAsync(int jobId);
+        Task<ICollection<JobOffer>> GetOffersAsync(string userId);
+        Task<JobOffer> AddOfferAsync(JobOffer offer);
+        Task RemoveOfferAsync(int id);
     }
 }

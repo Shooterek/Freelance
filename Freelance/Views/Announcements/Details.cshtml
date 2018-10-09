@@ -1,0 +1,68 @@
+﻿@model Freelance.Core.Models.Announcement
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Announcement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Advertiser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Advertiser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedHourlyWage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedHourlyWage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+    </dl>
+</div>
+
+@Html.Action("AddOffer", new {announcementId = Model.AnnouncementId})
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AnnouncementId }) |
+    @Html.ActionLink("Back to List", "Index", new {page = 1})
+</p>
