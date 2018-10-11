@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Freelance.Core.Models;
+using Freelance.Infrastructure;
 
 namespace Freelance
 {
@@ -16,6 +18,7 @@ namespace Freelance
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ModelBinders.Binders.DefaultBinder = new AvailabilityModelBinder();
         }
     }
 }

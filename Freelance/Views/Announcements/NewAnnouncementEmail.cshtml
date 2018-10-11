@@ -1,0 +1,50 @@
+﻿@model Freelance.Core.Models.AnnouncementOffer
+
+@{
+    ViewBag.Title = "NewAnnouncementEmail";
+}
+
+<h2>NewAnnouncementEmail</h2>
+
+<div>
+    <h4>AnnouncementOffer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Announcement.AdvertiserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Announcement.AdvertiserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Offerer.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Offerer.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubmissionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubmissionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProposedRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProposedRate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AnnouncementOfferId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

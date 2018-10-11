@@ -1,7 +1,7 @@
 ﻿@model Freelance.Core.Models.AnnouncementOffer
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("SubmitOffer", "Announcements")) 
 {
     @Html.AntiForgeryToken()
     

@@ -21,6 +21,8 @@ namespace Freelance.Core.Models
 
         public string Title { get; set; }
 
+        public Availability Availability { get; set; }
+
         public string Description { get; set; }
 
         public DateTime PublicationDate { get; set; }

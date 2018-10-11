@@ -17,6 +17,8 @@ namespace Freelance.Core.Models
 
         public string Description { get; set; }
 
+        public Availability Availability { get; set; }
+
         public decimal ExpectedHourlyWage { get; set; }
 
         public string Location { get; set; }

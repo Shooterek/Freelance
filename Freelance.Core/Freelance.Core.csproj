@@ -77,10 +77,15 @@
     <Compile Include="Migrations\201810090957415_AddOffers.Designer.cs">
       <DependentUpon>201810090957415_AddOffers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810111002509_AddAvailabilityColumn.cs" />
+    <Compile Include="Migrations\201810111002509_AddAvailabilityColumn.Designer.cs">
+      <DependentUpon>201810111002509_AddAvailabilityColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Availability.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\Job.cs" />
@@ -113,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810090957415_AddOffers.resx">
       <DependentUpon>201810090957415_AddOffers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810111002509_AddAvailabilityColumn.resx">
+      <DependentUpon>201810111002509_AddAvailabilityColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
