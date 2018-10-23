@@ -12,6 +12,8 @@ namespace Freelance.Infrastructure.ViewModels
     {
         public IList<Announcement> Announcements { get; set; }
 
+        public Announcement Filter { get; set; }
+
         public PagingInfo PagingInfo { get; set; }
     }
 }

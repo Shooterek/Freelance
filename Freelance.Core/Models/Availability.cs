@@ -7,7 +7,7 @@ namespace Freelance.Core.Models
     public enum Availability
     {
         Monday = 1 << 0,
-        Tuesdey = 1 << 1,
+        Tuesday = 1 << 1,
         Wednesday = 1 << 2,
         Thursday = 1 << 3,
         Friday = 1 << 4,

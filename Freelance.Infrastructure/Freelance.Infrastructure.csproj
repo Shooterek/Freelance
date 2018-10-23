@@ -100,6 +100,7 @@
     <Compile Include="Services\Interfaces\IJobsService.cs" />
     <Compile Include="Services\Interfaces\IServiceTypesService.cs" />
     <Compile Include="Utils\PagingInfo.cs" />
+    <Compile Include="Utils\StringArrayExtensions.cs" />
     <Compile Include="ViewModels\AddAnnouncementViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />
     <Compile Include="ViewModels\JobsListViewModel.cs" />

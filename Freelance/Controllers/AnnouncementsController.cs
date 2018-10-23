@@ -11,6 +11,7 @@ using Freelance.Core.Models;
 using Freelance.Infrastructure;
 using Freelance.Infrastructure.Services.Interfaces;
 using Freelance.Infrastructure.ViewModels;
+using Freelance.Utilities;
 using Microsoft.AspNet.Identity;
 using WebGrease.Css.Extensions;
 
@@ -29,9 +30,9 @@ namespace Freelance.Controllers
         }
 
         // GET: Announcements
-        public async Task<ActionResult> Index(int page)
-        {   
-            var result = await _announcementService.GetAnnouncementsAsync(page, PageSize);
+        public async Task<ActionResult> Index(int page, string[] availability = null, string localization = null)
+        {
+            var result = await _announcementService.GetAnnouncementsAsync(page, PageSize, availability, localization);
             return View(result);
         }
 
@@ -67,7 +68,11 @@ namespace Freelance.Controllers
                 return View("Details", result);
             }
 
-            return View("Add", announcement);
+            var serviceTypes = await _serviceTypesService.GetServiceTypesAsync();
+
+            var servicesList = new List<SelectListItem>();
+            serviceTypes.ForEach(s => servicesList.Add(new SelectListItem() { Value = s.ServiceTypeId.ToString(), Text = s.Name }));
+            return View("Add", new AddAnnouncementViewModel() {Announcement = announcement, ServiceTypes = servicesList});
         }
 
         [ChildActionOnly]
@@ -83,7 +88,7 @@ namespace Freelance.Controllers
             offer.OffererId = User.Identity.GetUserId();
             offer.SubmissionDate = DateTime.Today;
             var result = await _announcementService.AddOfferAsync(offer);
-            return View("Details");
+            return RedirectToAction("Details", new {id = offer.AnnouncementId});
         }
     }
 }

@@ -267,11 +267,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Announcements\Index.cshtml" />
-    <Content Include="Views\Navigation\Menu.cshtml" />
+    <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Navigation\SearchBar.cshtml" />
     <Content Include="Views\Announcements\Details.cshtml" />
     <Content Include="Views\Announcements\AddOffer.cshtml" />
     <Content Include="Views\Announcements\Add.cshtml" />
+    <Content Include="Views\Announcements\OffersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

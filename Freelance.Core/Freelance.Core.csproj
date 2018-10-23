@@ -81,6 +81,10 @@
     <Compile Include="Migrations\201810111002509_AddAvailabilityColumn.Designer.cs">
       <DependentUpon>201810111002509_AddAvailabilityColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810231156408_ChangedLocationColumnName.cs" />
+    <Compile Include="Migrations\201810231156408_ChangedLocationColumnName.Designer.cs">
+      <DependentUpon>201810231156408_ChangedLocationColumnName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
@@ -121,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810111002509_AddAvailabilityColumn.resx">
       <DependentUpon>201810111002509_AddAvailabilityColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810231156408_ChangedLocationColumnName.resx">
+      <DependentUpon>201810231156408_ChangedLocationColumnName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

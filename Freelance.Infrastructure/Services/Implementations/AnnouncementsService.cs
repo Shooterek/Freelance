@@ -22,16 +22,28 @@ namespace Freelance.Infrastructure.Services.Implementations
             _emailService = emailService;
         }
 
-        public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount)
+        public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, string[] availability, string localization)
         {
             var result = await _announcementRepository.GetAllAsync();
+            
+            Availability availableDays = Availability.Friday | Availability.Monday | Availability.Saturday | Availability.Sunday
+                                         | Availability.Thursday | Availability.Tuesday | Availability.Wednesday;
+            if (availability != null)
+            {
+                availableDays = availability.ConvertToFlagEnum<Availability>();
+            }
 
-            var totalItems = result.Entity.Count;
+            var entities = result.Entity.Where(a =>
+                (a.Availability & availableDays) > 0 && (a.Localization == localization || localization == null)).ToList();
+
+            var totalItems = entities.Count;
             var pagingInfo = new PagingInfo(page, amount, totalItems);
 
-            var announcements = result.Entity.Skip((page - 1) * amount).Take(amount).ToList();
+            var filter = new Announcement {Availability = availableDays, Localization = localization};
 
-            return new AnnouncementsListViewModel() {Announcements = announcements, PagingInfo = pagingInfo};
+            var announcements = entities.Skip((page - 1) * amount).Take(amount).ToList();
+
+            return new AnnouncementsListViewModel() {Announcements = announcements, PagingInfo = pagingInfo, Filter = filter};
         }
 
         public async Task<AnnouncementsListViewModel> GetAnnouncementsByServiceTypeAsync(ServiceType serviceType, int page, int amount)

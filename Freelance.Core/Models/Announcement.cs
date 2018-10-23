@@ -8,6 +8,11 @@ namespace Freelance.Core.Models
 {
     public class Announcement : IEntity
     {
+        public Announcement()
+        {
+            Offers = new List<AnnouncementOffer>();
+        }
+
         public int AnnouncementId { get; set; }
 
         public string AdvertiserId { get; set; }
@@ -21,10 +26,11 @@ namespace Freelance.Core.Models
 
         public decimal ExpectedHourlyWage { get; set; }
 
-        public string Location { get; set; }
+        public string Localization { get; set; }
 
         public int ServiceTypeId { get; set; }
 
         public virtual ServiceType ServiceType { get; set; }
+        public virtual ICollection <AnnouncementOffer> Offers{ get; set; }
     }
 }

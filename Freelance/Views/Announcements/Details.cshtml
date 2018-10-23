@@ -52,14 +52,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Location)
+            @Html.DisplayNameFor(model => model.Localization)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Location)
+            @Html.DisplayFor(model => model.Localization)
         </dd>
         @(Html.CheckBoxListForEnum<Announcement, Availability>(model => model.Availability))
     </dl>
+</div>
+
+<div class="row">
+    @Html.Partial("OffersList", Model.Offers)
 </div>
 
 @Html.Action("AddOffer", new {announcementId = Model.AnnouncementId})
