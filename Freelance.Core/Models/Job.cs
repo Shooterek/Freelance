@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Freelance.Core.Models
 {
@@ -16,18 +17,28 @@ namespace Freelance.Core.Models
         public string EmployerId { get; set; }
         public ApplicationUser Employer { get; set; }
 
+        [Required]
         public int ServiceTypeId { get; set; }
         public ServiceType ServiceType { get; set; }
 
+        [Required]
+        [StringLength(255)]
+        [MinLength(30)]
         public string Title { get; set; }
-
+        
         public Availability Availability { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
         public DateTime PublicationDate { get; set; }
 
+        [Required]
+        [Range(0.01, Double.MaxValue)]
         public decimal MinimumWage { get; set; }
+
+        [Required]
+        [Range(0.01, Double.MaxValue)]
         public decimal MaximumWage { get; set; }
 
         public ICollection<JobOffer> Offers { get; set; }

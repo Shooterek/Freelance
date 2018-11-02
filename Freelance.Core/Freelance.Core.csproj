@@ -89,13 +89,16 @@
     <Compile Include="Migrations\201810302307167_AddIsAcceptedAndIsFinishedColumns.Designer.cs">
       <DependentUpon>201810302307167_AddIsAcceptedAndIsFinishedColumns.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811022251228_AddDataAnnotations.cs" />
+    <Compile Include="Migrations\201811022251228_AddDataAnnotations.Designer.cs">
+      <DependentUpon>201811022251228_AddDataAnnotations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Availability.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\JobOffer.cs" />
     <Compile Include="Models\ServiceType.cs" />
@@ -135,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810302307167_AddIsAcceptedAndIsFinishedColumns.resx">
       <DependentUpon>201810302307167_AddIsAcceptedAndIsFinishedColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811022251228_AddDataAnnotations.resx">
+      <DependentUpon>201811022251228_AddDataAnnotations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
