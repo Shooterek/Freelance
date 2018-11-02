@@ -15,8 +15,11 @@ namespace Freelance.Core.Repositories
         Task<RepositoryActionResult<Announcement>> RemoveAsync(int id);
         Task<RepositoryActionResult<Announcement>> AddAsync(Announcement entity);
         Task<RepositoryActionResult<AnnouncementOffer>> AddOfferAsync(AnnouncementOffer entity);
-        Task<RepositoryActionResult<ICollection<AnnouncementOffer>>> GetOffersAsync(string userId);
+        Task<RepositoryActionResult<ICollection<AnnouncementOffer>>> GetPublishedOffersAsync(string userId);
+        Task<RepositoryActionResult<ICollection<AnnouncementOffer>>> GetReceivedOffersAsync(string userId);
         Task<RepositoryActionResult<AnnouncementOffer>> RemoveOfferAsync(int id);
 
+        Task<RepositoryActionResult<bool>> AcceptOfferAsync(int offerId, string userId);
+        Task<RepositoryActionResult<bool>> DeclineOfferAsync(int offerId, string userId);
     }
 }

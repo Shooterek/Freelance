@@ -1,0 +1,20 @@
+﻿@model Freelance.Infrastructure.ViewModels.UserOffersListViewModel
+
+@{
+    ViewBag.Title = "Offers";
+}
+
+<h2>Offers</h2>
+
+
+<h2>Published job offers</h2>
+@Html.Partial("JobOffers", Model.PublishedJobOffers)
+
+<h2>Received job offers</h2>
+@Html.Partial("JobOffers", Model.ReceivedJobOffers)
+
+<h2>Published announcement offers</h2>
+@Html.Partial("AnnouncementOffers", Model.PublishedAnnouncementOffers)
+
+<h2>Received announcement offers</h2>
+@Html.Partial("AnnouncementOffers", Model.ReceivedAnnouncementOffers)

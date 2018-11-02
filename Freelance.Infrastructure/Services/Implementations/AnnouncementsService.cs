@@ -102,9 +102,16 @@ namespace Freelance.Infrastructure.Services.Implementations
             var result = await _announcementRepository.RemoveAsync(announcementId);
         }
 
-        public async Task<ICollection<AnnouncementOffer>> GetOffersAsync(string userId)
+        public async Task<ICollection<AnnouncementOffer>> GetPublishedOffersAsync(string userId)
         {
-            var result = await _announcementRepository.GetOffersAsync(userId);
+            var result = await _announcementRepository.GetPublishedOffersAsync(userId);
+
+            return result.Entity;
+        }
+
+        public async Task<ICollection<AnnouncementOffer>> GetReceivedOffersAsync(string userId)
+        {
+            var result = await _announcementRepository.GetReceivedOffersAsync(userId);
 
             return result.Entity;
         }
@@ -125,6 +132,16 @@ namespace Freelance.Infrastructure.Services.Implementations
         public async Task RemoveOfferAsync(int id)
         {
             var result = await _announcementRepository.RemoveOfferAsync(id);
+        }
+
+        public async Task AcceptOfferAsync(int offerId, string userId)
+        {
+            var result = await _announcementRepository.AcceptOfferAsync(offerId, userId);
+        }
+
+        public async Task DeclineOfferAsync(int offerId, string userId)
+        {
+            var result = await _announcementRepository.DeclineOfferAsync(offerId, userId);
         }
     }
 }

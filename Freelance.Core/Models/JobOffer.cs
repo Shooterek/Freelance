@@ -15,5 +15,7 @@ namespace Freelance.Core.Models
         public ApplicationUser Offerer { get; set; }
 
         public decimal ProposedRate { get; set; }
+        public bool IsAccepted { get; set; }
+        public bool IsFinished { get; set; }
     }
 }

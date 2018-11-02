@@ -90,5 +90,17 @@ namespace Freelance.Controllers
             var result = await _announcementService.AddOfferAsync(offer);
             return RedirectToAction("Details", new {id = offer.AnnouncementId});
         }
+
+        public async Task<ActionResult> AcceptOffer(int id)
+        {
+            await _announcementService.AcceptOfferAsync(id, User.Identity.GetUserId());
+            return RedirectToAction("Offers", "Account");
+        }
+        
+        public async Task<ActionResult> DeclineOffer(int id)
+        {
+            await _announcementService.DeclineOfferAsync(id, User.Identity.GetUserId());
+            return RedirectToAction("Offers", "Account");
+        }
     }
 }

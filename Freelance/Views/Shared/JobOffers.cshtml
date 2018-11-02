@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Freelance.Core.Models.JobOffer>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.EmployerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Offerer.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubmissionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProposedRate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Job.EmployerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Offerer.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubmissionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProposedRate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.JobOfferId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.JobOfferId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.JobOfferId })
+        </td>
+    </tr>
+}
+
+</table>

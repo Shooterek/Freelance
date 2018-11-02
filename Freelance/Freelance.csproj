@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnnouncementsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Global.asax.cs">
@@ -273,6 +274,9 @@
     <Content Include="Views\Announcements\AddOffer.cshtml" />
     <Content Include="Views\Announcements\Add.cshtml" />
     <Content Include="Views\Announcements\OffersList.cshtml" />
+    <Content Include="Views\Shared\JobOffers.cshtml" />
+    <Content Include="Views\Shared\AnnouncementOffers.cshtml" />
+    <Content Include="Views\Account\Offers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

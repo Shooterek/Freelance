@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Freelance.Core.Models;
+using Freelance.Infrastructure.Services.Interfaces;
+using Freelance.Infrastructure.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -18,15 +20,22 @@ namespace Freelance.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly IAnnouncementsService _announcementsService;
+        private readonly IJobsService _jobsService;
 
-        public AccountController()
+        public AccountController(IAnnouncementsService announcementsService, IJobsService jobsService)
         {
+            _announcementsService = announcementsService;
+            _jobsService = jobsService;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,
+            IAnnouncementsService announcementsService, IJobsService jobsService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _announcementsService = announcementsService;
+            _jobsService = jobsService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -422,6 +431,19 @@ namespace Freelance.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        [Authorize]
+        public async Task<ActionResult> Offers()
+        {
+            var userId = User.Identity.GetUserId();
+            var publishedJobOffers = await _jobsService.GetPublishedOffersAsync(userId);
+            var publishedAnnouncementOffers = await _announcementsService.GetPublishedOffersAsync(userId);
+            var receivedJobOffers = await _jobsService.GetReceivedOffersAsync(userId);
+            var receivedAnnouncementOffers = await _announcementsService.GetReceivedOffersAsync(userId);
+
+            return View(new UserOffersListViewModel(receivedAnnouncementOffers.ToList(),
+                publishedAnnouncementOffers.ToList(), receivedJobOffers.ToList(), publishedJobOffers.ToList()));
         }
 
         #region Helpers

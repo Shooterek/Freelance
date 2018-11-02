@@ -19,14 +19,23 @@ namespace Freelance.Infrastructure.Services.Implementations
             _jobRepository = jobRepository;
         }
 
-        public async Task<JobsListViewModel> GetJobsAsync(int page, int amount)
+        public async Task<JobsListViewModel> GetJobsAsync(int page, int amount, string[] availability)
         {
             var result = await _jobRepository.GetAllAsync();
 
-            var totalItems = result.Entity.Count;
+            Availability availableDays = Availability.Friday | Availability.Monday | Availability.Saturday | Availability.Sunday
+                                         | Availability.Thursday | Availability.Tuesday | Availability.Wednesday;
+            if (availability != null)
+            {
+                availableDays = availability.ConvertToFlagEnum<Availability>();
+            }
+
+            var entities = result.Entity.Where(a => (a.Availability & availableDays) > 0).ToList();
+
+            var totalItems = entities.Count;
             var pagingInfo = new PagingInfo(page, amount, totalItems);
 
-            var jobs = result.Entity.Skip((page - 1) * amount).Take(amount).ToList();
+            var jobs = entities.Skip((page - 1) * amount).Take(amount).ToList();
 
             return new JobsListViewModel() { Jobs = jobs, PagingInfo = pagingInfo };
         }
@@ -87,9 +96,16 @@ namespace Freelance.Infrastructure.Services.Implementations
             var result = await _jobRepository.RemoveAsync(jobId);
         }
 
-        public async Task<ICollection<JobOffer>> GetOffersAsync(string userId)
+        public async Task<ICollection<JobOffer>> GetReceivedOffersAsync(string userId)
         {
-            var result = await _jobRepository.GetOffersAsync(userId);
+            var result = await _jobRepository.GetReceivedOffersAsync(userId);
+
+            return result.Entity;
+        }
+
+        public async Task<ICollection<JobOffer>> GetPublishedOffersAsync(string userId)
+        {
+            var result = await _jobRepository.GetPublishedOffersAsync(userId);
 
             return result.Entity;
         }
@@ -109,6 +125,16 @@ namespace Freelance.Infrastructure.Services.Implementations
         public async Task RemoveOfferAsync(int id)
         {
             var result = await _jobRepository.RemoveAsync(id);
+        }
+
+        public async Task DeclineOfferAsync(int id, string userId)
+        {
+            var result = await _jobRepository.DeclineOfferAsync(id, userId);
+        }
+
+        public async Task AcceptOfferAsync(int id, string userId)
+        {
+            var result = await _jobRepository.AcceptOfferAsync(id, userId);
         }
     }
 }

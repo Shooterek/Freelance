@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Freelance.Core.Models;
-using Freelance.Infrastructure.Utils;
 
 namespace Freelance.Infrastructure.ViewModels
 {
-    public class JobsListViewModel
+    public class AddJobViewModel
     {
-        public IList<Job> Jobs { get; set; }
-
-        public PagingInfo PagingInfo { get; set; }
-
-        public Job Filter { get; set; }
+        public List<SelectListItem> ServiceTypes { get; set; }
+        public Job Job { get; set; }
     }
 }
