@@ -59,11 +59,11 @@ namespace Freelance
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "1013696412582-h8dpi52pa96lno6ju8tuaeo66oibggq6.apps.googleusercontent.com",
+                ClientSecret = "_oN6uBEit5SjyH6dwYT4brVo"
+            });
         }
     }
 }
