@@ -1,4 +1,6 @@
-﻿using Microsoft.Owin;
+﻿using System.Diagnostics;
+using Freelance.Utilities;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(Freelance.Startup))]

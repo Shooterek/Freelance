@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    var url = location.href;
     $(document).on('mouseenter', '.item', function () {
         $(this).find("#hire-button").show();
     }).on('mouseleave', '.item', function () {
@@ -26,26 +27,45 @@
         }
     });
 
-    $(document).on('focusout', '#localization', function (event) {
+    $(document).on('focusout', ' #localization', function (event) {
         var localization = event.currentTarget.value;
-        if(localization.length > 0) {
-            location.href = addOrReplaceParam(location.href, "localization", localization, false, false);
+        if (localization.length > 0) {
+            if (window.innerWidth > 1199) {
+                location.href = addOrReplaceParam(location.href, "localization", localization, false, false);
+            } else {
+                url = addOrReplaceParam(url, "localization", localization, false, false);
+            }
         }
     });
 
     $(document).on('focusout', '#minWage', function (event) {
         var minWage = event.currentTarget.value;
-        location.href = addOrReplaceParam(location.href, "maxWage", minWage, false, false);
+        if (window.innerWidth > 1199) {
+            location.href = addOrReplaceParam(location.href, "maxWage", minWage, false, false);
+        } else {
+            url = addOrReplaceParam(url, "maxWage", minWage, false, false);
+        }
     });
 
     $(document).on('focusout', '#maxWage', function (event) {
         var minWage = event.currentTarget.value;
-        location.href = addOrReplaceParam(location.href, "maxWage", minWage, false, false);
+        if (window.innerWidth > 1199) {
+            location.href = addOrReplaceParam(location.href, "maxWage", minWage, false, false);
+        } else {
+            url = addOrReplaceParam(url, "maxWage", minWage, false, false);
+        }
     });
 
     $(document).on('change', '.availability-menu', function (event) {
-        location.href = addOrReplaceParam(location.href, "availability", event.currentTarget.value, true, event.currentTarget.checked);
-        console.log(event.currentTarget);
+        if (window.innerWidth > 1199) {
+            location.href = addOrReplaceParam(location.href, "availability", event.currentTarget.value, true, event.currentTarget.checked);
+        } else {
+            url = addOrReplaceParam(url, "availability", event.currentTarget.value, true, event.currentTarget.checked);
+        }
+    });
+
+    $(document).on('click', '#btn-show-announcements', function () {
+        location.href = url;
     });
 });
 

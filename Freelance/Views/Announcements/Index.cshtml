@@ -22,7 +22,7 @@
 
 <div class="row">
     <div class="col-sm-3">
-        <div class="col-sm-12 menu">
+        <div class="col-sm-12 menu hidden-sm hidden-xs">
             @Html.Partial("AnnouncementsFilter", Model.Filter)
         </div>
     </div>
@@ -32,6 +32,9 @@
                 <div class="spacer"></div>
                 <div class="row">
                     <div id="sorting" class="col-sm-12" align="center">
+                        <a class="hidden-md hidden-lg" data-toggle="modal" data-target="#myModal">
+                            Filtry
+                        </a>
                         <select>
                             <option> halohaloha</option>
                             <option> halohaloha</option>
@@ -84,6 +87,20 @@
                         <hr/>
                     }
                 }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade modal-fullscreen-xs-down modal-fullscreen-sm-down modal-fullscreen-md-down">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header col-sm-12">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("AnnouncementsFilter", Model.Filter)
             </div>
         </div>
     </div>
