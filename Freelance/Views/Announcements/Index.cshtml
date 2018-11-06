@@ -1,4 +1,5 @@
-﻿@model Freelance.Infrastructure.ViewModels.AnnouncementsListViewModel
+﻿@using Freelance.Infrastructure.Utils
+@model Freelance.Infrastructure.ViewModels.AnnouncementsListViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -64,7 +65,7 @@
                                 <h4>@Html.ActionLink(announcements[i].Title, "Details", new {id = announcements[i].AnnouncementId})</h4>
                             </div>
                             <div>
-                                <p>@announcements[i].Description</p>
+                                <p>@announcements[i].Description.GetFirstCharacters(240)</p>
                             </div>
                         </div>
 

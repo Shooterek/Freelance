@@ -1,0 +1,35 @@
+﻿@using Freelance.Core.Models
+@using Freelance.Infrastructure.Utils
+@model Freelance.Infrastructure.Utils.AnnouncementFilter
+
+<div class="spacer"></div>
+<h4 class="bold">
+    Umiejętności
+</h4>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        @Html.LabelFor(model => model.Localization, htmlAttributes: new { @class = "control-label col-md-2", @for = "localization"})
+        @Html.EditorFor(model => model.Localization, new { htmlAttributes = new { @class = "form-control", id = "localization" } })
+    </div>
+</div>
+<h4 class="bold">
+    Wynagrodzenie
+</h4>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        @Html.LabelFor(model => model.MinWage, htmlAttributes: new { @class = "control-label col-md-2", @for = "minWage" })
+        @Html.EditorFor(model => model.MinWage, new { htmlAttributes = new { @class = "form-control", id = "minWage"} })
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        @Html.LabelFor(model => model.MaxWage, htmlAttributes: new { @class = "control-label col-md-2", @for = "maxWage" })
+        @Html.EditorFor(model => model.MaxWage, new { htmlAttributes = new { @class = "form-control", id = "maxWage" } })
+    </div>
+</div>
+
+@(Html.CheckBoxListForEnum<AnnouncementFilter, Availability>(m => m.Availability, new { @class = "availability-menu" }))

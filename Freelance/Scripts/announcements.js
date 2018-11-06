@@ -6,17 +6,17 @@
     });
 
     $(document).on('click', '#search-button', function () {
-        let url = location.href;
-        let category = $('#search-dropdown :selected').text();
+        var url = location.href;
+        var category = $('#search-dropdown :selected').text();
         url = url + '/category=' + category;
         location.href = url;
     });
 
     $(document).on('keydown', '#page-number', function (event) {
         if (event.which === 13) {
-            let value = parseInt($('#page-number').val());
-            let max = parseInt($('#page-number').attr('max'));
-            let href = $('#page-number').attr('data-url');
+            var value = parseInt($('#page-number').val());
+            var max = parseInt($('#page-number').attr('max'));
+            var href = $('#page-number').attr('data-url');
             href = href.substr(0, href.substr(0, href.lastIndexOf("/")).lastIndexOf("/"));
 
             if (value > max) {
@@ -26,34 +26,54 @@
         }
     });
 
-    $(document).on('focusout', '#localization', function () {
-        let localization = $('#localization').val();
+    $(document).on('focusout', '#localization', function (event) {
+        var localization = event.currentTarget.value;
         if(localization.length > 0) {
-            location.href = addOrReplaceParam(location.href, "localization", localization, false);
+            location.href = addOrReplaceParam(location.href, "localization", localization, false, false);
         }
     });
 
+    $(document).on('focusout', '#minWage', function (event) {
+        var minWage = event.currentTarget.value;
+        location.href = addOrReplaceParam(location.href, "maxWage", minWage, false, false);
+    });
+
+    $(document).on('focusout', '#maxWage', function (event) {
+        var minWage = event.currentTarget.value;
+        location.href = addOrReplaceParam(location.href, "maxWage", minWage, false, false);
+    });
+
     $(document).on('change', '.availability-menu', function (event) {
-        location.href = addOrReplaceParam(location.href, "availability", event.currentTarget.value, true);
+        location.href = addOrReplaceParam(location.href, "availability", event.currentTarget.value, true, event.currentTarget.checked);
+        console.log(event.currentTarget);
     });
 });
 
 
-var addOrReplaceParam = function (url, param, value, isArray) {
-    let query = param + "=" + value;
-    let shouldAddParam = true;
+var addOrReplaceParam = function (url, param, value, isArray, isChecked) {
+    var query = param + "=" + value;
+    var shouldAddParam = true;
+    var parametersString = url.split("?")[1];
     if (url.indexOf("?") === -1) {
         url += "?" + param + "=" + value;
     }
-    else if (isArray) {
-        if (url.indexOf(param + "=" + value) === -1) {
-            url += "&" + param + "=" + value;
+    else if (parametersString !== undefined) {
+        var parameters = parametersString.split("&");
+        if (isArray) {
+            for (let i = 0; i < parameters.length; i++) {
+                if (parameters[i].indexOf(query) !== -1) {
+                    if (!isChecked) {
+                        parameters.splice(i, 1);
+                        shouldAddParam = false;
+                        break;
+                    }
+                }
+            }
+            if (shouldAddParam) {
+                parameters.push(query);
+            }
         }
-    }
-    else {
-        let parametersString = url.split("?")[1];
-        if (parametersString !== undefined) {
-            let parameters = parametersString.split("&");
+        else {
             for (let i = 0; i < parameters.length; i++) {
                 if (parameters[i].indexOf(param) !== -1) {
                     parameters[i] = query;
@@ -62,13 +82,14 @@ var addOrReplaceParam = function (url, param, value, isArray) {
                 }
             }
             if (shouldAddParam) {
-                url += "&" + param + "=" + value;
-            } else {
-                alert();
-                url = url.split("?")[0] + "?" + parameters.join("&");
+                parameters.push(query);
             }
         }
-
+        if (parameters.length > 0) {
+            url = url.split("?")[0] + "?" + parameters.join("&");
+        } else {
+            url = url.split("?")[0];
+        }
     }
     return url;
 }

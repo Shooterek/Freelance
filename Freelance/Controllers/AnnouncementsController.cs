@@ -30,9 +30,9 @@ namespace Freelance.Controllers
         }
 
         // GET: Announcements
-        public async Task<ActionResult> Index(int page, string[] availability = null, string localization = null)
+        public async Task<ActionResult> Index(int page, decimal minWage = Decimal.One, decimal maxWage = Decimal.MaxValue, string[] availability = null, string localization = null)
         {
-            var result = await _announcementService.GetAnnouncementsAsync(page, PageSize, availability, localization);
+            var result = await _announcementService.GetAnnouncementsAsync(page, PageSize, minWage, maxWage, availability, localization);
             return View(result);
         }
 

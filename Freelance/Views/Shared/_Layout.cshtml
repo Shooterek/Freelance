@@ -27,14 +27,15 @@
                 <li class="dropdown">
                     <a href=@Url.Action("Index", "Announcements", new {page = 1}) role="button" aria-haspopup="true" aria-expanded="false">Zatrudnij</a>
                     <ul class="dropdown-menu white-hover no-hover">
-                        <li><a href="/Home/Index">Another action</a></li>
-                        <li><a href="/Home/Index">Something else here</a></li>
+                        <li><a href=@Url.Action("Index", "Announcements", new {page = 1})>Przeglądaj ogłoszenia</a></li>
+                        <li><a href=@Url.Action("Add", "Jobs")>Opublikuj zlecenie</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="~/Home/Index" role="button" aria-haspopup="true" aria-expanded="false">Pracuj</a>
+                    <a href=@Url.Action("Index", "Announcements", new {page = 1}) role="button" aria-haspopup="true" aria-expanded="false">Znajdź pracę</a>
                     <ul class="dropdown-menu white-hover no-hover">
-                        <li><p class="center">Znajdź pracę</p></li>
+                        <li><a href=@Url.Action("Index", "Jobs", new {page = 1})>Przeglądaj oferty</a></li>
+                        <li><a href=@Url.Action("Add", "Announcements")>Opublikuj ogłoszenie</a></li>
                     </ul>
                 </li>
             </ul>

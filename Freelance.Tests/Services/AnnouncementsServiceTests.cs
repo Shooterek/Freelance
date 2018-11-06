@@ -32,9 +32,9 @@ namespace Freelance.Tests.Services
 
             var data = new List<Announcement>()
             {
-                new Announcement() {AnnouncementId = _existingId, Title = "Announcement1", ServiceTypeId = 1, AdvertiserId = "User1", Availability = Availability.Monday},
-                new Announcement() {AnnouncementId = 2, Title = "Announcement2", ServiceTypeId = 1, AdvertiserId = "User2", Availability = Availability.Tuesday},
-                new Announcement() {AnnouncementId = 3, Title = "Announcement3", ServiceTypeId = 2, AdvertiserId = "User1", Availability = Availability.Wednesday}
+                new Announcement() {AnnouncementId = _existingId, Title = "Announcement1", ServiceTypeId = 1, AdvertiserId = "User1", Availability = Availability.Monday, ExpectedHourlyWage = 10.0M},
+                new Announcement() {AnnouncementId = 2, Title = "Announcement2", ServiceTypeId = 1, AdvertiserId = "User2", Availability = Availability.Tuesday, ExpectedHourlyWage = 20.0M},
+                new Announcement() {AnnouncementId = 3, Title = "Announcement3", ServiceTypeId = 2, AdvertiserId = "User1", Availability = Availability.Wednesday, ExpectedHourlyWage = 30.0M}
             };
             _initialAmount = data.Count;
 
@@ -93,7 +93,7 @@ namespace Freelance.Tests.Services
             int amountOfItemsToGet = 5;
             int page = 1;
 
-            var result = await _announcementsService.GetAnnouncementsAsync(page, amountOfItemsToGet, null, null);
+            var result = await _announcementsService.GetAnnouncementsAsync(page, amountOfItemsToGet, Decimal.Zero, Decimal.MaxValue, null, null);
 
             Assert.AreEqual(_initialAmount, result.Announcements.Count);
         }
@@ -104,7 +104,7 @@ namespace Freelance.Tests.Services
             int amountOfItemsToGet = 2;
             int page = 1;
 
-            var result = await _announcementsService.GetAnnouncementsAsync(page, amountOfItemsToGet, null, null);
+            var result = await _announcementsService.GetAnnouncementsAsync(page, amountOfItemsToGet, Decimal.Zero, Decimal.MaxValue, null, null);
 
             Assert.AreEqual(amountOfItemsToGet, result.Announcements.Count);
         }
@@ -115,7 +115,7 @@ namespace Freelance.Tests.Services
             int amountOfItemsToGet = 2;
             int page = 2;
 
-            var result = await _announcementsService.GetAnnouncementsAsync(page, amountOfItemsToGet, null, null);
+            var result = await _announcementsService.GetAnnouncementsAsync(page, amountOfItemsToGet, Decimal.Zero, Decimal.MaxValue, null, null);
 
             Assert.AreEqual(amountOfItemsToGet, result.PagingInfo.ItemsPerPage);
             Assert.AreEqual(page, result.PagingInfo.CurrentPage);
@@ -149,10 +149,10 @@ namespace Freelance.Tests.Services
         public async Task AddAsync_ShouldAddSpecifiedElement()
         {
             var result =
-                await _announcementsService.AddAnnouncementAsync(new Announcement() {AnnouncementId = _notExistingId, Availability = Availability.Monday});
+                await _announcementsService.AddAnnouncementAsync(new Announcement() {AnnouncementId = _notExistingId, Availability = Availability.Monday, ExpectedHourlyWage = 1230});
 
             var entity = await _announcementsService.GetAnnouncementByIdAsync(_notExistingId);
-            var allEntities = await _announcementsService.GetAnnouncementsAsync(1, _initialAmount + 1, null, null);
+            var allEntities = await _announcementsService.GetAnnouncementsAsync(1, _initialAmount + 1, Decimal.Zero, Decimal.MaxValue, null, null);
 
             Assert.AreEqual(result, entity);
             Assert.AreEqual(_initialAmount + 1, allEntities.Announcements.Count);

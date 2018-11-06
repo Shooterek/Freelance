@@ -22,24 +22,30 @@ namespace Freelance.Infrastructure.Services.Implementations
             _emailService = emailService;
         }
 
-        public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, string[] availability, string localization)
+        public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, decimal minWage, decimal maxWage, string[] availability, string localization)
         {
             var result = await _announcementRepository.GetAllAsync();
-            
-            Availability availableDays = Availability.Friday | Availability.Monday | Availability.Saturday | Availability.Sunday
-                                         | Availability.Thursday | Availability.Tuesday | Availability.Wednesday;
+
+            Availability availableDays = (Availability) 0;
             if (availability != null)
             {
                 availableDays = availability.ConvertToFlagEnum<Availability>();
             }
 
-            var entities = result.Entity.Where(a =>
-                (a.Availability & availableDays) > 0 && (a.Localization == localization || localization == null)).ToList();
+            var entities = result.Entity.Where(a => (a.Localization == localization || localization == null)
+                                                    && a.ExpectedHourlyWage > minWage && a.ExpectedHourlyWage < maxWage).ToList();
+
+            if (availability != null)
+            {
+                availableDays = availability.ConvertToFlagEnum<Availability>();
+                entities = entities.Where(a => (a.Availability & availableDays) > 0).ToList();
+            }
+
 
             var totalItems = entities.Count;
             var pagingInfo = new PagingInfo(page, amount, totalItems);
 
-            var filter = new Announcement {Availability = availableDays, Localization = localization};
+            var filter = new AnnouncementFilter {Availability = availableDays, Localization = localization};
 
             var announcements = entities.Skip((page - 1) * amount).Take(amount).ToList();
 

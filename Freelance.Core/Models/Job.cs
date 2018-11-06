@@ -22,8 +22,8 @@ namespace Freelance.Core.Models
         public ServiceType ServiceType { get; set; }
 
         [Required]
-        [StringLength(255)]
-        [MinLength(30)]
+        [StringLength(25)]
+        [MinLength(6)]
         public string Title { get; set; }
         
         public Availability Availability { get; set; }

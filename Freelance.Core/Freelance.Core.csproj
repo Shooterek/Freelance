@@ -93,6 +93,10 @@
     <Compile Include="Migrations\201811022251228_AddDataAnnotations.Designer.cs">
       <DependentUpon>201811022251228_AddDataAnnotations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811060847305_ChangedRequiredTitleLength.cs" />
+    <Compile Include="Migrations\201811060847305_ChangedRequiredTitleLength.Designer.cs">
+      <DependentUpon>201811060847305_ChangedRequiredTitleLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
@@ -141,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811022251228_AddDataAnnotations.resx">
       <DependentUpon>201811022251228_AddDataAnnotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811060847305_ChangedRequiredTitleLength.resx">
+      <DependentUpon>201811060847305_ChangedRequiredTitleLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

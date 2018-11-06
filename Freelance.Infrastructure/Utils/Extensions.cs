@@ -2,7 +2,7 @@
 
 namespace Freelance.Infrastructure.Utils
 {
-    public static class StringArrayExtensions
+    public static class Extensions
     {
         public static T ConvertToFlagEnum<T>(this string[] flags) where T : struct, IConvertible
         {
@@ -16,6 +16,16 @@ namespace Freelance.Infrastructure.Utils
                 flagValue |= currentValue;
             }
             return (T)Enum.ToObject(typeof(T), flagValue);
+        }
+
+        public static string GetFirstCharacters(this string text, int amountOfCharacters)
+        {
+            if (amountOfCharacters < 0 || text.Length < amountOfCharacters)
+            {
+                return text;
+            }
+
+            return text.Substring(0, amountOfCharacters) + "...";
         }
     }
 }

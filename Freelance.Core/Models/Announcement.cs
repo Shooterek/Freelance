@@ -20,8 +20,8 @@ namespace Freelance.Core.Models
         public virtual ApplicationUser Advertiser { get; set; }
 
         [Required]
-        [StringLength(255)]
-        [MinLength(30)]
+        [StringLength(25)]
+        [MinLength(6)]
         public string Title { get; set; }
 
         [Required]
