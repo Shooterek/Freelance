@@ -47,17 +47,17 @@ namespace Freelance
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            app.UseMicrosoftAccountAuthentication(
+                clientId: "2a86e109-1d4c-4a5a-9597-2e6a9d299156", 
+                clientSecret: "ljhEEYZC327%%yvmaNF75}=");
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1955319581438658",
+               appSecret: "9ad61b823d15ae6adf65ebcc7bc9af72");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
