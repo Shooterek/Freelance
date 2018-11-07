@@ -21,7 +21,7 @@ namespace Freelance.Controllers
     {
         private IAnnouncementsService _announcementService;
         private IServiceTypesService _serviceTypesService;
-        private const int PageSize = 5;
+        private const int PageSize = 10;
 
         public AnnouncementsController(IAnnouncementsService announcementService, IServiceTypesService serviceTypesService)
         {
@@ -30,9 +30,10 @@ namespace Freelance.Controllers
         }
 
         // GET: Announcements
-        public async Task<ActionResult> Index(int page, decimal minWage = Decimal.One, decimal maxWage = Decimal.MaxValue, string[] availability = null, string localization = null)
+        public async Task<ActionResult> Index(int page, decimal minWage = Decimal.One, decimal maxWage = Decimal.MaxValue,
+            string[] availability = null, string localization = null, int? serviceType = null)
         {
-            var result = await _announcementService.GetAnnouncementsAsync(page, PageSize, minWage, maxWage, availability, localization);
+            var result = await _announcementService.GetAnnouncementsAsync(page, PageSize, minWage, maxWage, availability, localization, serviceType);
             return View(result);
         }
 

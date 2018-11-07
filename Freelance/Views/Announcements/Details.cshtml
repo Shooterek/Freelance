@@ -1,65 +1,30 @@
 ﻿@using Freelance.Core.Models
 @model Freelance.Core.Models.Announcement
 
-@{
-    ViewBag.Title = "Details";
-}
+<div class="row blue-strip">
+    <div class="col-md-10 col-md-offset-1">
+        <section id="header">
+            <h2><b>@Model.Title</b></h2>
+        </section>
+    </div>
+</div>
 
-<h2>Details</h2>
+<div class="spacer"></div>
+<div class="row">
+    <div class="col-md-7 col-md-offset-1">
+        <div class="col-sm-12 details">
+            <div class="spacer"></div>
 
-<div>
-    <h4>Announcement</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Advertiser.Email)
-        </dt>
+            @Model.Description
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="col-sm-12 details">
+            <div class="spacer"></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Advertiser.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ServiceType.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ServiceType.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpectedHourlyWage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ExpectedHourlyWage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Localization)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Localization)
-        </dd>
-        @(Html.CheckBoxListForEnum<Announcement, Availability>(model => model.Availability))
-    </dl>
+            <img width="120" height="120" src="http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg"/>
+        </div>
+    </div>
 </div>
 
 <div class="row">

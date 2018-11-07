@@ -3,26 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Freelance.Core.Models;
 using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Services.Interfaces;
 using Freelance.Infrastructure.Utils;
 using Freelance.Infrastructure.ViewModels;
+using WebGrease.Css.Extensions;
 
 namespace Freelance.Infrastructure.Services.Implementations
 {
     public class AnnouncementsService : IAnnouncementsService
     {
         private IAnnouncementsRepository _announcementRepository;
+        private IServiceTypesService _serviceTypesService;
         private IEmailService _emailService;
 
-        public AnnouncementsService(IAnnouncementsRepository announcementRepository, IEmailService emailService)
+        public AnnouncementsService(IAnnouncementsRepository announcementRepository, IEmailService emailService, IServiceTypesService serviceTypesService)
         {
             _announcementRepository = announcementRepository;
             _emailService = emailService;
+            _serviceTypesService = serviceTypesService;
         }
 
-        public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, decimal minWage, decimal maxWage, string[] availability, string localization)
+        public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, decimal minWage, decimal maxWage,
+            string[] availability, string localization, int? serviceTypeId)
         {
             var result = await _announcementRepository.GetAllAsync();
 
@@ -33,7 +38,8 @@ namespace Freelance.Infrastructure.Services.Implementations
             }
 
             var entities = result.Entity.Where(a => (a.Localization == localization || localization == null)
-                                                    && a.ExpectedHourlyWage > minWage && a.ExpectedHourlyWage < maxWage).ToList();
+                                                    && a.ExpectedHourlyWage > minWage && a.ExpectedHourlyWage < maxWage
+                                                    && (serviceTypeId == null || a.ServiceTypeId == serviceTypeId)).ToList();
 
             if (availability != null)
             {
@@ -45,7 +51,14 @@ namespace Freelance.Infrastructure.Services.Implementations
             var totalItems = entities.Count;
             var pagingInfo = new PagingInfo(page, amount, totalItems);
 
-            var filter = new AnnouncementFilter {Availability = availableDays, Localization = localization};
+            var serviceTypes = await _serviceTypesService.GetServiceTypesAsync();
+            var servicesList = new List<SelectListItem> {new SelectListItem() {Value = "", Text = "", Selected = serviceTypeId == null} };
+
+            serviceTypes.ForEach(s => servicesList.Add(new SelectListItem() { Value = s.ServiceTypeId.ToString(), Text = s.Name,
+                Selected = serviceTypeId != null && s.ServiceTypeId == serviceTypeId.Value}));
+
+            var filter = new AnnouncementFilter {Availability = availableDays, Localization = localization,
+                ServiceTypes = servicesList, ServiceTypeId = serviceTypeId};
 
             var announcements = entities.Skip((page - 1) * amount).Take(amount).ToList();
 

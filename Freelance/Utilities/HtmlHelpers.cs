@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -41,14 +43,23 @@ namespace Freelance.Utilities
                 builder.MergeAttribute("type", "checkbox");
                 builder.MergeAttribute("value", item.ToString());
                 builder.MergeAttribute("name", fullBindingName);
+                builder.MergeAttribute("id", item.ToString());
 
                 // Add optional html attributes
                 if (htmlAttributes != null)
                     builder.MergeAttributes(new RouteValueDictionary(htmlAttributes));
-                
-                builder.InnerHtml = item.ToString();
 
                 sb.Append(builder.ToString(TagRenderMode.Normal));
+
+                var labelBuilder = new TagBuilder("label");
+                labelBuilder.MergeAttribute("for", item.ToString());
+                labelBuilder.InnerHtml = item.GetType()?
+                                             .GetMember(item.ToString())?
+                                             .First()?
+                                             .GetCustomAttribute<DisplayAttribute>()?
+                                             .Name;
+
+                sb.Append(labelBuilder.ToString(TagRenderMode.Normal));
 
                 // Seperate checkboxes by new line
                 sb.Append("<br />");

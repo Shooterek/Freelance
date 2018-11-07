@@ -3,6 +3,29 @@
     padding-bottom: 20px;
     font-family: 'Lato', sans-serif;
     background-color: #eeeeee;
+    font-size: 16px;
+}
+
+label {
+    padding-left: 3px;
+}
+
+select {
+    width: 150px;
+    height: 34px;
+    border-radius: 4px;
+}
+
+a {
+    color: black;
+}
+
+hr {
+    border: none;
+    margin: 0em;
+    height: 1px;
+    color: #cccccc; 
+    background-color: #cccccc;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -19,10 +42,15 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-
 input[type='number'] {
     -moz-appearance:textfield;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
 }
 
 
@@ -42,8 +70,8 @@ input::-webkit-inner-spin-button {
 }
 
 .blue-strip {
-    background-color: #3d87ff;
-    height: 76px;
+    background-color: teal;
+    min-height: 76px;
 }
 
 .spacer {
@@ -60,29 +88,16 @@ input::-webkit-inner-spin-button {
 
 .menu {
     background-color: white;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 div.item:hover{
     background-color: #e6e6e6;
+    cursor: pointer;
 }
 
-a {
-    color: black;
-}
-
-.inline {
-    display: inline;
-}
-
-.bold {
-    font-weight: bold;
-}
-
-select {
-    width: 150px;
-    height: 34px;
-    border-radius: 4px;
+.details {
+    background-color: white;
 }
 
 #sorting {
@@ -99,9 +114,8 @@ select {
 }
 
 /* Bootstrap */
-
-.navbar-header {
-    background-color: #ffffff;
+.navbar {
+    background-color: white !important;
 }
 
 .navbar-brand {
@@ -114,7 +128,7 @@ select {
 
 .dropdown > ul > li > a {
     margin: 11px;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .navbar-default .navbar-nav > li > a:focus {

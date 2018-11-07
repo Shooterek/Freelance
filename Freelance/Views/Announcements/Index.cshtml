@@ -7,7 +7,7 @@
     var pagingInfo = Model.PagingInfo;
 }
 <div class="row blue-strip">
-    <div class="col-sm-12">
+    <div class="col-md-10 col-md-offset-1">
         <section id="header">
             <h2><b>Oferty Pracy</b></h2>
         </section>
@@ -16,77 +16,78 @@
 
 <div class="spacer"></div>
 
-@Html.Action("SearchBar", "Navigation")
-
-<div class="spacer"></div>
-
 <div class="row">
-    <div class="col-sm-3">
-        <div class="col-sm-12 menu hidden-sm hidden-xs">
-            @Html.Partial("AnnouncementsFilter", Model.Filter)
-        </div>
-    </div>
-    <div class="col-sm-9">
+    <div class="col-md-10 col-md-offset-1">
         <div class="row">
-            <div class="col-sm-12 menu">
-                <div class="spacer"></div>
+            <div class="col-sm-4 col-md-3 hidden-xs">
+                <div class="col-sm-12 menu">
+                    @Html.Partial("AnnouncementsFilter", Model.Filter)
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-9">
                 <div class="row">
-                    <div id="sorting" class="col-sm-12" align="center">
-                        <a class="hidden-md hidden-lg" data-toggle="modal" data-target="#myModal">
-                            Filtry
-                        </a>
-                        <select>
-                            <option> halohaloha</option>
-                            <option> halohaloha</option>
-                            <option> halohaloha</option>
-                        </select>
-                        <span class="pull-right">
-                            @if (pagingInfo.CurrentPage > 1)
-                            {
-                                <a href=@Url.Action("Index", "Announcements", new {page = pagingInfo.CurrentPage - 1})>
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <div class="col-sm-12 menu">
+                        <div class="spacer"></div>
+                        <div class="row">
+                            <div id="sorting" class="col-sm-12" align="center">
+                                <a class="hidden-md hidden-lg hidden-sm" data-toggle="modal" data-target="#myModal">
+                                    Filtry
                                 </a>
-                            }
-                            <input id="page-number" type="number" value=@pagingInfo.CurrentPage min="1" max=@pagingInfo.TotalPages data-url=@Url.Action("Index", "Announcements")/>
-                            <span>z @(pagingInfo.TotalPages == 0 ? 1 : pagingInfo.TotalPages)</span>
-                            @if (pagingInfo.CurrentPage < pagingInfo.TotalPages)
-                            {
+                                <select>
+                                    <option> halohaloha</option>
+                                    <option> halohaloha</option>
+                                    <option> halohaloha</option>
+                                </select>
+                                <span class="pull-right">
+                                    @if (pagingInfo.CurrentPage > 1)
+                                    {
+                                        <a href="#" id="previous-page" data-page-number=@(pagingInfo.CurrentPage - 1)>
+                                            <span class="glyphicon glyphicon-chevron-left"></span>
+                                        </a>
+                                    }
+                                    <input id="page-number" type="number" value=@pagingInfo.CurrentPage min="1" max=@pagingInfo.TotalPages data-url=@Url.Action("Index", "Announcements")/>
+                                    <span>z @(pagingInfo.TotalPages == 0 ? 1 : pagingInfo.TotalPages)</span>
+                                    @if (pagingInfo.CurrentPage < pagingInfo.TotalPages)
+                                    {
+                                        <a href="#" id="next-page" data-page-number=@(pagingInfo.CurrentPage + 1)>
+                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                        </a>
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="spacer"></div>
+                        @for (int i = 0; i < Model.Announcements.Count; i++)
+                        {
+                            <div class="row item" id=@("item"+(i+1))>
+                                <div class="spacer"></div>
+                                <div class="col-md-9">
+                                    <div>
+                                        <h4>@Html.ActionLink(announcements[i].Title, "Details", new {id = announcements[i].AnnouncementId})</h4>
+                                    </div>
+                                    <div>
+                                        <p>@announcements[i].Description.GetFirstCharacters(240)</p>
+                                    </div>
+                                </div>
 
-                                <a href=@Url.Action("Index", "Announcements", new {page = pagingInfo.CurrentPage + 1})>
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                </a>
+                                <div class="col-md-3">
+                                    <div>
+                                        Oczekiwana stawka: @announcements[i].ExpectedHourlyWage zł
+                                    </div>
+                                    <div class="text-center">
+                                        @Html.ActionLink("Zatrudnij", "Details", new {id = announcements[i].AnnouncementId},
+                                            new {@style = "display: none;", @class = "btn btn-primary", @id = "hire-button"})
+                                    </div>
+                                </div>
+
+                            </div>
+                            if (i < announcements.Count - 1)
+                            {
+                                <hr/>
                             }
-                        </span>
+                        }
                     </div>
                 </div>
-                <div class="spacer"></div>
-                @for (int i = 0; i < Model.Announcements.Count; i++)
-                {
-                    <div class="row item">
-                        <div class="col-md-9">
-                            <div>   
-                                <h4>@Html.ActionLink(announcements[i].Title, "Details", new {id = announcements[i].AnnouncementId})</h4>
-                            </div>
-                            <div>
-                                <p>@announcements[i].Description.GetFirstCharacters(240)</p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div>
-                                Oczekiwana stawka: @announcements[i].ExpectedHourlyWage zł
-                            </div>
-                            <div class="text-center">
-                                @Html.ActionLink("Zatrudnij", "Details", new {id = announcements[i].AnnouncementId},
-                                    new {@style = "display: none;", @class = "btn btn-primary", @id = "hire-button"})
-                            </div>
-                        </div>
-                    </div>
-                    if (i < announcements.Count - 1)
-                    {
-                        <hr/>
-                    }
-                }
             </div>
         </div>
     </div>
@@ -97,7 +98,7 @@
         <div class="modal-content">
             <div class="modal-header col-sm-12">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Confirmation</h4>
+                <h4 class="modal-title">Filtry</h4>
             </div>
             <div class="modal-body">
                 @Html.Partial("AnnouncementsFilter", Model.Filter)
