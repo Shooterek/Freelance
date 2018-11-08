@@ -38,7 +38,7 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.AnnouncementOfferId }) |
             @Html.ActionLink("Details", "Details", new { id=item.AnnouncementOfferId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.AnnouncementOfferId })
-            @Html.ActionLink("Accept offer", "AcceptOffer", "Announcements", new { offerId=item.AnnouncementOfferId }, null)
+            @Html.ActionLink("Accept offer", "AcceptOffer", "Announcements", new { id=item.AnnouncementOfferId }, null)
             @Html.ActionLink("Decline offer", "DeclineOffer", "Announcements", new { id=item.AnnouncementOfferId }, null)
         </td>
     </tr>

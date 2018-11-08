@@ -14,6 +14,9 @@
         <th>
             @Html.DisplayNameFor(model => model.ProposedRate)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProposedRate)
+        </th>
         <th></th>
     </tr>
 
@@ -30,6 +33,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ProposedRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Offerer.Rating)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AnnouncementOfferId }) |

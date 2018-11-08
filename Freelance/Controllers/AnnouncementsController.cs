@@ -21,7 +21,7 @@ namespace Freelance.Controllers
     {
         private IAnnouncementsService _announcementService;
         private IServiceTypesService _serviceTypesService;
-        private const int PageSize = 10;
+        private const int PageSize = 6;
 
         public AnnouncementsController(IAnnouncementsService announcementService, IServiceTypesService serviceTypesService)
         {
@@ -31,9 +31,9 @@ namespace Freelance.Controllers
 
         // GET: Announcements
         public async Task<ActionResult> Index(int page, decimal minWage = Decimal.One, decimal maxWage = Decimal.MaxValue,
-            string[] availability = null, string localization = null, int? serviceType = null)
+            string[] availability = null, string localization = null, int? serviceType = null, string sort = null)
         {
-            var result = await _announcementService.GetAnnouncementsAsync(page, PageSize, minWage, maxWage, availability, localization, serviceType);
+            var result = await _announcementService.GetAnnouncementsAsync(page, PageSize, minWage, maxWage, availability, localization, serviceType, sort);
             return View(result);
         }
 
@@ -48,6 +48,7 @@ namespace Freelance.Controllers
             return View(announcement);
         }
 
+        [Authorize]
         public async Task<ActionResult> Add()
         {
             var serviceTypes = await _serviceTypesService.GetServiceTypesAsync();
@@ -58,6 +59,7 @@ namespace Freelance.Controllers
             return View(new AddAnnouncementViewModel {ServiceTypes = servicesList});
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Add(Announcement announcement)
         {
@@ -76,6 +78,7 @@ namespace Freelance.Controllers
             return View("Add", new AddAnnouncementViewModel() {Announcement = announcement, ServiceTypes = servicesList});
         }
 
+        [Authorize]
         [ChildActionOnly]
         public ActionResult AddOffer(int announcementId)
         {
@@ -83,6 +86,7 @@ namespace Freelance.Controllers
                 new AnnouncementOffer() {AnnouncementId = announcementId, OffererId = User.Identity.GetUserId()});
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> SubmitOffer(AnnouncementOffer offer)
         {
@@ -92,16 +96,27 @@ namespace Freelance.Controllers
             return RedirectToAction("Details", new {id = offer.AnnouncementId});
         }
 
+        [Authorize]
         public async Task<ActionResult> AcceptOffer(int id)
         {
             await _announcementService.AcceptOfferAsync(id, User.Identity.GetUserId());
             return RedirectToAction("Offers", "Account");
         }
         
+        [Authorize]
         public async Task<ActionResult> DeclineOffer(int id)
         {
             await _announcementService.DeclineOfferAsync(id, User.Identity.GetUserId());
             return RedirectToAction("Offers", "Account");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> EndOffer(int id)
+        {
+            await _announcementService.EndOfferAsync(id, User.Identity.GetUserId());
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

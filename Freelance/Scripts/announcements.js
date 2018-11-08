@@ -1,7 +1,7 @@
-﻿$(document).ready(function() {
+﻿$(document).ready(function () {
+    var url = location.href;
     $(document).on('keydown', '#page-number', function(event) {
         if (event.which === 13) {
-            var url = location.href;
             var value = parseInt($('#page-number').val());
             var max = parseInt($('#page-number').attr('max'));
             var href = $('#page-number').attr('data-url');
@@ -35,6 +35,13 @@
 
     $(document).on('click', '.item', function (event) {
         event.currentTarget.children[1].children[0].children[0].children[0].click();
+    });
+
+    $(document).on('change', '#sorting', function (event) {
+        url = changeParam(url, "sort", event.currentTarget.value, false, false);
+        if (isBigWindow() && url !== location.href) {
+            location.href = url;
+        }
     });
 
 });

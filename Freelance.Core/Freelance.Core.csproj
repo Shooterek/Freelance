@@ -97,6 +97,14 @@
     <Compile Include="Migrations\201811060847305_ChangedRequiredTitleLength.Designer.cs">
       <DependentUpon>201811060847305_ChangedRequiredTitleLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811081358415_AddPublicationDate.cs" />
+    <Compile Include="Migrations\201811081358415_AddPublicationDate.Designer.cs">
+      <DependentUpon>201811081358415_AddPublicationDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811081424223_AddOpinionsTable.cs" />
+    <Compile Include="Migrations\201811081424223_AddOpinionsTable.Designer.cs">
+      <DependentUpon>201811081424223_AddOpinionsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
@@ -105,6 +113,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\JobOffer.cs" />
+    <Compile Include="Models\Opinion.cs" />
     <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAnnouncementsRepository.cs" />
@@ -148,6 +157,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811060847305_ChangedRequiredTitleLength.resx">
       <DependentUpon>201811060847305_ChangedRequiredTitleLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811081358415_AddPublicationDate.resx">
+      <DependentUpon>201811081358415_AddPublicationDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811081424223_AddOpinionsTable.resx">
+      <DependentUpon>201811081424223_AddOpinionsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -19,6 +19,11 @@ select {
 a {
     color: black;
 }
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 hr {
     border: none;
@@ -26,6 +31,10 @@ hr {
     height: 1px;
     color: #cccccc; 
     background-color: #cccccc;
+}
+
+p {
+    text-align: center;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -111,6 +120,16 @@ div.item:hover{
     font-size: 18px;
     border: 2px solid grey;
     text-align: center;
+}
+
+.rating {
+    display: block;
+    text-align: center;
+}
+
+.glyphicon-star {
+    font-size: 24px;
+    color: orange;
 }
 
 /* Bootstrap */

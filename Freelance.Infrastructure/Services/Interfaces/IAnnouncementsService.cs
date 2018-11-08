@@ -7,7 +7,8 @@ namespace Freelance.Infrastructure.Services.Interfaces
 {
     public interface IAnnouncementsService
     {
-        Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, decimal minWage, decimal maxWage, string[] availability, string localization, int? serviceTypeId);
+        Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, decimal minWage, decimal maxWage, string[] availability,
+            string localization, int? serviceTypeId, string sort);
         Task<AnnouncementsListViewModel> GetAnnouncementsByServiceTypeAsync(ServiceType serviceType, int page, int amount);
         Task<AnnouncementsListViewModel> GetAnnouncementsByUserIdAsync(string userId, int page, int amount);
         Task<Announcement> GetAnnouncementByIdAsync(int announcementId);
@@ -20,5 +21,6 @@ namespace Freelance.Infrastructure.Services.Interfaces
         Task RemoveOfferAsync(int id);
         Task AcceptOfferAsync(int offerId, string userId);
         Task DeclineOfferAsync(int offerId, string userId);
+        Task EndOfferAsync(int id, string userId);
     }
 }

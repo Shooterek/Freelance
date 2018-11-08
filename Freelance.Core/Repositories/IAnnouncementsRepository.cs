@@ -21,5 +21,6 @@ namespace Freelance.Core.Repositories
 
         Task<RepositoryActionResult<bool>> AcceptOfferAsync(int offerId, string userId);
         Task<RepositoryActionResult<bool>> DeclineOfferAsync(int offerId, string userId);
+        Task<RepositoryActionResult<bool>> EndOfferAsync(int id, string userId);
     }
 }

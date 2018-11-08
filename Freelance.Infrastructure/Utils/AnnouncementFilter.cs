@@ -25,6 +25,8 @@ namespace Freelance.Infrastructure.Utils
         [Display(Name = "Kategoria")]
         public int? ServiceTypeId { get; set; }
 
+        public string SortOrder { get; set; }
+
         public List<SelectListItem> ServiceTypes { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Freelance.Core.Models;
 using Freelance.Core.Repositories;
+using WebGrease.Css.Extensions;
 
 namespace Freelance.Infrastructure.Repositories
 {
@@ -26,12 +27,50 @@ namespace Freelance.Infrastructure.Repositories
 
         public async Task<RepositoryActionResult<Announcement>> GetByIdAsync(int id)
         {
-            var announcement = await _context.Announcements.FirstOrDefaultAsync(a => a.AnnouncementId == id);
+            var rawAnnouncement = from a in _context.Announcements
+                where a.AnnouncementId == id
+                join op in _context.Opinions on a.AdvertiserId equals op.EvaluatedUserId
+                group new {a, op} by a.AnnouncementId
+                into g
+                select new
+                {
+                    Announcement = g.FirstOrDefault().a,
+                    AmountOfReviews = g.Count(),
+                    Rating = g.Average(x =>(double) x.op.Rating)
+                };
+
+            rawAnnouncement.FirstOrDefault().Announcement.Advertiser.Rating = rawAnnouncement.FirstOrDefault().Rating;
+            rawAnnouncement.FirstOrDefault().Announcement.Advertiser.AmountOfReviews = rawAnnouncement.FirstOrDefault().AmountOfReviews;
+
+            var announcement = rawAnnouncement.FirstOrDefault()?.Announcement;
 
             if (announcement == null)
             {
                 return new RepositoryActionResult<Announcement>(null, RepositoryStatus.NotFound);
             }
+
+            var rawOffers = from of in _context.AnnouncementOffers
+                where of.AnnouncementId == announcement.AnnouncementId
+                join op in _context.Opinions on of.OffererId equals op.EvaluatedUserId
+                join u in _context.Users on of.OffererId equals u.Id
+                group new {of, op, u} by of.OffererId
+                into g
+                select new
+                {
+                    Offerer = g.FirstOrDefault().u,
+                    Offer = g.FirstOrDefault().of,
+                    AmountOfReviews = g.Count(),
+                    Rating = g.Average(a => a.op.Rating)
+                };
+
+            var rawOffersList = await rawOffers.ToListAsync();
+            announcement.Offers = new List<AnnouncementOffer>(rawOffersList.Select(x =>
+            {
+                x.Offerer.Rating = x.Rating;
+                x.Offerer.AmountOfReviews = x.AmountOfReviews;
+                x.Offer.Offerer = x.Offerer;
+                return x.Offer;
+            }));
             return new RepositoryActionResult<Announcement>(announcement, RepositoryStatus.Ok);
         }
 
@@ -189,6 +228,33 @@ namespace Freelance.Infrastructure.Repositories
                 }
 
                 _context.AnnouncementOffers.Remove(offer);
+                await _context.SaveChangesAsync();
+
+                return new RepositoryActionResult<bool>(true, RepositoryStatus.Ok);
+            }
+            catch (Exception e)
+            {
+                return new RepositoryActionResult<bool>(false, RepositoryStatus.Error);
+            }
+        }
+
+        public async Task<RepositoryActionResult<bool>> EndOfferAsync(int id, string userId)
+        {
+            try
+            {
+                var offer = await _context.AnnouncementOffers.Include(o => o.Announcement).FirstOrDefaultAsync(a => a.AnnouncementOfferId == id);
+
+                if (offer == null)
+                {
+                    return new RepositoryActionResult<bool>(false, RepositoryStatus.NotFound);
+                }
+
+                if (offer.Announcement.AdvertiserId != userId)
+                {
+                    return new RepositoryActionResult<bool>(false, RepositoryStatus.BadRequest);
+                }
+
+                offer.IsFinished = true;
                 await _context.SaveChangesAsync();
 
                 return new RepositoryActionResult<bool>(true, RepositoryStatus.Ok);

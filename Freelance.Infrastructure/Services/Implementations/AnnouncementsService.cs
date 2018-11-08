@@ -27,7 +27,7 @@ namespace Freelance.Infrastructure.Services.Implementations
         }
 
         public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, decimal minWage, decimal maxWage,
-            string[] availability, string localization, int? serviceTypeId)
+            string[] availability, string localization, int? serviceTypeId, string sortOrder)
         {
             var result = await _announcementRepository.GetAllAsync();
 
@@ -47,6 +47,29 @@ namespace Freelance.Infrastructure.Services.Implementations
                 entities = entities.Where(a => (a.Availability & availableDays) > 0).ToList();
             }
 
+            switch (sortOrder)
+            {
+                case null:
+                case Constants.SortDateDescending:
+                    entities = entities.OrderByDescending(a => a.PublicationDate).ToList();
+                    sortOrder = sortOrder == null ? null : Constants.SortDateDescending;
+                    break;
+                    
+                case Constants.SortWageDescending:
+                    entities = entities.OrderByDescending(a => a.ExpectedHourlyWage).ToList();
+                    sortOrder = Constants.SortWageDescending;
+                    break;
+
+                case Constants.SortWageAscending:
+                    entities = entities.OrderBy(a => a.ExpectedHourlyWage).ToList();
+                    sortOrder = Constants.SortWageAscending;
+                    break;
+
+                case Constants.SortDateAscending:
+                    entities = entities.OrderBy(a => a.PublicationDate).ToList();
+                    sortOrder = Constants.SortDateAscending;
+                    break;
+            }
 
             var totalItems = entities.Count;
             var pagingInfo = new PagingInfo(page, amount, totalItems);
@@ -58,7 +81,7 @@ namespace Freelance.Infrastructure.Services.Implementations
                 Selected = serviceTypeId != null && s.ServiceTypeId == serviceTypeId.Value}));
 
             var filter = new AnnouncementFilter {Availability = availableDays, Localization = localization,
-                ServiceTypes = servicesList, ServiceTypeId = serviceTypeId};
+                ServiceTypes = servicesList, ServiceTypeId = serviceTypeId, SortOrder = sortOrder};
 
             var announcements = entities.Skip((page - 1) * amount).Take(amount).ToList();
 
@@ -161,6 +184,11 @@ namespace Freelance.Infrastructure.Services.Implementations
         public async Task DeclineOfferAsync(int offerId, string userId)
         {
             var result = await _announcementRepository.DeclineOfferAsync(offerId, userId);
+        }
+
+        public async Task EndOfferAsync(int id, string userId)
+        {
+            var result = await _announcementRepository.EndOfferAsync(id, userId);
         }
     }
 }

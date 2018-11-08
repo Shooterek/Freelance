@@ -113,6 +113,7 @@
     <Compile Include="Services\Interfaces\IJobsService.cs" />
     <Compile Include="Services\Interfaces\IServiceTypesService.cs" />
     <Compile Include="Utils\AnnouncementFilter.cs" />
+    <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\PagingInfo.cs" />
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="ViewModels\AddAnnouncementViewModel.cs" />

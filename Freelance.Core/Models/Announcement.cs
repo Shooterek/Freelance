@@ -33,6 +33,7 @@ namespace Freelance.Core.Models
         public decimal ExpectedHourlyWage { get; set; }
 
         public string Localization { get; set; }
+        public DateTime PublicationDate { get; set; }
 
         [Required]
         public int ServiceTypeId { get; set; }

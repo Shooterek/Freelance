@@ -5,6 +5,7 @@
     ViewBag.Title = "Index";
     var announcements = Model.Announcements;
     var pagingInfo = Model.PagingInfo;
+    var sortOrder = Model.Filter.SortOrder;
 }
 <div class="row blue-strip">
     <div class="col-md-10 col-md-offset-1">
@@ -29,14 +30,23 @@
                     <div class="col-sm-12 menu">
                         <div class="spacer"></div>
                         <div class="row">
-                            <div id="sorting" class="col-sm-12" align="center">
+                            <div id="utilities" class="col-sm-12" align="center">
                                 <a class="hidden-md hidden-lg hidden-sm" data-toggle="modal" data-target="#myModal">
                                     Filtry
                                 </a>
-                                <select>
-                                    <option> halohaloha</option>
-                                    <option> halohaloha</option>
-                                    <option> halohaloha</option>
+                                <select id="sorting">
+                                    <option value=@Constants.SortDateDescending selected=@(sortOrder == null || sortOrder.Equals(Constants.SortDateDescending))>
+                                         Od najnowszego
+                                    </option>
+                                    <option value=@Constants.SortDateAscending selected=@Constants.SortDateAscending.Equals(sortOrder)>
+                                         Od najstarszego
+                                    </option>
+                                    <option value=@Constants.SortWageDescending selected=@Constants.SortWageDescending.Equals(sortOrder)>
+                                         Stawka: malejąco
+                                    </option>
+                                    <option value=@Constants.SortWageAscending selected=@Constants.SortWageAscending.Equals(sortOrder)>
+                                         Stawka: rosnąco
+                                    </option>
                                 </select>
                                 <span class="pull-right">
                                     @if (pagingInfo.CurrentPage > 1)

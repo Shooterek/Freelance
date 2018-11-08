@@ -22,7 +22,22 @@
         <div class="col-sm-12 details">
             <div class="spacer"></div>
 
-            <img width="120" height="120" src="http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg"/>
+            <img class="img-responsive" width="120" height="120" src="http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg"/>
+            <p>@Model.Advertiser.UserName</p>
+            <div class="rating">
+                @if (Model.Advertiser.AmountOfReviews > 0)
+                {
+                    for (int i = 0; i < Model.Advertiser.Rating; i++)
+                     {
+                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                     }
+                    <span>(@Model.Advertiser.AmountOfReviews ocen)</span>
+                }
+                else
+                {
+                    <span>Brak ocen</span>
+                }
+            </div>
         </div>
     </div>
 </div>
