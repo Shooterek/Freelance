@@ -61,21 +61,24 @@ namespace Freelance.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> Add(Announcement announcement)
+        public async Task<ActionResult> Add([Bind(Exclude = "ServiceTypes")]AddAnnouncementViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                var announcement = viewModel.Announcement;
                 announcement.AdvertiserId = User.Identity.GetUserId();
                 var result = await _announcementService.AddAnnouncementAsync(announcement);
 
-                return View("Details", result);
+                return RedirectToAction("Details", new {id = result.AnnouncementId});
             }
 
             var serviceTypes = await _serviceTypesService.GetServiceTypesAsync();
 
             var servicesList = new List<SelectListItem>();
             serviceTypes.ForEach(s => servicesList.Add(new SelectListItem() { Value = s.ServiceTypeId.ToString(), Text = s.Name }));
-            return View("Add", new AddAnnouncementViewModel() {Announcement = announcement, ServiceTypes = servicesList});
+            viewModel.ServiceTypes = servicesList;
+
+            return View("Add", viewModel);
         }
 
         [Authorize]

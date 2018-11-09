@@ -171,6 +171,15 @@ div.item:hover{
     background-color: white;
 }
 
+#files {
+    display: none;
+}
+
+.preview {
+    max-width: 120px;
+    max-height: 80px;
+}
+
 
 @media(max-width: 767px) {
     .no-hover { display: none !important; }

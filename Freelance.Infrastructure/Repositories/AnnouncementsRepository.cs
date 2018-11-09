@@ -53,7 +53,7 @@ namespace Freelance.Infrastructure.Repositories
                 where of.AnnouncementId == announcement.AnnouncementId
                 join op in _context.Opinions on of.OffererId equals op.EvaluatedUserId
                 join u in _context.Users on of.OffererId equals u.Id
-                group new {of, op, u} by of.OffererId
+                group new {of, op, u} by of.AnnouncementOfferId
                 into g
                 select new
                 {

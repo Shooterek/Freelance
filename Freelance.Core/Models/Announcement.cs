@@ -12,6 +12,8 @@ namespace Freelance.Core.Models
         public Announcement()
         {
             Offers = new List<AnnouncementOffer>();
+            Photos = new List<Photo>();
+            PublicationDate = DateTime.Now;
         }
 
         public int AnnouncementId { get; set; }
@@ -39,6 +41,7 @@ namespace Freelance.Core.Models
         public int ServiceTypeId { get; set; }
 
         public virtual ServiceType ServiceType { get; set; }
-        public virtual ICollection <AnnouncementOffer> Offers { get; set; }
+        public virtual ICollection<AnnouncementOffer> Offers { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
     }
 }

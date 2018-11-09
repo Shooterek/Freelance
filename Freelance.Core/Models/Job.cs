@@ -41,6 +41,7 @@ namespace Freelance.Core.Models
         [Range(0.01, Double.MaxValue)]
         public decimal MaximumWage { get; set; }
 
-        public ICollection<JobOffer> Offers { get; set; }
+        public virtual ICollection<JobOffer> Offers { get; set; }
+        public virtual ICollection<Photo> Photos{ get; set; }
     }
 }

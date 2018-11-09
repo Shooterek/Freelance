@@ -13,6 +13,7 @@ namespace Freelance.Core.Models
         public virtual DbSet<JobOffer> JobOffers{ get; set; }
         public virtual DbSet<AnnouncementOffer> AnnouncementOffers{ get; set; }
         public virtual DbSet<Opinion> Opinions { get; set; }
+        public virtual DbSet<Photo> Photos{ get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

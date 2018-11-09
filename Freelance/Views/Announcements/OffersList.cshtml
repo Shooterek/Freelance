@@ -35,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.ProposedRate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Offerer.Rating)
+            @Html.DisplayFor(modelItem => item.Offerer.Rating) (@item.Offerer.AmountOfReviews)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AnnouncementOfferId }) |
