@@ -69,9 +69,8 @@
         <div class="col-md-10">
             <a class="btn btn-default" id="add-announcement-photos">Dodaj zdjęcie</a>
             @* <input type="file" multiple id="files" accept=".jpg, .jpeg, .png"/> *@
-            @Html.TextBoxFor(model => model.Photos, "", new { type = "file", multiple = "multiple", id = "files", accept = ".jpg, .jpeg, .png" })
+            <input class="hide" name="Photos" type = "file" multiple id = "Photos" accept = ".jpg, .jpeg, .png" />)
             <div class="preview-area">
-
             </div>
         </div>  
 

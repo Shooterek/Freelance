@@ -123,6 +123,17 @@ namespace Freelance.Infrastructure.Repositories
             try
             {
                 var announcement = _context.Announcements.Add(entity);
+
+                if (entity.Photos.Count > 0)
+                {
+                    foreach (var photo in entity.Photos)
+                    {
+                        photo.AnnouncementId = announcement.AnnouncementId;
+                    }
+
+                    var photos = _context.Photos.AddRange(entity.Photos);
+                    announcement.Photos = photos.ToList();
+                }
                 await _context.SaveChangesAsync();
 
                 return new RepositoryActionResult<Announcement>(announcement, RepositoryStatus.Created);

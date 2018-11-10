@@ -125,10 +125,10 @@ div.item:hover{
 .rating {
     display: block;
     text-align: center;
+    font-size: 20px;
 }
 
-.glyphicon-star {
-    font-size: 24px;
+.fa {
     color: orange;
 }
 
@@ -171,7 +171,7 @@ div.item:hover{
     background-color: white;
 }
 
-#files {
+.hide {
     display: none;
 }
 

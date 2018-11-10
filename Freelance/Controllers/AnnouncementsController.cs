@@ -19,8 +19,8 @@ namespace Freelance.Controllers
 {
     public class AnnouncementsController : Controller
     {
-        private IAnnouncementsService _announcementService;
-        private IServiceTypesService _serviceTypesService;
+        private readonly IAnnouncementsService _announcementService;
+        private readonly IServiceTypesService _serviceTypesService;
         private const int PageSize = 6;
 
         public AnnouncementsController(IAnnouncementsService announcementService, IServiceTypesService serviceTypesService)
@@ -61,12 +61,24 @@ namespace Freelance.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add([Bind(Exclude = "ServiceTypes")]AddAnnouncementViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 var announcement = viewModel.Announcement;
                 announcement.AdvertiserId = User.Identity.GetUserId();
+
+                viewModel.Photos.ForEach(p =>
+                {
+                    var photo = new Photo();
+                    photo.Content = new byte[p.ContentLength];
+                    p.InputStream.Read(photo.Content, 0, p.ContentLength);
+
+                    photo.ContentType = p.ContentType;
+                    announcement.Photos.Add(photo);
+                });
+
                 var result = await _announcementService.AddAnnouncementAsync(announcement);
 
                 return RedirectToAction("Details", new {id = result.AnnouncementId});

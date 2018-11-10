@@ -45,14 +45,14 @@
     });
 
     $(document).on('click', '#add-announcement-photos', function (event) {
-        $('#files').click();
+        $('#Photos').click();
     });
 
-    $(document).on('click', '#files', function (event) {
+    $(document).on('click', '#Photos', function (event) {
         $(this).val("");
     });
 
-    $(document).on('change', '#files', function (event) {
+    $(document).on('change', '#Photos', function (event) {
         $('.preview-area').empty();
         var maxAmountOfFiles = $(this).attr('data-max-amount');
         var fileCount = this.files.length;
