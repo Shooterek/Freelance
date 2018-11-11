@@ -68,6 +68,11 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
+input[type="text"]:focus{
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 
 .white-hover > li > a:hover, .white-hover > li > a:focus{
     color: #3d87ff !important;
@@ -128,8 +133,54 @@ div.item:hover{
     font-size: 20px;
 }
 
-.fa {
+.fa-star {
     color: orange;
+}
+
+.hide {
+    display: none;
+}
+
+.preview {
+    max-width: 120px;
+    max-height: 80px;
+}
+
+.login-form {
+    background-color: white;
+    width: auto;
+    height: 500px;
+    border-radius: 5px;
+}
+
+.round {
+    border-radius: 54px;
+}
+
+section > h2, h4 {
+    text-align: center;
+}
+
+.google{
+    background-color: #ff0000;
+    width: 44px;
+    color: white;
+    border: none;
+}
+
+.google:hover {
+    color: white;
+}
+
+.facebook{
+    background-color: #3b5998;
+    color: white;
+    width: 44px;
+    border: none;
+}
+
+.facebook:hover {
+    color: white;
 }
 
 /* Bootstrap */
@@ -169,15 +220,6 @@ div.item:hover{
 
 .navbar-collapse {
     background-color: white;
-}
-
-.hide {
-    display: none;
-}
-
-.preview {
-    max-width: 120px;
-    max-height: 80px;
 }
 
 

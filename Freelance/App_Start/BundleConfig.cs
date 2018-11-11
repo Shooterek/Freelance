@@ -12,6 +12,7 @@ namespace Freelance
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/announcements.js",
                         "~/Scripts/announcements-filter.js",
+                        "~/Scripts/materialize/materialize.js",
                         "~/Scripts/layout.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -29,6 +30,7 @@ namespace Freelance
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css",
+                      "~/Content/materialize/css/materialize.css",
                       "~/Content/Site.css"));
         }
     }
