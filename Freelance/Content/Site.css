@@ -33,10 +33,6 @@ hr {
     background-color: #cccccc;
 }
 
-p {
-    text-align: center;
-}
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -53,6 +49,9 @@ p {
 
 input[type='number'] {
     -moz-appearance:textfield;
+}
+input[type='checkbox'] {
+    border-radius: 4px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -149,7 +148,6 @@ div.item:hover{
 .login-form {
     background-color: white;
     width: auto;
-    height: 500px;
     border-radius: 5px;
 }
 
@@ -157,7 +155,7 @@ div.item:hover{
     border-radius: 54px;
 }
 
-section > h2, h4 {
+section > h2 {
     text-align: center;
 }
 
@@ -177,6 +175,10 @@ section > h2, h4 {
     color: white;
     width: 44px;
     border: none;
+}
+
+.facebook:focus, .google:focus {
+    outline: none;
 }
 
 .facebook:hover {

@@ -5,7 +5,9 @@
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
 }
 
-<h4>lub użyj</h4>
+<div class="center">
+    <h4>lub użyj</h4>
+</div>
 
 @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
     @Html.AntiForgeryToken()

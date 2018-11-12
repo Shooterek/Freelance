@@ -11,7 +11,7 @@
 <div class="row">
     <div class="form-group col-sm-12">
         @Html.LabelFor(model => model.MinWage,  htmlAttributes: new { @class = "control-label"})
-        @Html.EditorFor(model => model.MinWage, new { htmlAttributes = new { @class = "form-control"} })
+        @Html.EditorFor(model => model.MinWage, new { htmlAttributes = new { @class = "form-control round"} })
     </div>
 </div>
 
@@ -19,7 +19,7 @@
 <div class="row">
     <div class="form-group col-sm-12">
         @Html.LabelFor(model => model.MaxWage, htmlAttributes: new { @class = "control-label"})
-        @Html.EditorFor(model => model.MaxWage, new { htmlAttributes = new { @class = "form-control"} })
+        @Html.EditorFor(model => model.MaxWage, new { htmlAttributes = new { @class = "form-control round"} })
     </div>
 </div>
 
@@ -40,7 +40,7 @@
     <div class="form-group col-sm-12">
         @Html.LabelFor(model => model.ServiceTypeId, htmlAttributes: new { @class = "control-label" })
         <div>
-            @Html.DropDownListFor(model => model.ServiceTypeId, Model.ServiceTypes)
+            @Html.DropDownListFor(model => model.ServiceTypeId, Model.ServiceTypes, new {@class="round"})
         </div>
     </div>
 </div>
@@ -48,7 +48,7 @@
 <div class="row">
     <div class="form-group col-sm-12">
         @Html.LabelFor(model => model.Localization, htmlAttributes: new { @class = "control-label"})
-        @Html.EditorFor(model => model.Localization, new { htmlAttributes = new { @class = "form-control"} })
+        @Html.EditorFor(model => model.Localization, new { htmlAttributes = new { @class = "form-control round"} })
     </div>
 </div>
 
