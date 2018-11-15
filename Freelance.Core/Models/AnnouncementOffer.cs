@@ -24,6 +24,10 @@ namespace Freelance.Core.Models
         [Required]
         [Range(0.01, Double.MaxValue)]
         public decimal ProposedRate { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string Message { get; set; }
         
         public bool IsAccepted { get; set; }
         public bool IsFinished { get; set; }

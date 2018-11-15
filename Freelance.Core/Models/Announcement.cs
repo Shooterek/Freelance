@@ -24,6 +24,7 @@ namespace Freelance.Core.Models
         [Required]
         [StringLength(25)]
         [MinLength(6)]
+        [Display(Name = "Tytuł")]
         public string Title { get; set; }
 
         [Required]

@@ -14,38 +14,37 @@
         </section>
     </div>
 </div>
-
 <div class="spacer"></div>
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="row">
             <div class="col-sm-4 col-md-3 hidden-xs">
-                <div class="col-sm-12 menu">
-                    @Html.Partial("AnnouncementsFilter", Model.Filter)
-                </div>
+                    <div class="col-sm-12 menu white-background">
+                        @Html.Partial("AnnouncementsFilter", Model.Filter)
+                    </div>
             </div>
             <div class="col-xs-12 col-sm-8 col-md-9">
                 <div class="row">
-                    <div class="col-sm-12 menu">
+                    <div class="col-sm-12 menu white-background">
                         <div class="spacer"></div>
                         <div class="row">
                             <div id="utilities" class="col-sm-12" align="center">
-                                <a class="hidden-md hidden-lg hidden-sm" data-toggle="modal" data-target="#myModal">
+                                <a class="hidden-md hidden-lg hidden-sm pull-left" data-toggle="modal" data-target="#myModal">
                                     Filtry
                                 </a>
                                 <select id="sorting">
                                     <option value=@Constants.SortDateDescending selected=@(sortOrder == null || sortOrder.Equals(Constants.SortDateDescending))>
-                                         Od najnowszego
+                                        Od najnowszego
                                     </option>
                                     <option value=@Constants.SortDateAscending selected=@Constants.SortDateAscending.Equals(sortOrder)>
-                                         Od najstarszego
+                                        Od najstarszego
                                     </option>
                                     <option value=@Constants.SortWageDescending selected=@Constants.SortWageDescending.Equals(sortOrder)>
-                                         Stawka: malejąco
+                                        Stawka: malejąco
                                     </option>
                                     <option value=@Constants.SortWageAscending selected=@Constants.SortWageAscending.Equals(sortOrder)>
-                                         Stawka: rosnąco
+                                        Stawka: rosnąco
                                     </option>
                                 </select>
                                 <span class="pull-right">
@@ -69,7 +68,8 @@
                         <div class="spacer"></div>
                         @for (int i = 0; i < Model.Announcements.Count; i++)
                         {
-                            <div class="row item" id=@("item"+(i+1))>
+                            <hr/>
+                            <div class="row item" id=@("item" + (i + 1))>
                                 <div class="spacer"></div>
                                 <div class="col-md-9">
                                     <div>
@@ -91,7 +91,7 @@
                                 </div>
 
                             </div>
-                            if (i < announcements.Count - 1)
+                            if (i == announcements.Count - 1)
                             {
                                 <hr/>
                             }

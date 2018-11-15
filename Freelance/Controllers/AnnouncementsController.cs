@@ -69,10 +69,9 @@ namespace Freelance.Controllers
                 var announcement = viewModel.Announcement;
                 announcement.AdvertiserId = User.Identity.GetUserId();
 
-                viewModel.Photos.ForEach(p =>
+                viewModel.Photos.Where(p => p != null).ForEach(p =>
                 {
-                    var photo = new Photo();
-                    photo.Content = new byte[p.ContentLength];
+                    var photo = new Photo {Content = new byte[p.ContentLength]};
                     p.InputStream.Read(photo.Content, 0, p.ContentLength);
 
                     photo.ContentType = p.ContentType;
@@ -103,7 +102,7 @@ namespace Freelance.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> SubmitOffer(AnnouncementOffer offer)
+        public async Task<ActionResult> SubmitOffer([Bind(Exclude = "SubmissionDate, OffererId")] AnnouncementOffer offer)
         {
             offer.OffererId = User.Identity.GetUserId();
             offer.SubmissionDate = DateTime.Today;

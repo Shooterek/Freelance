@@ -109,6 +109,10 @@
     <Compile Include="Migrations\201811092039505_AddPhotosToAnnouncementsAndJobs.Designer.cs">
       <DependentUpon>201811092039505_AddPhotosToAnnouncementsAndJobs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811151842554_AddMessageFieldToOffers.cs" />
+    <Compile Include="Migrations\201811151842554_AddMessageFieldToOffers.Designer.cs">
+      <DependentUpon>201811151842554_AddMessageFieldToOffers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
@@ -171,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811092039505_AddPhotosToAnnouncementsAndJobs.resx">
       <DependentUpon>201811092039505_AddPhotosToAnnouncementsAndJobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811151842554_AddMessageFieldToOffers.resx">
+      <DependentUpon>201811151842554_AddMessageFieldToOffers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

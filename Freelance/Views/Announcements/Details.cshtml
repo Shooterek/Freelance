@@ -6,7 +6,7 @@
             <div class="col-sm-8">
                 <h2><b>@Model.Title</b></h2>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 center">
                 <h2><b>Stawka: @Model.ExpectedHourlyWage zł</b></h2>
             </div>
         </section>
@@ -16,15 +16,17 @@
 <div class="spacer"></div>
 <div class="row">
     <div class="col-md-7 col-md-offset-1">
-        <div class="col-sm-12 details">
+        <div class="col-sm-12 details white-background">
             <div class="spacer"></div>
 
-            @Model.Description
+            <p class="user-content">
+                @Model.Description
+            </p>
             <div class="spacer"></div>
             
             @if (Model.Photos.Count > 0)
             {
-                <p>Załączniki</p>
+                <p>Załączone zdjęcia</p>
                 <div class="preview-area">
                     @foreach (var photo in Model.Photos)
                     {
@@ -40,12 +42,13 @@
                             </div>
                         </div>
                     }
+                    <div class="spacer"></div>
                 </div>
             }
         </div>
     </div>
     <div class="col-md-3">
-        <div class="col-sm-12 details">
+        <div class="col-sm-12 details white-background">
             <div class="spacer"></div>
 
             <img class="img-responsive" width="120" height="120" src="http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg"/>
@@ -66,7 +69,7 @@
                     {
                         <i class="fa fa-star"></i>
                     }
-                    <span>(@Model.Advertiser.AmountOfReviews ocen) @Model.Advertiser.Rating</span>
+                    <span>(@Model.Advertiser.AmountOfReviews ocen)</span>
                 }
                 else
                 {

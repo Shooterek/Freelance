@@ -54,14 +54,6 @@ input[type='checkbox'] {
     border-radius: 4px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -100,7 +92,6 @@ input[type="text"]:focus{
 }
 
 .menu {
-    background-color: white;
     border-radius: 2px;
 }
 
@@ -110,8 +101,11 @@ div.item:hover{
 }
 
 .details {
-    background-color: white;
     text-align: center;
+}
+
+.white-background {
+    background-color: white;
 }
 
 #sorting {
@@ -133,7 +127,7 @@ div.item:hover{
     font-size: 20px;
 }
 
-.fa-star {
+.fa-star, .fa-star-half {
     color: orange;
 }
 
@@ -168,10 +162,6 @@ section > h2 {
     border: none;
 }
 
-.google:hover {
-    color: white;
-}
-
 .facebook{
     background-color: #3b5998;
     color: white;
@@ -183,8 +173,9 @@ section > h2 {
     outline: none;
 }
 
-.facebook:hover {
-    color: white;
+.user-content {
+    white-space: pre-line;
+    text-align: left;
 }
 
 /* Bootstrap */

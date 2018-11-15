@@ -2,85 +2,88 @@
 @using Freelance.Infrastructure.ViewModels
 @model Freelance.Infrastructure.ViewModels.AddAnnouncementViewModel
 
-@{
-    ViewBag.Title = "Add";
-}
+<div class="row blue-strip">
+    <div class="col-md-4 col-md-offset-4">
+        <section id="header">
+            <h2><b>Dodaj ogłoszenie</b></h2>
+        </section>
+    </div>
+</div>
 
-<h2>Add</h2>
+<div class="spacer"></div>
 
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 white-background menu">
+        <div class="col-sm-12">
+            <div class="spacer"></div>
+            @using (Html.BeginForm("Add", "Announcements", FormMethod.Post, new {enctype = "multipart/form-data"}))
+            {
+                @Html.AntiForgeryToken()
 
-@using (Html.BeginForm("Add", "Announcements", FormMethod.Post, new {enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Announcement</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Announcement.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Announcement.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Announcement.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Announcement.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Announcement.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Announcement.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Announcement.Title, htmlAttributes: new {@class = "control-label"})
+                    @Html.EditorFor(model => model.Announcement.Title, new {htmlAttributes = new {@class = "form-control round"}})
+                    @Html.ValidationMessageFor(model => model.Announcement.Title, "", new {@class = "text-danger"})
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Announcement.ExpectedHourlyWage, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Announcement.ExpectedHourlyWage, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Announcement.ExpectedHourlyWage, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Announcement.Description, htmlAttributes: new {@class = "control-label"})
+                    <div>
+                        @Html.TextAreaFor(model => model.Announcement.Description, new {@class = "form-control", rows = 14, cols = 90})
+                        @Html.ValidationMessageFor(model => model.Announcement.Description, "", new {@class = "text-danger"})
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Announcement.Localization, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Announcement.Localization, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Announcement.Localization, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Announcement.ExpectedHourlyWage, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Announcement.ExpectedHourlyWage, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Announcement.ExpectedHourlyWage, "", new {@class = "text-danger"})
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Announcement.ServiceTypeId, "ServiceTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Announcement.ServiceTypeId, Model.ServiceTypes)
-                @Html.ValidationMessageFor(model => model.Announcement.ServiceTypeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Announcement.Availability, "Availability", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @(Html.CheckBoxListForEnum<AddAnnouncementViewModel, Availability>(model => model.Announcement.Availability, "Availability"))
-                @Html.ValidationMessageFor(model => model.Announcement.Availability, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="col-md-10">
-            <a class="btn btn-default" id="add-announcement-photos">Dodaj zdjęcie</a>
-            @* <input type="file" multiple id="files" accept=".jpg, .jpeg, .png"/> *@
-            <input class="hide" name="Photos" type = "file" multiple id = "Photos" accept = ".jpg, .jpeg, .png" />)
-            <div class="preview-area">
-            </div>
-        </div>  
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Announcement.Localization, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Announcement.Localization, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Announcement.Localization, "", new {@class = "text-danger"})
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Announcement.ServiceTypeId, "ServiceTypeId", htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Announcement.ServiceTypeId, Model.ServiceTypes)
+                        @Html.ValidationMessageFor(model => model.Announcement.ServiceTypeId, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Announcement.Availability, "Availability", htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @(Html.CheckBoxListForEnum<AddAnnouncementViewModel, Availability>(model => model.Announcement.Availability, "Availability"))
+                        @Html.ValidationMessageFor(model => model.Announcement.Availability, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="col-md-10">
+                    <a class="btn btn-default" id="add-announcement-photos">Dodaj zdjęcie</a>
+                    <input class="hide" name="Photos" type="file" multiple id="Photos" accept=".jpg, .jpeg, .png"/>)
+                    <div class="preview-area">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default"/>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-}
+</div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
