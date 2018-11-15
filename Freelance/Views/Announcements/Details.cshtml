@@ -22,12 +22,26 @@
             @Model.Description
             <div class="spacer"></div>
             
-            <div class="preview-area">
-                @foreach (var photo in Model.Photos)
-                {
-                    <img class="img-responsive preview" src="@String.Format("data:{0};base64,{1}", photo.ContentType, Convert.ToBase64String(photo.Content))"/>
-                }
-            </div>
+            @if (Model.Photos.Count > 0)
+            {
+                <p>Załączniki</p>
+                <div class="preview-area">
+                    @foreach (var photo in Model.Photos)
+                    {
+                        <img id=@photo.PhotoId class="img-responsive preview" src="@String.Format("data:{0};base64,{1}", photo.ContentType, Convert.ToBase64String(photo.Content))"/>
+                        <div id=@("photo"+photo.PhotoId) class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <div class="modal-body">
+                                        <img class="img-responsive " src="@String.Format("data:{0};base64,{1}", photo.ContentType, Convert.ToBase64String(photo.Content))"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
         </div>
     </div>
     <div class="col-md-3">

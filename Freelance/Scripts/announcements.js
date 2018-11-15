@@ -74,6 +74,12 @@
         }
     });
 
+    $(document).on('click', '.preview', function (event) {
+        var id = $(this).attr('id');
+        var selector = `#photo${id}`;
+        $(selector).modal('show');
+    });
+
 });
 
 var changePage = function(value) {

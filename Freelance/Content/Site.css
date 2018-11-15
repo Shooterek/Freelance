@@ -111,6 +111,7 @@ div.item:hover{
 
 .details {
     background-color: white;
+    text-align: center;
 }
 
 #sorting {
@@ -143,6 +144,7 @@ div.item:hover{
 .preview {
     max-width: 120px;
     max-height: 80px;
+    display: inline-block;
 }
 
 .login-form {
