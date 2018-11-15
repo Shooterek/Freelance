@@ -85,6 +85,17 @@ namespace Freelance.Infrastructure.Repositories
             try
             {
                 var job = _context.Jobs.Add(entity);
+
+                if (entity.Photos.Count > 0)
+                {
+                    foreach (var photo in entity.Photos)
+                    {
+                        photo.JobId = job.JobId;
+                    }
+
+                    var photos = _context.Photos.AddRange(entity.Photos);
+                    job.Photos = photos.ToList();
+                }
                 await _context.SaveChangesAsync();
 
                 return new RepositoryActionResult<Job>(job, RepositoryStatus.Created);

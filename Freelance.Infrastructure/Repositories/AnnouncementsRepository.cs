@@ -30,19 +30,23 @@ namespace Freelance.Infrastructure.Repositories
             var rawAnnouncement = from a in _context.Announcements
                 where a.AnnouncementId == id
                 join op in _context.Opinions on a.AdvertiserId equals op.EvaluatedUserId
+                into temp
+                from op in temp.DefaultIfEmpty()
                 group new {a, op} by a.AnnouncementId
                 into g
                 select new
                 {
                     Announcement = g.FirstOrDefault().a,
-                    AmountOfReviews = g.Count(),
-                    Rating = g.Average(x =>(double) x.op.Rating)
+                    AmountOfReviews = (int?)g.Count(x => x.op.Rating > 0),
+                    Rating = (double?)g.Average(a => (double) a.op.Rating)
                 };
 
-            rawAnnouncement.FirstOrDefault().Announcement.Advertiser.Rating = rawAnnouncement.FirstOrDefault().Rating;
-            rawAnnouncement.FirstOrDefault().Announcement.Advertiser.AmountOfReviews = rawAnnouncement.FirstOrDefault().AmountOfReviews;
+            var c = rawAnnouncement.FirstOrDefault();
 
-            var announcement = rawAnnouncement.FirstOrDefault()?.Announcement;
+            c.Announcement.Advertiser.Rating = c.Rating ?? 0;
+            c.Announcement.Advertiser.AmountOfReviews = c.AmountOfReviews ?? 0;
+
+            var announcement = c.Announcement;
 
             if (announcement == null)
             {
@@ -52,6 +56,8 @@ namespace Freelance.Infrastructure.Repositories
             var rawOffers = from of in _context.AnnouncementOffers
                 where of.AnnouncementId == announcement.AnnouncementId
                 join op in _context.Opinions on of.OffererId equals op.EvaluatedUserId
+                into temp
+                from op in temp.DefaultIfEmpty()
                 join u in _context.Users on of.OffererId equals u.Id
                 group new {of, op, u} by of.AnnouncementOfferId
                 into g
@@ -59,15 +65,15 @@ namespace Freelance.Infrastructure.Repositories
                 {
                     Offerer = g.FirstOrDefault().u,
                     Offer = g.FirstOrDefault().of,
-                    AmountOfReviews = g.Count(),
-                    Rating = g.Average(a => a.op.Rating)
+                    AmountOfReviews = (int?)g.Count(x => x.op.Rating > 0),
+                    Rating = (double?)g.Average(a => a.op.Rating)
                 };
 
             var rawOffersList = await rawOffers.ToListAsync();
             announcement.Offers = new List<AnnouncementOffer>(rawOffersList.Select(x =>
             {
-                x.Offerer.Rating = x.Rating;
-                x.Offerer.AmountOfReviews = x.AmountOfReviews;
+                x.Offerer.Rating = x.Rating ?? 0;
+                x.Offerer.AmountOfReviews = x.AmountOfReviews ?? 0;
                 x.Offer.Offerer = x.Offerer;
                 return x.Offer;
             }));
