@@ -178,6 +178,14 @@ section > h2 {
     text-align: left;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
+.input-short {
+    max-width: 280px;
+}
+
 /* Bootstrap */
 .navbar {
     background-color: white !important;

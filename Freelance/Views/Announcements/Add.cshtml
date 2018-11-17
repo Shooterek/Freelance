@@ -22,63 +22,85 @@
 
                 @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Announcement.Title, htmlAttributes: new {@class = "control-label"})
-                    @Html.EditorFor(model => model.Announcement.Title, new {htmlAttributes = new {@class = "form-control round"}})
-                    @Html.ValidationMessageFor(model => model.Announcement.Title, "", new {@class = "text-danger"})
+                <div id="add-announcement-1">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Announcement.Title, htmlAttributes: new {@class = "control-label"})
+                        @Html.EditorFor(model => model.Announcement.Title, new {htmlAttributes = new {@class = "form-control round disable-next-button"}})
+                        @Html.ValidationMessageFor(model => model.Announcement.Title, "", new {@class = "text-danger"})
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Announcement.Description, htmlAttributes: new {@class = "control-label"})
+                        <div>
+                            @Html.TextAreaFor(model => model.Announcement.Description, new {@class = "form-control disable-next-button", rows = 14, cols = 90})
+                            @Html.ValidationMessageFor(model => model.Announcement.Description, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a id="add-announcements-next" class="btn btn-primary pull-right">Do przodu</a>
+                        </div>
+                    </div>
+
+                    <div class="spacer"></div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Announcement.Description, htmlAttributes: new {@class = "control-label"})
-                    <div>
-                        @Html.TextAreaFor(model => model.Announcement.Description, new {@class = "form-control", rows = 14, cols = 90})
-                        @Html.ValidationMessageFor(model => model.Announcement.Description, "", new {@class = "text-danger"})
+                <div id="add-announcement-2" class="hidden">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Announcement.ExpectedHourlyWage, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Announcement.ExpectedHourlyWage, new { htmlAttributes = new { @class = "form-control input-short" } })
+                        @Html.ValidationMessageFor(model => model.Announcement.ExpectedHourlyWage, "", new { @class = "text-danger" })
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Announcement.ExpectedHourlyWage, htmlAttributes: new {@class = "control-label col-md-2"})
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Announcement.ExpectedHourlyWage, new {htmlAttributes = new {@class = "form-control"}})
-                        @Html.ValidationMessageFor(model => model.Announcement.ExpectedHourlyWage, "", new {@class = "text-danger"})
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Announcement.Localization, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Announcement.Localization, new { htmlAttributes = new { @class = "form-control input-short" } })
+                        @Html.ValidationMessageFor(model => model.Announcement.Localization, "", new { @class = "text-danger" })
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Announcement.Localization, htmlAttributes: new {@class = "control-label col-md-2"})
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Announcement.Localization, new {htmlAttributes = new {@class = "form-control"}})
-                        @Html.ValidationMessageFor(model => model.Announcement.Localization, "", new {@class = "text-danger"})
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Announcement.ServiceTypeId, "ServiceTypeId", htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @Html.DropDownListFor(model => model.Announcement.ServiceTypeId, Model.ServiceTypes)
+                            @Html.ValidationMessageFor(model => model.Announcement.ServiceTypeId, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Announcement.ServiceTypeId, "ServiceTypeId", htmlAttributes: new {@class = "control-label col-md-2"})
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.Announcement.ServiceTypeId, Model.ServiceTypes)
-                        @Html.ValidationMessageFor(model => model.Announcement.ServiceTypeId, "", new {@class = "text-danger"})
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Announcement.Availability, "Availability", htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @(Html.CheckBoxListForEnum<AddAnnouncementViewModel, Availability>(model => model.Announcement.Availability, "Availability"))
+                            @Html.ValidationMessageFor(model => model.Announcement.Availability, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Announcement.Availability, "Availability", htmlAttributes: new {@class = "control-label col-md-2"})
-                    <div class="col-md-10">
-                        @(Html.CheckBoxListForEnum<AddAnnouncementViewModel, Availability>(model => model.Announcement.Availability, "Availability"))
-                        @Html.ValidationMessageFor(model => model.Announcement.Availability, "", new {@class = "text-danger"})
-                    </div>
-                </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a class="btn btn-default" id="add-announcement-photos">Wybierz zdjęcia</a>
+                            <input class="hide" name="Photos" type="file" multiple id="Photos" accept="image/*" />
 
-                <div class="col-md-10">
-                    <a class="btn btn-default" id="add-announcement-photos">Dodaj zdjęcie</a>
-                    <input class="hide" name="Photos" type="file" multiple id="Photos" accept=".jpg, .jpeg, .png"/>)
-                    <div class="preview-area">
-                    </div>
-                </div>
+                            <div class="spacer"></div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default"/>
+                            <div class="row">
+                                <div class="col-xs-12 preview-area">
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <div class="spacer"></div>
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a id="add-announcements-previous" class="btn btn-primary pull-left">Wróć</a>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="submit" value="Opublikuj" class="btn btn-success pull-right" />
+                        </div>
+                    </div>
+                    
+                    <div class="spacer"></div>
                 </div>
             }
         </div>
