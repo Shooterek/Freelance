@@ -164,7 +164,7 @@ namespace Freelance.Infrastructure.Services.Implementations
 
             if (result.Status == RepositoryStatus.Created)
             {
-                _emailService.Notify(result.Entity);
+                await _emailService.Notify(result.Entity);
                 return result.Entity;
             }
 

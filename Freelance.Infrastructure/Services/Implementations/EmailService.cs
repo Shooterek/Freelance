@@ -13,7 +13,7 @@ namespace Freelance.Infrastructure.Services.Implementations
 {
     public class EmailService : IEmailService
     {
-        public void Notify(AnnouncementOffer offer)
+        public async Task Notify(AnnouncementOffer offer)
         {
             var message = new MailMessage();
             message.To.Add("plokarzbartlomiej@gmail.com");
@@ -32,11 +32,11 @@ namespace Freelance.Infrastructure.Services.Implementations
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.EnableSsl = true;
-                smtp.Send(message);
+                await smtp.SendMailAsync(message);
             }
         }
 
-        public void Notify(JobOffer offer)
+        public async Task Notify(JobOffer offer)
         {
             var message = new MailMessage();
             message.To.Add(offer.Offerer.Email);
@@ -55,7 +55,7 @@ namespace Freelance.Infrastructure.Services.Implementations
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.EnableSsl = true;
-                smtp.Send(message);
+                await smtp.SendMailAsync(message);
             }
         }
     }

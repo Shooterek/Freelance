@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Freelance.Core.Models;
@@ -8,8 +9,11 @@ using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Repositories;
 using Freelance.Infrastructure.Services.Implementations;
 using Freelance.Infrastructure.Services.Interfaces;
+using Freelance.ScheduledJobs;
 using Ninject;
 using Ninject.Web.Common;
+using Quartz;
+using Quartz.Impl;
 
 namespace Freelance.Infrastructure
 {
@@ -35,6 +39,17 @@ namespace Freelance.Infrastructure
 
         private void AddBindings()
         {
+            kernel.Bind<IScheduler>().ToMethod(x =>
+            {
+                IScheduler scheduler = null;
+                var temp = new StdSchedulerFactory();
+                var runSync = Task.Factory.StartNew(async () => { scheduler = await temp.GetScheduler(); }).Unwrap();
+                runSync.Wait();
+
+                scheduler.JobFactory = new NinjectJobFactory(kernel);
+                return scheduler;
+            });
+
             kernel.Bind<IAnnouncementsRepository>().To<AnnouncementsRepository>().InRequestScope();
             kernel.Bind<IServiceTypesRepository>().To<ServiceTypesRepository>().InRequestScope();
             kernel.Bind<IJobsRepository>().To<JobsRepository>().InRequestScope();

@@ -34,6 +34,8 @@ namespace Freelance.Infrastructure.Repositories
                 from op in temp.DefaultIfEmpty()
                 join us in _context.Users on a.AdvertiserId equals us.Id
                 join p in _context.Photos on us.PhotoId equals p.PhotoId
+                into tempPhotos
+                from p in tempPhotos.DefaultIfEmpty()
                 group new {a, op, p} by a.AnnouncementId
                 into g
                 select new
@@ -61,6 +63,8 @@ namespace Freelance.Infrastructure.Repositories
                 where of.AnnouncementId == announcement.AnnouncementId
                 join us in _context.Users on of.OffererId equals us.Id
                 join p in _context.Photos on us.PhotoId equals p.PhotoId
+                into tempPhotos
+                from p in tempPhotos.DefaultIfEmpty()
                 join op in _context.Opinions on of.OffererId equals op.EvaluatedUserId
                 into temp
                 from op in temp.DefaultIfEmpty()

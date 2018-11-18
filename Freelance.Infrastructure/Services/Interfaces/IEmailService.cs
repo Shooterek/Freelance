@@ -9,7 +9,7 @@ namespace Freelance.Infrastructure.Services.Interfaces
 {
     public interface IEmailService
     {
-        void Notify(JobOffer offer);
-        void Notify(AnnouncementOffer offer);
+        Task Notify(JobOffer offer);
+        Task Notify(AnnouncementOffer offer);
     }
 }
