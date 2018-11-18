@@ -3,7 +3,7 @@
 @model Freelance.Infrastructure.ViewModels.AddAnnouncementViewModel
 
 <div class="row blue-strip">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-8 col-md-offset-2">
         <section id="header">
             <h2><b>Dodaj ogłoszenie</b></h2>
         </section>
@@ -78,7 +78,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <a class="btn btn-default" id="add-announcement-photos">Wybierz zdjęcia</a>
-                            <input class="hide" name="Photos" type="file" multiple id="Photos" accept="image/*" />
+                            <input class="hide" name="Photos" type="file" multiple id="Photos" accept="image/*" data-max-amount="5"/>
 
                             <div class="spacer"></div>
 

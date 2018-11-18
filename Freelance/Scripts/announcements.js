@@ -96,6 +96,11 @@
         $(this).toggleClass('disable-next-button');
     });
 
+    $(document).on('click', '#show-more-offers', function () {
+        $(this).addClass('hidden');
+        $('#second-part').toggleClass('hidden');
+    });
+
 });
 
 var changePage = function(value) {
@@ -112,6 +117,5 @@ var areInputsTouchedAndCorrect = function () {
     var isTitleCorrect = $('#Announcement_Title').valid();
     var isDescriptionCorrect = $('#Announcement_Description').valid();
 
-    alert(isDescriptionCorrect);
     return isTitleCorrect && isDescriptionCorrect;
 }

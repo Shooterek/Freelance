@@ -1,4 +1,6 @@
-﻿@model Freelance.Core.Models.Announcement
+﻿@using Freelance.Infrastructure.ViewModels
+@using Microsoft.AspNet.Identity
+@model Freelance.Core.Models.Announcement
 
 <div class="row blue-strip">
     <div class="col-md-10 col-md-offset-1">
@@ -15,42 +17,69 @@
 
 <div class="spacer"></div>
 <div class="row">
-    <div class="col-md-7 col-md-offset-1">
-        <div class="col-sm-12 details white-background">
-            <div class="spacer"></div>
+    <div class="col-md-7 col-sm-12 col-md-offset-1">
+        <div class="row">
+            <div class="col-sm-12 white-background">
+                <h3>Opis</h3>
+                <p class="user-content">
+                    @Model.Description
+                </p>
+                <div class="spacer"></div>
 
-            <p class="user-content">
-                @Model.Description
-            </p>
-            <div class="spacer"></div>
-            
-            @if (Model.Photos.Count > 0)
-            {
-                <p>Załączone zdjęcia</p>
-                <div class="preview-area">
-                    @foreach (var photo in Model.Photos)
-                    {
-                        <img id=@photo.PhotoId class="img-responsive preview" src="@String.Format("data:{0};base64,{1}", photo.ContentType, Convert.ToBase64String(photo.Content))"/>
-                        <div id=@("photo"+photo.PhotoId) class="modal fade">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <div class="modal-body">
-                                        <img class="img-responsive " src="@String.Format("data:{0};base64,{1}", photo.ContentType, Convert.ToBase64String(photo.Content))"/>
+                @if (Model.Photos.Count > 0)
+                {
+                    <h4>Załączone zdjęcia</h4>
+                    <div class="preview-area">
+                        @foreach (var photo in Model.Photos)
+                        {
+                            <img id=@photo.PhotoId class="img-responsive preview" src="@String.Format("data:{0};base64,{1}", photo.ContentType, Convert.ToBase64String(photo.Content))"/>
+                            <div id=@("photo" + photo.PhotoId) class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <div class="modal-body">
+                                            <img class="img-responsive " src="@String.Format("data:{0};base64,{1}", photo.ContentType, Convert.ToBase64String(photo.Content))"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        }
+                        <div class="spacer"></div>
+                    </div>
+                }
+                <div class="spacer"></div>
+                <hr/>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>
+                            Złożone oferty
+                        </h4>
+                        <div>
+                            @Html.Partial("OffersList", new AnnouncementOffersListViewModel {Offers = Model.Offers, ShowAll = false})
                         </div>
-                    }
-                    <div class="spacer"></div>
+                    </div>
                 </div>
-            }
+                
+                @if (Context.User.Identity.GetUserId() != Model.AdvertiserId)
+                {
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4>
+                                Dodaj ofertę
+                            </h4>
+                            <div>
+                                @Html.Action("AddOffer", new {announcementId = Model.AnnouncementId})
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 hidden-sm hidden-xs">
         <div class="col-sm-12 details white-background">
             <div class="spacer"></div>
-
             <img class="img-responsive" width="120" height="120" src="http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg"/>
             <p>@Model.Advertiser.UserName</p>
             <div class="rating">
@@ -80,11 +109,6 @@
     </div>
 </div>
 
-<div class="row">
-    @Html.Partial("OffersList", Model.Offers)
-</div>
-
-@Html.Action("AddOffer", new {announcementId = Model.AnnouncementId})
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.AnnouncementId }) |
     @Html.ActionLink("Back to List", "Index", new {page = 1})

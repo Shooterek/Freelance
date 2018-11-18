@@ -186,6 +186,17 @@ section > h2 {
     max-width: 280px;
 }
 
+.user {
+    background-color: white;
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+}
+
+.second-part {
+    display: none;
+}
+
 /* Bootstrap */
 .navbar {
     background-color: white !important;
@@ -232,17 +243,11 @@ section > h2 {
         align-items: center;
         justify-content: center;
     }
-}
 
-@media(min-width: 0px) {
-    .container {
-        width: 100% !important;
-        min-width: 100%;
+    .user {
+        padding: 0px;
     }
-}
 
-/* Extra small devices (less than 768px) */
-@media (max-width: 767px) {
     .modal-fullscreen-xs-down {
         padding: 0 !important;
     }
@@ -260,7 +265,13 @@ section > h2 {
     } 
 }
 
-/* Small devices (less than 992px) */
+@media(min-width: 0px) {
+    .container {
+        width: 100% !important;
+        min-width: 100%;
+    }
+}
+
 @media (max-width: 991px) {
     .modal-fullscreen-sm-down {
         padding: 0 !important;
@@ -279,7 +290,6 @@ section > h2 {
     }
 }
 
-/* Medium devices (less than 1200px) */
 @media (max-width: 1199px) {
     .modal-fullscreen-md-down {
         padding: 0 !important;

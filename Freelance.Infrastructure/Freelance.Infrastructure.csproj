@@ -125,6 +125,7 @@
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="ViewModels\AddAnnouncementViewModel.cs" />
     <Compile Include="ViewModels\AddJobViewModel.cs" />
+    <Compile Include="ViewModels\AnnouncementOffersListViewModel.cs" />
     <Compile Include="ViewModels\UserOffersListViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />
     <Compile Include="ViewModels\JobsListViewModel.cs" />

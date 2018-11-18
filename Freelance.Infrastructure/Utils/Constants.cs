@@ -13,5 +13,6 @@ namespace Freelance.Infrastructure.Utils
         public const string SortWageDescending = "wageDesc";
         public const string SortWageAscending = "wageAsc";
         public const int MaxAmountOfPhotos = 5;
+        public const int MaxInitialAmountOfOffers = 5;
     }
 }
