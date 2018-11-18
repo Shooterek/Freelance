@@ -15,6 +15,9 @@ namespace Freelance.Core.Models
 
         public int AmountOfReviews { get; set; }
 
+        public int? PhotoId { get; set; }
+        public Photo Photo { get; set; }
+
         public virtual ICollection<Announcement> PublishedAnnouncements { get; set; }
         public virtual ICollection<Job> PublishedJobs { get; set; }
         public virtual ICollection<JobOffer> ProposedOffers { get; set; }

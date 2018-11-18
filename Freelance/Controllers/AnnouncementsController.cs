@@ -105,7 +105,7 @@ namespace Freelance.Controllers
         public async Task<ActionResult> SubmitOffer([Bind(Exclude = "SubmissionDate, OffererId")] AnnouncementOffer offer)
         {
             offer.OffererId = User.Identity.GetUserId();
-            offer.SubmissionDate = DateTime.Today;
+            offer.SubmissionDate = DateTime.Now;
             var result = await _announcementService.AddOfferAsync(offer);
             return RedirectToAction("Details", new {id = offer.AnnouncementId});
         }

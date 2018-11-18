@@ -32,7 +32,8 @@
                     <div class="preview-area">
                         @foreach (var photo in Model.Photos)
                         {
-                            <img id=@photo.PhotoId class="img-responsive preview" src="@String.Format("data:{0};base64,{1}", photo.ContentType, Convert.ToBase64String(photo.Content))"/>
+                            <img id=@photo.PhotoId class="img-responsive preview"
+                                 src="@String.Format("data:{0};base64,{1}", photo.ContentType, Convert.ToBase64String(photo.Content))"/>
                             <div id=@("photo" + photo.PhotoId) class="modal fade">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -48,19 +49,22 @@
                     </div>
                 }
                 <div class="spacer"></div>
-                <hr/>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h4>
-                            Złożone oferty
-                        </h4>
-                        <div>
-                            @Html.Partial("OffersList", new AnnouncementOffersListViewModel {Offers = Model.Offers, ShowAll = false})
+                @if (Model.Offers.Any())
+                {
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4>
+                                Złożone oferty
+                            </h4>
+                            <div>
+                                @Html.Partial("OffersList", new AnnouncementOffersListViewModel {Offers = Model.Offers, ShowAll = false})
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                @if (Context.User.Identity.GetUserId() != Model.AdvertiserId)
+                }
+
+                @if (Context.User.Identity.IsAuthenticated && Context.User.Identity.GetUserId() != Model.AdvertiserId)
                 {
                     <br/>
                     <div class="row">
@@ -80,7 +84,9 @@
     <div class="col-md-3 hidden-sm hidden-xs">
         <div class="col-sm-12 details white-background">
             <div class="spacer"></div>
-            <img class="img-responsive" width="120" height="120" src="http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg"/>
+            <img class="img-responsive" width="120" height="120" 
+                 src="@(Model.Advertiser.Photo != null ? String.Format("data:{0};base64,{1}", Model.Advertiser.Photo.ContentType, Convert.ToBase64String(Model.Advertiser.Photo.Content)) 
+                 : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")"/>
             <p>@Model.Advertiser.UserName</p>
             <div class="rating">
                 @if (Model.Advertiser.AmountOfReviews > 0)

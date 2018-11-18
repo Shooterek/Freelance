@@ -32,19 +32,23 @@ namespace Freelance.Infrastructure.Repositories
                 join op in _context.Opinions on a.AdvertiserId equals op.EvaluatedUserId
                 into temp
                 from op in temp.DefaultIfEmpty()
-                group new {a, op} by a.AnnouncementId
+                join us in _context.Users on a.AdvertiserId equals us.Id
+                join p in _context.Photos on us.PhotoId equals p.PhotoId
+                group new {a, op, p} by a.AnnouncementId
                 into g
                 select new
                 {
                     Announcement = g.FirstOrDefault().a,
                     AmountOfReviews = (int?)g.Count(x => x.op.Rating > 0),
-                    Rating = (double?)g.Average(a => (double) a.op.Rating)
+                    Rating = (double?)g.Average(a => (double) a.op.Rating),
+                    Photo = g.FirstOrDefault().p
                 };
 
             var c = rawAnnouncement.FirstOrDefault();
 
             c.Announcement.Advertiser.Rating = c.Rating ?? 0;
             c.Announcement.Advertiser.AmountOfReviews = c.AmountOfReviews ?? 0;
+            c.Announcement.Advertiser.Photo = c.Photo;
 
             var announcement = c.Announcement;
 
@@ -55,24 +59,28 @@ namespace Freelance.Infrastructure.Repositories
 
             var rawOffers = from of in _context.AnnouncementOffers
                 where of.AnnouncementId == announcement.AnnouncementId
+                join us in _context.Users on of.OffererId equals us.Id
+                join p in _context.Photos on us.PhotoId equals p.PhotoId
                 join op in _context.Opinions on of.OffererId equals op.EvaluatedUserId
                 into temp
                 from op in temp.DefaultIfEmpty()
                 join u in _context.Users on of.OffererId equals u.Id
-                group new {of, op, u} by of.AnnouncementOfferId
+                group new {of, op, u, p} by of.AnnouncementOfferId
                 into g
                 select new
                 {
                     Offerer = g.FirstOrDefault().u,
                     Offer = g.FirstOrDefault().of,
                     AmountOfReviews = (int?)g.Count(x => x.op.Rating > 0),
-                    Rating = (double?)g.Average(a => a.op.Rating)
+                    Rating = (double?)g.Average(a => a.op.Rating),
+                    Photo = g.FirstOrDefault().p
                 };
 
             var rawOffersList = await rawOffers.ToListAsync();
             announcement.Offers = new List<AnnouncementOffer>(rawOffersList.Select(x =>
             {
                 x.Offerer.Rating = x.Rating ?? 0;
+                x.Offerer.Photo = x.Photo;
                 x.Offerer.AmountOfReviews = x.AmountOfReviews ?? 0;
                 x.Offer.Offerer = x.Offerer;
                 return x.Offer;
