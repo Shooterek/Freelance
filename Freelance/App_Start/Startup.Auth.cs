@@ -48,7 +48,7 @@ namespace Freelance
 
             // Uncomment the following lines to enable logging in with third party login providers
             app.UseMicrosoftAccountAuthentication(
-                clientId: "2a86e109-1d4c-4a5a-9597-2e6a9d299156", 
+                clientId: "2a86e109-1d4c-4a5a-9597-2e6a9d299156",
                 clientSecret: "ljhEEYZC327%%yvmaNF75}=");
 
             //app.UseTwitterAuthentication(
