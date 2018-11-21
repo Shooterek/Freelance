@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace Freelance.Models
 {
@@ -70,7 +71,7 @@ namespace Freelance.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "{0} jest wymagane")]
-        [StringLength(100, ErrorMessage = "{0} musi mieć przynajmniej {2} znaków.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} musi mieć od {2} do {1} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
@@ -79,6 +80,8 @@ namespace Freelance.Models
         [Display(Name = "Potwierdź hasło")]
         [Compare("Password", ErrorMessage = "Hasła się nie zgadzają.")]
         public string ConfirmPassword { get; set; }
+
+        public HttpPostedFileBase Photo{ get; set; }
     }
 
     public class ResetPasswordViewModel

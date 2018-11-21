@@ -161,7 +161,20 @@ namespace Freelance.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+
+                if (model.Photo != null)
+                {
+                    var profilePhoto = new Photo
+                    {
+                        ContentType = model.Photo.ContentType,
+                        Content = new byte[model.Photo.ContentLength]
+                    };
+                    model.Photo.InputStream.Read(profilePhoto.Content, 0, model.Photo.ContentLength);
+
+                    user.Photo = profilePhoto;
+                }
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -10,7 +10,7 @@ namespace Freelance.Infrastructure.ViewModels
 {
     public class AnnouncementsListViewModel
     {
-        public IList<Announcement> Announcements { get; set; }
+        public IList<AnnouncementViewModel> Announcements { get; set; }
 
         public AnnouncementFilter Filter { get; set; }
 

@@ -11,7 +11,7 @@
 <div class="row">
     <div class="form-group col-sm-12">
         @Html.LabelFor(model => model.MinWage,  htmlAttributes: new { @class = "control-label"})
-        @Html.EditorFor(model => model.MinWage, new { htmlAttributes = new { @class = "form-control round"} })
+        @Html.EditorFor(model => model.MinWage, new { htmlAttributes = new { @class = "form-control round input-short" } })
     </div>
 </div>
 
@@ -19,7 +19,7 @@
 <div class="row">
     <div class="form-group col-sm-12">
         @Html.LabelFor(model => model.MaxWage, htmlAttributes: new { @class = "control-label"})
-        @Html.EditorFor(model => model.MaxWage, new { htmlAttributes = new { @class = "form-control round"} })
+        @Html.EditorFor(model => model.MaxWage, new { htmlAttributes = new { @class = "form-control round input-short" } })
     </div>
 </div>
 
@@ -48,8 +48,12 @@
 <div class="row">
     <div class="form-group col-sm-12">
         @Html.LabelFor(model => model.Localization, htmlAttributes: new { @class = "control-label"})
-        @Html.EditorFor(model => model.Localization, new { htmlAttributes = new { @class = "form-control round"} })
+        @Html.EditorFor(model => model.Localization, new { htmlAttributes = new { @class = "form-control round input-short"} })
     </div>
 </div>
 
-<button id="btn-show-announcements" class="btn btn-primary hidden-lg hidden-md hidden-sm">Wyświetl ogłoszenia</button>
+<div class="center">
+    <button id="btn-show-announcements" class="btn btn-primary round">Filtruj</button>
+</div>
+
+<div class="spacer"></div>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using AutoMapper;
 using Freelance.Core.Models;
 using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Services.Interfaces;
@@ -18,12 +19,14 @@ namespace Freelance.Infrastructure.Services.Implementations
         private IAnnouncementsRepository _announcementRepository;
         private IServiceTypesService _serviceTypesService;
         private IEmailService _emailService;
+        private readonly IMapper _mapper;
 
-        public AnnouncementsService(IAnnouncementsRepository announcementRepository, IEmailService emailService, IServiceTypesService serviceTypesService)
+        public AnnouncementsService(IAnnouncementsRepository announcementRepository, IEmailService emailService, IServiceTypesService serviceTypesService, IMapper mapper)
         {
             _announcementRepository = announcementRepository;
             _emailService = emailService;
             _serviceTypesService = serviceTypesService;
+            _mapper = mapper;
         }
 
         public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, decimal minWage, decimal maxWage,
@@ -85,58 +88,32 @@ namespace Freelance.Infrastructure.Services.Implementations
 
             var announcements = entities.Skip((page - 1) * amount).Take(amount).ToList();
 
-            return new AnnouncementsListViewModel() {Announcements = announcements, PagingInfo = pagingInfo, Filter = filter};
+            return new AnnouncementsListViewModel() {Announcements = _mapper.Map<List<AnnouncementViewModel>>(announcements),
+                PagingInfo = pagingInfo, Filter = filter};
         }
 
-        public async Task<AnnouncementsListViewModel> GetAnnouncementsByServiceTypeAsync(ServiceType serviceType, int page, int amount)
-        {
-            var result = await _announcementRepository.GetAllAsync();
-
-            var entitiesByServiceType = result.Entity.Where(a => a.ServiceTypeId == serviceType.ServiceTypeId).ToList();
-
-            var totalItems = result.Entity.Count;
-            var pagingInfo = new PagingInfo(page, amount, totalItems);
-
-            var entities = entitiesByServiceType.Skip((page - 1) * amount).Take(amount).ToList();
-            return new AnnouncementsListViewModel() {Announcements = entities, PagingInfo = pagingInfo};
-        }
-
-        public async Task<AnnouncementsListViewModel> GetAnnouncementsByUserIdAsync(string userId, int page, int amount)
-        {
-            var result = await _announcementRepository.GetAllAsync();
-
-            var usersAnnouncements = result.Entity.Where(a => a.AdvertiserId == userId).ToList();
-
-            var totalItems = usersAnnouncements.Count;
-            var pagingInfo = new PagingInfo(page, amount, totalItems);
-
-            var announcements = usersAnnouncements.Skip((page - 1) * amount).Take(amount).ToList();
-
-            return new AnnouncementsListViewModel() { Announcements = announcements, PagingInfo = pagingInfo };
-        }
-
-        public async Task<Announcement> GetAnnouncementByIdAsync(int announcementId)
+        public async Task<AnnouncementViewModel> GetAnnouncementByIdAsync(int announcementId)
         {
             var result = await _announcementRepository.GetByIdAsync(announcementId);
 
-            return result.Entity;
+            return _mapper.Map<AnnouncementViewModel>(result.Entity);
         }
 
-        public async Task<Announcement> AddAnnouncementAsync(Announcement announcement)
+        public async Task<AnnouncementViewModel> AddAnnouncementAsync(AnnouncementViewModel announcement)
         {
-            var result = await _announcementRepository.AddAsync(announcement);
+            var result = await _announcementRepository.AddAsync(_mapper.Map<AnnouncementViewModel, Announcement>(announcement));
 
             if (result.Status == RepositoryStatus.Created)
             {
-                return result.Entity;
+                return _mapper.Map<AnnouncementViewModel>(result.Entity);
             }
 
             return null;
         }
 
-        public async Task UpdateAnnouncementAsync(Announcement announcement)
+        public async Task UpdateAnnouncementAsync(AnnouncementViewModel announcement)
         {
-            var result = await _announcementRepository.UpdateAsync(announcement);
+            var result = await _announcementRepository.UpdateAsync(_mapper.Map<Announcement>(announcement));
         }
 
         public async Task RemoveAnnouncementAsync(int announcementId)

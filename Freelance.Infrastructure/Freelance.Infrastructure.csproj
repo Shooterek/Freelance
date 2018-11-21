@@ -35,6 +35,10 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -126,6 +130,8 @@
     <Compile Include="ViewModels\AddAnnouncementViewModel.cs" />
     <Compile Include="ViewModels\AddJobViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementOffersListViewModel.cs" />
+    <Compile Include="ViewModels\AnnouncementOfferViewModel.cs" />
+    <Compile Include="ViewModels\AnnouncementViewModel.cs" />
     <Compile Include="ViewModels\UserOffersListViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />
     <Compile Include="ViewModels\JobsListViewModel.cs" />

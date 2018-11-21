@@ -131,7 +131,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAnnouncementsRepository.cs" />
     <Compile Include="Repositories\IJobsRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Repositories\RepositoryActionResult.cs" />
     <Compile Include="Repositories\RepositoryStatus.cs" />

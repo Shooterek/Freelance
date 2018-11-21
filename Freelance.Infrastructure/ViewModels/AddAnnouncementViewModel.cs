@@ -13,6 +13,6 @@ namespace Freelance.Infrastructure.ViewModels
     {
         public HttpPostedFileBase[] Photos { get; set; }
         public List<SelectListItem> ServiceTypes { get; set; }
-        public Announcement Announcement { get; set; }
+        public AnnouncementViewModel Announcement { get; set; }
     }
 }

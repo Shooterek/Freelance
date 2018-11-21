@@ -5,10 +5,13 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
+using AutoMapper;
 using Freelance.Core.Models;
 using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Services.Implementations;
 using Freelance.Infrastructure.Services.Interfaces;
+using Freelance.Infrastructure.ViewModels;
 using Moq;
 using NUnit.Framework;
 
@@ -83,7 +86,8 @@ namespace Freelance.Tests.Services
                     } 
                 });
 
-            _announcementsService = new AnnouncementsService(announcementsRepositoryMock.Object, emailServiceMock.Object, serviceTypesServiceMock.Object);
+            _announcementsService = new AnnouncementsService(announcementsRepositoryMock.Object,
+                emailServiceMock.Object, serviceTypesServiceMock.Object, (IMapper)DependencyResolver.Current.GetService(typeof(IMapper)));
         }
 
         #endregion
@@ -134,24 +138,10 @@ namespace Freelance.Tests.Services
         }
 
         [Test]
-        public async Task GetByServiceType_ShouldReturnItemsFromServiceType()
-        {
-            int amountOfItemsToGet = 5;
-            int page = 1;
-            var result = await _announcementsService.GetAnnouncementsByServiceTypeAsync(new ServiceType() {ServiceTypeId = 1},
-                page, amountOfItemsToGet);
-
-            foreach (var announcement in result.Announcements)
-            {
-                Assert.AreEqual(1, announcement.ServiceTypeId);
-            }
-        }
-
-        [Test]
         public async Task AddAsync_ShouldAddSpecifiedElement()
         {
             var result =
-                await _announcementsService.AddAnnouncementAsync(new Announcement() {AnnouncementId = _notExistingId, Availability = Availability.Monday, ExpectedHourlyWage = 1230});
+                await _announcementsService.AddAnnouncementAsync(new AnnouncementViewModel() {AnnouncementId = _notExistingId, Availability = Availability.Monday, ExpectedHourlyWage = 1230});
 
             var entity = await _announcementsService.GetAnnouncementByIdAsync(_notExistingId);
             var allEntities = await _announcementsService.GetAnnouncementsAsync(1, _initialAmount + 1, Decimal.Zero, Decimal.MaxValue, null, null, null, null);

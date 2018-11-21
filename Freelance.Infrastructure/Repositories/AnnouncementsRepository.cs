@@ -33,6 +33,8 @@ namespace Freelance.Infrastructure.Repositories
                 into temp
                 from op in temp.DefaultIfEmpty()
                 join us in _context.Users on a.AdvertiserId equals us.Id
+                into temp2
+                from us in temp2.DefaultIfEmpty()
                 join p in _context.Photos on us.PhotoId equals p.PhotoId
                 into tempPhotos
                 from p in tempPhotos.DefaultIfEmpty()

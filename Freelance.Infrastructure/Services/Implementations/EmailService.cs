@@ -19,14 +19,14 @@ namespace Freelance.Infrastructure.Services.Implementations
             message.To.Add("plokarzbartlomiej@gmail.com");
             message.Subject = "New Offer";
             message.IsBodyHtml = true;
-            message.From = new MailAddress("asp.netmvc.store@gmail.com");
+            message.From = new MailAddress(ConfigurationManager.AppSettings["email-address"]);
             message.Body = "<h1>hALO</h1>";
             using (var smtp = new SmtpClient())
             {
                 var credentials = new NetworkCredential
                 {
-                    UserName = "asp.netmvc.store@gmail.com",
-                    Password = "storepassword"
+                    UserName = ConfigurationManager.AppSettings["email-address"],
+                    Password = ConfigurationManager.AppSettings["email-password"]
                 };
                 smtp.Credentials = credentials;
                 smtp.Host = "smtp.gmail.com";

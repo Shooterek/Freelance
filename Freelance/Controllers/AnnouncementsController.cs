@@ -40,7 +40,7 @@ namespace Freelance.Controllers
         // GET: Announcements/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            Announcement announcement = await _announcementService.GetAnnouncementByIdAsync(id);
+            var announcement = await _announcementService.GetAnnouncementByIdAsync(id);
             if (announcement == null)
             {
                 return HttpNotFound();
@@ -58,8 +58,7 @@ namespace Freelance.Controllers
 
             return View(new AddAnnouncementViewModel {ServiceTypes = servicesList});
         }
-
-        [Authorize]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add([Bind(Exclude = "ServiceTypes")]AddAnnouncementViewModel viewModel)

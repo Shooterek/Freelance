@@ -1,40 +1,64 @@
-﻿@model Freelance.Models.RegisterViewModel
-@{
-    ViewBag.Title = "Register";
-}
+﻿@using Freelance.Models
+@model Freelance.Models.RegisterViewModel
 
-<h2>@ViewBag.Title.</h2>
+<div class="row">
+    <div class="spacer"></div>
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+        <div class="row login-form">
+            <div class="spacer"></div>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            <div class="col-xs-10 col-xs-offset-1">
+                <section id="registrationForm">
+                    <h2>Zarejestruj się</h2>
+                    <div class="spacer"></div>
+                    @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control round input-short"})
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control round input-short" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control round input-short" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row">
+                            <label for="Photo">Zdjęcie profilowe</label>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 preview-area"></div>
+                                    </div>
+
+                                    <div class="spacer"></div>
+                                    <button type="button" class="btn btn-primary round" id="add-profile-photo">Wybierz zdjęcie</button>
+                                    <input class="hide" name="Photo" type="file" id="Photo" accept="image/*"/>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group center">
+                            <input type="submit" value="Zarejestruj się" class="btn btn-success round" />
+                        </div>
+
+                    }
+                </section>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+</div>
+<div class="spacer"></div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

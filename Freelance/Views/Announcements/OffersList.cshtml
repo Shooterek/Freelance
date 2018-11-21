@@ -13,10 +13,12 @@
         <div class="col-xs-3">
             <div class="spacer"></div>
 
-            <img class="img-responsive" width="120" height="120"
+            <img class="img-responsive" width="120" height="120" alt="Zdjęcie użytkownika"
                  src="@(offers[x].Offerer.Photo != null ? String.Format("data:{0};base64,{1}", offers[x].Offerer.Photo.ContentType, Convert.ToBase64String(offers[x].Offerer.Photo.Content)) 
                             : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")"/>
-            <p>@offers[x].Offerer.UserName</p>
+            <div>
+                <span>@offers[x].Offerer.UserName</span>
+            </div>
             <div class="rating">
                 @if (offers[x].Offerer.AmountOfReviews > 0)
                 {

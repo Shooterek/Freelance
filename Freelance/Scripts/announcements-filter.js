@@ -3,45 +3,28 @@
     $(document).on('focusout', ' #Localization', function (event) {
         var localization = event.currentTarget.value;
         url = changeParam(url, "localization", localization, false, false);
-        if (isBigWindow() && url !== location.href) {
-            location.href = url;
-        }
     });
 
     $(document).on('focusout', '#MinWage', function (event) {
         var minWage = event.currentTarget.value;
         url = changeParam(url, "minWage", minWage, false, false);
-        if (isBigWindow() && url !== location.href) {
-            location.href = url;
-        }
     });
 
     $(document).on('focusout', '#MaxWage', function (event) {
         var maxWage = event.currentTarget.value;
         url = changeParam(url, "maxWage", maxWage, false, false);
-        if (isBigWindow() && url !== location.href) {
-            location.href = url;
-        }
     });
 
     $(document).on('change', '.availability-menu', function (event) {
         url = changeParam(url, "availability", event.currentTarget.value, true, event.currentTarget.checked);
-        if (isBigWindow() && url !== location.href) {
-            location.href = url;
-        }
     });
 
     $(document).on('change', '#ServiceTypeId', function (event) {
         url = changeParam(url, "serviceType", event.currentTarget.value, false, event.currentTarget.checked);
-        if (isBigWindow() && url !== location.href) {
-            location.href = url;
-        }
     });
 
     $(document).on('click', '#btn-show-announcements', function () {
-        if (!isBigWindow() && url !== location.href) {
-            location.href = url;
-        }
+        location.href = url;
     });
 });
 

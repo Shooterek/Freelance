@@ -9,11 +9,9 @@ namespace Freelance.Infrastructure.Services.Interfaces
     {
         Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, decimal minWage, decimal maxWage, string[] availability,
             string localization, int? serviceTypeId, string sort);
-        Task<AnnouncementsListViewModel> GetAnnouncementsByServiceTypeAsync(ServiceType serviceType, int page, int amount);
-        Task<AnnouncementsListViewModel> GetAnnouncementsByUserIdAsync(string userId, int page, int amount);
-        Task<Announcement> GetAnnouncementByIdAsync(int announcementId);
-        Task<Announcement> AddAnnouncementAsync(Announcement announcement);
-        Task UpdateAnnouncementAsync(Announcement announcement);
+        Task<AnnouncementViewModel> GetAnnouncementByIdAsync(int announcementId);
+        Task<AnnouncementViewModel> AddAnnouncementAsync(AnnouncementViewModel announcement);
+        Task UpdateAnnouncementAsync(AnnouncementViewModel announcement);
         Task RemoveAnnouncementAsync(int announcementId);
         Task<ICollection<AnnouncementOffer>> GetPublishedOffersAsync(string userId);
         Task<ICollection<AnnouncementOffer>> GetReceivedOffersAsync(string userId);
