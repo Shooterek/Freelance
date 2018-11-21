@@ -41,5 +41,10 @@ namespace Freelance.Infrastructure.Services.Implementations
         {
             await _serviceTypesRepository.RemoveAsync(serviceTypeId);
         }
+
+        public async Task UpdateServiceTypeAsync(ServiceType serviceType)
+        {
+            await _serviceTypesRepository.UpdateAsync(serviceType);
+        }
     }
 }

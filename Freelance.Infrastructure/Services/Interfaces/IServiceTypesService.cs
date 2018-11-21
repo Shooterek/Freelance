@@ -13,5 +13,6 @@ namespace Freelance.Infrastructure.Services.Interfaces
         Task<ServiceType> GetServiceTypeByIdAsync(int serviceTypeId);
         Task AddServiceTypeAsync(ServiceType serviceType);
         Task RemoveServiceTypeAsync(int serviceTypeId);
+        Task UpdateServiceTypeAsync(ServiceType serviceType);
     }
 }

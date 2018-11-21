@@ -14,6 +14,18 @@ namespace Freelance
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "EditServiceType",
+                url: "Admin/ServiceTypes/Edit/{id}",
+                defaults: new {controller = "Admin", action = "EditServiceType"}
+            );
+
+            routes.MapRoute(
+                name: "AddServiceType",
+                url: "Admin/ServiceTypes/Add",
+                defaults: new { controller = "Admin", action = "AddServiceType" }
+            );
+
+            routes.MapRoute(
                 name: "Announcements",
                 url: "{controller}/index/{page}",
                 defaults: new {action = "Index"}

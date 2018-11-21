@@ -197,6 +197,17 @@ section > h2 {
     display: none;
 }
 
+#footer {
+    position:fixed;
+    bottom:0;
+    width: 100%;
+    background-color: white;
+}
+
+.navbar-pad {
+    padding-left: 25px !important;
+}
+
 /* Bootstrap */
 .navbar {
     background-color: white !important;
@@ -263,13 +274,6 @@ section > h2 {
         border: 0 none;
         border-radius: 0;
     } 
-}
-
-@media(min-width: 0px) {
-    .container {
-        width: 100% !important;
-        min-width: 100%;
-    }
 }
 
 @media (max-width: 991px) {

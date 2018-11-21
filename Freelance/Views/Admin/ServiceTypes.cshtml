@@ -1,0 +1,49 @@
+﻿@model ICollection<Freelance.Core.Models.ServiceType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row blue-strip">
+    <div class="col-md-8 col-md-offset-1">
+        <section id="header">
+            <h2><b>Kategorie</b></h2>
+        </section>
+    </div>
+</div>
+<div class="spacer"></div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="col-sm-12 white-background">
+            <div class="spacer"></div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <tr>
+                        <th>
+                            Nazwa
+                        </th>
+                        <th>
+                            Dostępne czynności
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.RouteLink("Edytuj", "EditServiceType", new {id = item.ServiceTypeId})
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <br/>
+            @Html.ActionLink("Dodaj", "AddServiceType", null, new { @class="btn btn-primary round"})
+            <div class="spacer"></div>
+        </div>
+    </div>
+</div>
