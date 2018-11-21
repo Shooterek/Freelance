@@ -14,14 +14,14 @@ namespace Freelance.Infrastructure.ViewModels
 
         [Required]
         public int AnnouncementId { get; set; }
-        public Announcement Announcement { get; set; }
+        public AnnouncementViewModel Announcement { get; set; }
 
         [Display(Name = "Data zgłoszenia")]
         public DateTime SubmissionDate { get; set; }
 
         [Required]
         public string OffererId { get; set; }
-        public ApplicationUser Offerer { get; set; }
+        public ApplicationUserViewModel Offerer { get; set; }
 
         [Required(ErrorMessage = "{0} jest wymagana")]
         [Range(0.01, Double.MaxValue, ErrorMessage = "Błędna wartość")]

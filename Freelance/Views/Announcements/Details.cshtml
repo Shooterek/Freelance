@@ -2,6 +2,10 @@
 @using Microsoft.AspNet.Identity
 @model AnnouncementViewModel
 
+@{
+    bool isAuthenticatedAndNotAdvertiser = Context.User.Identity.IsAuthenticated && !Context.User.Identity.GetUserId().Equals(Model.AdvertiserId);
+}
+
 <div class="row blue-strip">
     <div class="col-md-10 col-md-offset-1">
         <section id="header">
@@ -77,6 +81,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="spacer"></div>
                 }
             </div>
         </div>
@@ -86,25 +91,25 @@
             <div class="spacer"></div>
             <img class="img-responsive" width="120" height="120" 
                  src="@(Model.Advertiser.Photo != null ? String.Format("data:{0};base64,{1}", Model.Advertiser.Photo.ContentType, Convert.ToBase64String(Model.Advertiser.Photo.Content)) 
-                 : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")"/>
+                            : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")"/>
             <p>@Model.Advertiser.UserName</p>
-            <div class="rating">
-                @if (Model.Advertiser.AmountOfReviews > 0)
+            <div class="@(isAuthenticatedAndNotAdvertiser && Model.Advertiser.ReceivedOpinions.Any() ? "rating pointer" : "rating")">
+                @if (Model.Advertiser.ReceivedOpinionsCount > 0)
                 {
                     int i = 1;
-                    for (; i <= Model.Advertiser.Rating; i++)
+                    for (; i <= Model.Advertiser.ReceivedOpinionsAverage; i++)
                     {
                         <i class="fa fa-star"></i>
                     }
-                    if (Model.Advertiser.Rating - i + 1 >= 0.25 && Model.Advertiser.Rating - i + 1 < 0.75)
+                    if (Model.Advertiser.ReceivedOpinionsAverage - i + 1 >= 0.25 && Model.Advertiser.ReceivedOpinionsAverage - i + 1 < 0.75)
                     {
                         <i class="fa fa-star-half"></i>
                     }
-                    else if (Model.Advertiser.Rating - i + 1 >= 0.75)
+                    else if (Model.Advertiser.ReceivedOpinionsAverage - i + 1 >= 0.75)
                     {
                         <i class="fa fa-star"></i>
                     }
-                    <span>(@Model.Advertiser.AmountOfReviews ocen)</span>
+                    <span>(@Model.Advertiser.ReceivedOpinionsCount ocen)</span>
                 }
                 else
                 {
@@ -115,7 +120,19 @@
     </div>
 </div>
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AnnouncementId }) |
-    @Html.ActionLink("Back to List", "Index", new {page = 1})
-</p>
+@if (Model.Advertiser.ReceivedOpinions.Any())
+{
+    <div class="modal fade modal-fullscreen-xs-down" id="opinionsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Opinie o @Model.Advertiser.UserName</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("OpinionsList", Model.Advertiser.ReceivedOpinions)
+                </div>
+            </div>
+        </div>
+    </div>
+}

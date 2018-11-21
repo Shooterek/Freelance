@@ -21,7 +21,7 @@
 
                         <div class="form-group">
                             @Html.LabelFor(m => m.Email, new {@class = "control-label"})
-                            @Html.TextBoxFor(m => m.Email, new {@class = "form-control round", placeholder = "johndoe@example.com"})
+                            @Html.TextBoxFor(m => m.Email, new {@class = "form-control round"})
                             @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
                         </div>
 

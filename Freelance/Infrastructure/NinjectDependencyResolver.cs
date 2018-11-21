@@ -71,14 +71,16 @@ namespace Freelance.Infrastructure
         {
             Mapper.Initialize(config =>
             {
+                config.AllowNullCollections = true;
                 config.ConstructServicesUsing(type => kernel.Get(type));
 
                 config.CreateMap<Announcement, AnnouncementViewModel>();
-                config.CreateMap<AnnouncementOffer, AnnouncementOfferViewModel>();          
+                config.CreateMap<AnnouncementOffer, AnnouncementOfferViewModel>();
+                config.CreateMap<ApplicationUser, ApplicationUserViewModel>()
+                    .ForMember(dest => dest.ReceivedOpinionsAverage, opt => opt.Ignore());
 
             });
-
-            Mapper.AssertConfigurationIsValid();
+            
             return Mapper.Instance;
         }
     }

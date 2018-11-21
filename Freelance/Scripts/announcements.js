@@ -101,6 +101,10 @@
         $('#second-part').toggleClass('hidden');
     });
 
+    $(document).on('click', 'div.rating.pointer', function () {
+        $('#opinionsModal').modal('show');
+    });
+
 });
 
 var changePage = function(value) {

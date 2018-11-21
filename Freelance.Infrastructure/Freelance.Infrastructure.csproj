@@ -132,6 +132,7 @@
     <Compile Include="ViewModels\AnnouncementOffersListViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementOfferViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementViewModel.cs" />
+    <Compile Include="ViewModels\ApplicationUserViewModel.cs" />
     <Compile Include="ViewModels\UserOffersListViewModel.cs" />
     <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />
     <Compile Include="ViewModels\JobsListViewModel.cs" />

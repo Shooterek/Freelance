@@ -135,14 +135,14 @@ namespace Freelance.Infrastructure.Services.Implementations
             return result.Entity;
         }
 
-        public async Task<AnnouncementOffer> AddOfferAsync(AnnouncementOffer offer)
+        public async Task<AnnouncementOfferViewModel> AddOfferAsync(AnnouncementOfferViewModel offer)
         {
-            var result = await _announcementRepository.AddOfferAsync(offer);
+            var result = await _announcementRepository.AddOfferAsync(_mapper.Map<AnnouncementOffer>(offer));
 
             if (result.Status == RepositoryStatus.Created)
             {
                 await _emailService.Notify(result.Entity);
-                return result.Entity;
+                return _mapper.Map<AnnouncementOfferViewModel>(result.Entity);
             }
 
             return null;

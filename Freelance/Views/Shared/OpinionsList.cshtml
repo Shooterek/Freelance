@@ -1,0 +1,36 @@
+﻿@using System.ComponentModel.DataAnnotations
+@model ICollection<Freelance.Core.Models.Opinion>
+
+@{
+    var opinions = Model.ToArray();
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tr>
+                    <th class="center">
+                        Ocena
+                    </th>
+                    <th>
+                        Opis
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="center large-font">
+                            @Html.DisplayFor(modelItem => item.Rating)
+                        </td>
+                        <td>
+                            @item.Review
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

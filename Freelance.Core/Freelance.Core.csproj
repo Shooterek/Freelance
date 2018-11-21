@@ -117,6 +117,10 @@
     <Compile Include="Migrations\201811181810177_AddPhotoToApplicationUser.Designer.cs">
       <DependentUpon>201811181810177_AddPhotoToApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811211353429_RemoveUnusedProperties.cs" />
+    <Compile Include="Migrations\201811211353429_RemoveUnusedProperties.Designer.cs">
+      <DependentUpon>201811211353429_RemoveUnusedProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
@@ -184,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811181810177_AddPhotoToApplicationUser.resx">
       <DependentUpon>201811181810177_AddPhotoToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811211353429_RemoveUnusedProperties.resx">
+      <DependentUpon>201811211353429_RemoveUnusedProperties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

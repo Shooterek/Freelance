@@ -11,22 +11,20 @@ namespace Freelance.Core.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public double Rating { get; set; }
-
-        public int AmountOfReviews { get; set; }
-
         public int? PhotoId { get; set; }
         public Photo Photo { get; set; }
 
         public virtual ICollection<Announcement> PublishedAnnouncements { get; set; }
         public virtual ICollection<Job> PublishedJobs { get; set; }
         public virtual ICollection<JobOffer> ProposedOffers { get; set; }
+        public virtual ICollection<Opinion> ReceivedOpinions { get; set; }
 
         public ApplicationUser()
         {
             PublishedAnnouncements = new List<Announcement>();
             PublishedJobs = new List<Job>();
             ProposedOffers = new List<JobOffer>();
+            ReceivedOpinions = new List<Opinion>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

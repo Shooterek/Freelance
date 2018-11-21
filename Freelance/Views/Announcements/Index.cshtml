@@ -30,7 +30,7 @@
                         <div class="spacer"></div>
                         <div class="row">
                             <div id="utilities" class="col-sm-12" align="center">
-                                <a class="hidden-md hidden-lg hidden-sm pull-left" data-toggle="modal" data-target="#myModal">
+                                <a class="hidden-md hidden-lg hidden-sm pull-left" data-toggle="modal" data-target="#filtersModal">
                                     Filtry
                                 </a>
                                 <select id="sorting">
@@ -103,12 +103,12 @@
     </div>
 </div>
 
-<div id="myModal" class="modal fade modal-fullscreen-xs-down">
-    <div class="modal-dialog">
+<div class="modal fade modal-fullscreen-xs-down" id="filtersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header col-xs-12">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Filtry</h4>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Filtry</h4>
             </div>
             <div class="modal-body">
                 @Html.Partial("AnnouncementsFilter", Model.Filter)

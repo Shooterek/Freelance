@@ -208,6 +208,14 @@ section > h2 {
     padding-left: 25px !important;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
+.large-font {
+    font-size: 50px;
+}
+
 /* Bootstrap */
 .navbar {
     background-color: white !important;

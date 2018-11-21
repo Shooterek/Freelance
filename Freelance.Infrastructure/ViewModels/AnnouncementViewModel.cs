@@ -18,7 +18,7 @@ namespace Freelance.Infrastructure.ViewModels
         public int AnnouncementId { get; set; }
 
         public string AdvertiserId { get; set; }
-        public  ApplicationUser Advertiser { get; set; }
+        public  ApplicationUserViewModel Advertiser { get; set; }
 
         [Required]
         [StringLength(25)]
@@ -45,7 +45,7 @@ namespace Freelance.Infrastructure.ViewModels
         public int ServiceTypeId { get; set; }
 
         public ServiceType ServiceType { get; set; }
-        public ICollection<AnnouncementOffer> Offers { get; set; }
+        public ICollection<AnnouncementOfferViewModel> Offers { get; set; }
         public ICollection<Photo> Photos { get; set; }
     }
 }

@@ -20,22 +20,22 @@
                 <span>@offers[x].Offerer.UserName</span>
             </div>
             <div class="rating">
-                @if (offers[x].Offerer.AmountOfReviews > 0)
+                @if (offers[x].Offerer.ReceivedOpinionsCount > 0)
                 {
                     int i = 1;
-                    for (; i <= offers[x].Offerer.Rating; i++)
+                    for (; i <= offers[x].Offerer.ReceivedOpinionsAverage; i++)
                     {
                         <i class="fa fa-star"></i>
                     }
-                    if (offers[x].Offerer.Rating - i + 1 >= 0.25 && offers[x].Offerer.Rating - i + 1 < 0.75)
+                    if (offers[x].Offerer.ReceivedOpinionsAverage - i + 1 >= 0.25 && offers[x].Offerer.ReceivedOpinionsAverage - i + 1 < 0.75)
                     {
                         <i class="fa fa-star-half"></i>
                     }
-                    else if (offers[x].Offerer.Rating - i + 1 >= 0.75)
+                    else if (offers[x].Offerer.ReceivedOpinionsAverage - i + 1 >= 0.75)
                     {
                         <i class="fa fa-star"></i>
                     }
-                    <span>(@offers[x].Offerer.AmountOfReviews ocen)</span>
+                    <span>(@offers[x].Offerer.ReceivedOpinionsCount ocen)</span>
                 }
                 else
                 {
@@ -72,22 +72,22 @@
                                     : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")"/>
                     <p>@offers[x].Offerer.UserName</p>
                     <div class="rating">
-                        @if (offers[x].Offerer.AmountOfReviews > 0)
+                        @if (offers[x].Offerer.ReceivedOpinionsCount > 0)
                         {
                             int i = 1;
-                            for (; i <= offers[x].Offerer.Rating; i++)
+                            for (; i <= offers[x].Offerer.ReceivedOpinionsAverage; i++)
                             {
                                 <i class="fa fa-star"></i>
                             }
-                            if (offers[x].Offerer.Rating - i + 1 >= 0.25 && offers[x].Offerer.Rating - i + 1 < 0.75)
+                            if (offers[x].Offerer.ReceivedOpinionsAverage - i + 1 >= 0.25 && offers[x].Offerer.ReceivedOpinionsAverage - i + 1 < 0.75)
                             {
                                 <i class="fa fa-star-half"></i>
                             }
-                            else if (offers[x].Offerer.Rating - i + 1 >= 0.75)
+                            else if (offers[x].Offerer.ReceivedOpinionsAverage - i + 1 >= 0.75)
                             {
                                 <i class="fa fa-star"></i>
                             }
-                            <span>(@offers[x].Offerer.AmountOfReviews ocen)</span>
+                            <span>(@offers[x].Offerer.ReceivedOpinionsCount ocen)</span>
                         }
                         else
                         {

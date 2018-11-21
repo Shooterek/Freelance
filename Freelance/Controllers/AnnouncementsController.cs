@@ -96,12 +96,12 @@ namespace Freelance.Controllers
         public ActionResult AddOffer(int announcementId)
         {
             return PartialView(
-                new AnnouncementOffer() {AnnouncementId = announcementId, OffererId = User.Identity.GetUserId()});
+                new AnnouncementOfferViewModel() {AnnouncementId = announcementId});
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> SubmitOffer([Bind(Exclude = "SubmissionDate, OffererId")] AnnouncementOffer offer)
+        public async Task<ActionResult> SubmitOffer([Bind(Exclude = "SubmissionDate, OffererId")] AnnouncementOfferViewModel offer)
         {
             offer.OffererId = User.Identity.GetUserId();
             offer.SubmissionDate = DateTime.Now;

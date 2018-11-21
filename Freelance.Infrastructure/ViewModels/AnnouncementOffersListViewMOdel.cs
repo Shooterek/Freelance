@@ -9,7 +9,7 @@ namespace Freelance.Infrastructure.ViewModels
 {
     public class AnnouncementOffersListViewModel
     {
-        public IEnumerable<AnnouncementOffer> Offers{ get; set; }
+        public ICollection<AnnouncementOfferViewModel> Offers{ get; set; }
         public bool ShowAll { get; set; }
     }
 }
