@@ -1,0 +1,109 @@
+﻿@using Freelance.Infrastructure.Utils
+@model Freelance.Infrastructure.ViewModels.Jobs.JobOffersListViewModel
+@{
+    var offers = Model.Offers.ToArray();
+    int x = 0;
+}
+
+
+@for (; x < offers.Length && (Model.ShowAll || x < Constants.MaxInitialAmountOfOffers); x++)
+{
+    <br />
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="spacer"></div>
+
+            <img class="img-responsive" width="120" height="120" alt="Zdjęcie użytkownika"
+                 src="@(offers[x].Offerer.Photo != null ? String.Format("data:{0};base64,{1}", offers[x].Offerer.Photo.ContentType, Convert.ToBase64String(offers[x].Offerer.Photo.Content))
+                            : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")" />
+            <div class="word-wrap">
+                <span>@offers[x].Offerer.UserName</span>
+            </div>
+            <div class="rating">
+                @if (offers[x].Offerer.ReceivedOpinionsCount > 0)
+                {
+                    int i = 1;
+                    for (; i <= offers[x].Offerer.ReceivedOpinionsAverage; i++)
+                    {
+                        <i class="fa fa-star"></i>
+                    }
+                    if (offers[x].Offerer.ReceivedOpinionsAverage - i + 1 >= 0.25 && offers[x].Offerer.ReceivedOpinionsAverage - i + 1 < 0.75)
+                    {
+                        <i class="fa fa-star-half"></i>
+                    }
+                    else if (offers[x].Offerer.ReceivedOpinionsAverage - i + 1 >= 0.75)
+                    {
+                        <i class="fa fa-star"></i>
+                    }
+                    <span>(@offers[x].Offerer.ReceivedOpinionsCount ocen)</span>
+                }
+                else
+                {
+                    <span>Brak ocen</span>
+                }
+            </div>
+        </div>
+        <div class="col-xs-9">
+            <br />
+            <h4>Stawka: @offers[x].ProposedRate</h4>
+            <p>@offers[x].Message</p>
+        </div>
+    </div>
+    <hr />
+}
+
+@if (!Model.ShowAll && offers.Length > Constants.MaxInitialAmountOfOffers)
+{
+    <div class="center">
+        <a id="show-more-offers">
+            Pokaż pozostałe @(offers.Length - Constants.MaxInitialAmountOfOffers) ofert
+        </a>
+    </div>
+    <div id="second-part" class="hidden">
+        @for (; x < offers.Length; x++)
+        {
+            <br />
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="spacer"></div>
+
+                    <img class="img-responsive" width="120" height="120"
+                         src="@(offers[x].Offerer.Photo != null ? String.Format("data:{0};base64,{1}", offers[x].Offerer.Photo.ContentType, Convert.ToBase64String(offers[x].Offerer.Photo.Content))
+                                    : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")" alt="Zdjęcie użytkownika" />
+                    <div class="word-wrap">
+                        <span>@offers[x].Offerer.UserName</span>
+                    </div>
+                    <div class="rating">
+                        @if (offers[x].Offerer.ReceivedOpinionsCount > 0)
+                        {
+                            int i = 1;
+                            for (; i <= offers[x].Offerer.ReceivedOpinionsAverage; i++)
+                            {
+                                <i class="fa fa-star"></i>
+                            }
+                            if (offers[x].Offerer.ReceivedOpinionsAverage - i + 1 >= 0.25 && offers[x].Offerer.ReceivedOpinionsAverage - i + 1 < 0.75)
+                            {
+                                <i class="fa fa-star-half"></i>
+                            }
+                            else if (offers[x].Offerer.ReceivedOpinionsAverage - i + 1 >= 0.75)
+                            {
+                                <i class="fa fa-star"></i>
+                            }
+                            <span>(@offers[x].Offerer.ReceivedOpinionsCount ocen)</span>
+                        }
+                        else
+                        {
+                            <span>Brak ocen</span>
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-9">
+                    <br />
+                    <h4>Stawka: @offers[x].ProposedRate</h4>
+                    <p>@offers[x].Message</p>
+                </div>
+            </div>
+            <hr />
+        }
+    </div>
+}

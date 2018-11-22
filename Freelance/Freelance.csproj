@@ -318,15 +318,21 @@
     <Content Include="Views\Shared\AnnouncementsFilter.cshtml" />
     <Content Include="Views\Navigation\SearchBar.cshtml" />
     <Content Include="Views\Announcements\Details.cshtml" />
-    <Content Include="Views\Announcements\AddOffer.cshtml" />
+    <Content Include="Views\Announcements\AddAnnouncementOffer.cshtml" />
     <Content Include="Views\Announcements\Add.cshtml" />
-    <Content Include="Views\Announcements\OffersList.cshtml" />
+    <Content Include="Views\Announcements\AnnouncementOffersList.cshtml" />
     <Content Include="Views\Shared\JobOffers.cshtml" />
     <Content Include="Views\Shared\AnnouncementOffers.cshtml" />
     <Content Include="Views\Account\Offers.cshtml" />
     <Content Include="Views\Admin\ServiceTypes.cshtml" />
     <Content Include="Views\Admin\AddServiceType.cshtml" />
     <Content Include="Views\Shared\OpinionsList.cshtml" />
+    <Content Include="Views\Jobs\Index.cshtml" />
+    <Content Include="Views\Shared\JobsFilter.cshtml" />
+    <Content Include="Views\Jobs\Details.cshtml" />
+    <Content Include="Views\Jobs\AddJobOffer.cshtml" />
+    <Content Include="Views\Jobs\JobOffersList.cshtml" />
+    <Content Include="Views\Jobs\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,7 +27,13 @@ namespace Freelance.Infrastructure.Repositories
 
         public async Task<RepositoryActionResult<Job>> GetByIdAsync(int id)
         {
-            var job = await _context.Jobs.FirstOrDefaultAsync(a => a.JobId == id);
+            var job = await _context.Jobs
+                .Include(j => j.Offers)
+                .Include(j => j.Offers.Select(o => o.Offerer))
+                .Include(j => j.Employer)
+                .Include(j => j.Employer.ReceivedOpinions)
+                .Include(j => j.Employer.Photo)
+                .FirstOrDefaultAsync(j => j.JobId == id);
 
             if (job == null)
             {

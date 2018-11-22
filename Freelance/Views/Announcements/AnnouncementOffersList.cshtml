@@ -1,5 +1,5 @@
 ﻿@using Freelance.Infrastructure.Utils
-@model Freelance.Infrastructure.ViewModels.AnnouncementOffersListViewModel
+@model Freelance.Infrastructure.ViewModels.Announcements.AnnouncementOffersListViewModel
 @{
     var offers = Model.Offers.ToArray();
     int x = 0;
@@ -16,7 +16,7 @@
             <img class="img-responsive" width="120" height="120" alt="Zdjęcie użytkownika"
                  src="@(offers[x].Offerer.Photo != null ? String.Format("data:{0};base64,{1}", offers[x].Offerer.Photo.ContentType, Convert.ToBase64String(offers[x].Offerer.Photo.Content)) 
                             : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")"/>
-            <div>
+            <div class="word-wrap">
                 <span>@offers[x].Offerer.UserName</span>
             </div>
             <div class="rating">
@@ -69,8 +69,10 @@
 
                     <img class="img-responsive" width="120" height="120"
                          src="@(offers[x].Offerer.Photo != null ? String.Format("data:{0};base64,{1}", offers[x].Offerer.Photo.ContentType, Convert.ToBase64String(offers[x].Offerer.Photo.Content)) 
-                                    : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")"/>
-                    <p>@offers[x].Offerer.UserName</p>
+                                    : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")" alt="Zdjęcie użytkownika"/>
+                    <div class="word-wrap">
+                        <span>@offers[x].Offerer.UserName</span>
+                    </div>  
                     <div class="rating">
                         @if (offers[x].Offerer.ReceivedOpinionsCount > 0)
                         {

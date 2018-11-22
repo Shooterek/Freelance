@@ -1,16 +1,15 @@
 ﻿@using Freelance.Infrastructure.Utils
-@model Freelance.Infrastructure.ViewModels.Announcements.AnnouncementsListViewModel
+@model Freelance.Infrastructure.ViewModels.Jobs.JobsListViewModel
 
 @{
-    ViewBag.Title = "Index";
-    var announcements = Model.Announcements;
+    var jobs = Model.Jobs.ToArray();
     var pagingInfo = Model.PagingInfo;
     var sortOrder = Model.Filter.SortOrder;
 }
 <div class="row blue-strip">
     <div class="col-md-10 col-md-offset-1">
         <section id="header">
-            <h2><b>Ogłoszenia</b></h2>
+            <h2><b>Oferty pracy</b></h2>
         </section>
     </div>
 </div>
@@ -20,9 +19,9 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="row">
             <div class="col-sm-4 col-md-3 hidden-xs">
-                    <div class="col-sm-12 menu white-background">
-                        @Html.Partial("AnnouncementsFilter", Model.Filter)
-                    </div>
+                <div class="col-sm-12 menu white-background">
+                    @Html.Partial("JobsFilter", Model.Filter)
+                </div>
             </div>
             <div class="col-xs-12 col-sm-8 col-md-9">
                 <div class="row">
@@ -40,11 +39,17 @@
                                     <option value=@Constants.SortDateAscending selected=@Constants.SortDateAscending.Equals(sortOrder)>
                                         Od najstarszego
                                     </option>
-                                    <option value=@Constants.SortWageDescending selected=@Constants.SortWageDescending.Equals(sortOrder)>
-                                        Stawka: malejąco
+                                    <option value=@Constants.SortMinWageDescending selected=@Constants.SortMinWageDescending.Equals(sortOrder)>
+                                        Stawka min.: malejąco
                                     </option>
-                                    <option value=@Constants.SortWageAscending selected=@Constants.SortWageAscending.Equals(sortOrder)>
-                                        Stawka: rosnąco
+                                    <option value=@Constants.SortMinWageAscending selected=@Constants.SortMinWageAscending.Equals(sortOrder)>
+                                        Stawka min.: rosnąco
+                                    </option>
+                                    <option value=@Constants.SortMaxWageDescending selected=@Constants.SortMaxWageDescending.Equals(sortOrder)>
+                                        Stawka max.: malejąco
+                                    </option>
+                                    <option value=@Constants.SortMaxWageAscending selected=@Constants.SortMaxWageAscending.Equals(sortOrder)>
+                                        Stawka max.: rosnąco
                                     </option>
                                 </select>
                                 <span class="pull-right">
@@ -54,7 +59,7 @@
                                             <span class="glyphicon glyphicon-chevron-left"></span>
                                         </a>
                                     }
-                                    <input id="page-number" type="number" value=@pagingInfo.CurrentPage min="1" max=@pagingInfo.TotalPages data-url=@Url.Action("Index", "Announcements")/>
+                                    <input id="page-number" type="number" value=@pagingInfo.CurrentPage min="1" max=@pagingInfo.TotalPages data-url=@Url.Action("Index", "Jobs") />
                                     <span>z @(pagingInfo.TotalPages == 0 ? 1 : pagingInfo.TotalPages)</span>
                                     @if (pagingInfo.CurrentPage < pagingInfo.TotalPages)
                                     {
@@ -66,34 +71,34 @@
                             </div>
                         </div>
                         <div class="spacer"></div>
-                        @for (int i = 0; i < Model.Announcements.Count; i++)
+                        @for (int i = 0; i < jobs.Length; i++)
                         {
-                            <hr/>
+                            <hr />
                             <div class="row item" id=@("item" + (i + 1))>
                                 <div class="spacer"></div>
                                 <div class="col-md-9">
                                     <div>
-                                        <h4>@Html.ActionLink(announcements[i].Title, "Details", new {id = announcements[i].AnnouncementId})</h4>
+                                        <h4>@Html.ActionLink(jobs[i].Title, "Details", new { id = jobs[i].JobId })</h4>
                                     </div>
                                     <div>
-                                        <p>@announcements[i].Description.GetFirstCharacters(240)</p>
+                                        <p>@jobs[i].Description.GetFirstCharacters(240)</p>
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div>
-                                        Oczekiwana stawka: @announcements[i].ExpectedHourlyWage zł
+                                        Stawka: @jobs[i].MinimumWage - @jobs[i].MaximumWage zł
                                     </div>
                                     <div class="text-center">
-                                        @Html.ActionLink("Zatrudnij", "Details", new {id = announcements[i].AnnouncementId},
-                                            new {@style = "display: none;", @class = "btn btn-primary", @id = "hire-button"})
+                                        @Html.ActionLink("Zatrudnij", "Details", new { id = jobs[i].JobId },
+                                            new { @style = "display: none;", @class = "btn btn-primary", @id = "hire-button" })
                                     </div>
                                 </div>
 
                             </div>
-                            if (i == announcements.Count - 1)
+                            if (i == jobs.Length - 1)
                             {
-                                <hr/>
+                                <hr />
                             }
                         }
                     </div>
@@ -111,7 +116,7 @@
                 <h4 class="modal-title" id="myModalLabel">Filtry</h4>
             </div>
             <div class="modal-body">
-                @Html.Partial("AnnouncementsFilter", Model.Filter)
+                @Html.Partial("JobsFilter", Model.Filter)
             </div>
         </div>
     </div>

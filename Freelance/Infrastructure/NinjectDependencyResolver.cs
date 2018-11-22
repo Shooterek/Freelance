@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Freelance.Core.Models;
@@ -11,6 +9,8 @@ using Freelance.Infrastructure.Repositories;
 using Freelance.Infrastructure.Services.Implementations;
 using Freelance.Infrastructure.Services.Interfaces;
 using Freelance.Infrastructure.ViewModels;
+using Freelance.Infrastructure.ViewModels.Announcements;
+using Freelance.Infrastructure.ViewModels.Jobs;
 using Freelance.ScheduledJobs;
 using Ninject;
 using Ninject.Activation;
@@ -78,6 +78,9 @@ namespace Freelance.Infrastructure
                 config.CreateMap<AnnouncementOffer, AnnouncementOfferViewModel>();
                 config.CreateMap<ApplicationUser, ApplicationUserViewModel>()
                     .ForMember(dest => dest.ReceivedOpinionsAverage, opt => opt.Ignore());
+
+                config.CreateMap<Job, JobViewModel>();
+                config.CreateMap<JobOffer, JobOfferViewModel>();
 
             });
             

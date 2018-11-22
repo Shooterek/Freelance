@@ -12,6 +12,7 @@ using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Services.Implementations;
 using Freelance.Infrastructure.Services.Interfaces;
 using Freelance.Infrastructure.ViewModels;
+using Freelance.Infrastructure.ViewModels.Announcements;
 using Moq;
 using NUnit.Framework;
 

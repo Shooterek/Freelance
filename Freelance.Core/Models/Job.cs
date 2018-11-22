@@ -9,6 +9,7 @@ namespace Freelance.Core.Models
         public Job()
         {
             Offers = new List<JobOffer>();
+            Photos = new List<Photo>();
             PublicationDate = DateTime.Now;
         }
 
@@ -40,6 +41,9 @@ namespace Freelance.Core.Models
         [Required]
         [Range(0.01, Double.MaxValue)]
         public decimal MaximumWage { get; set; }
+
+        [StringLength(31)]
+        public string Localization { get; set; }
 
         public virtual ICollection<JobOffer> Offers { get; set; }
         public virtual ICollection<Photo> Photos{ get; set; }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Freelance.Core.Models;
+﻿using System.Collections.Generic;
 using Freelance.Infrastructure.Utils;
 
-namespace Freelance.Infrastructure.ViewModels
+namespace Freelance.Infrastructure.ViewModels.Announcements
 {
     public class AnnouncementsListViewModel
     {

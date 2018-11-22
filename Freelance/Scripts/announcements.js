@@ -39,9 +39,7 @@
 
     $(document).on('change', '#sorting', function (event) {
         url = changeParam(url, "sort", event.currentTarget.value, false, false);
-        if (isBigWindow() && url !== location.href) {
-            location.href = url;
-        }
+        location.href = url;
     });
 
     $(document).on('click', '#add-announcement-photos', function () {
@@ -80,16 +78,16 @@
         $(selector).modal('show');
     });
 
-    $(document).on('click', '#add-announcements-next', function () {
+    $(document).on('click', '#add-next', function () {
         if (areInputsTouchedAndCorrect()) {
-            $('#add-announcement-1').toggleClass('hidden');
-            $('#add-announcement-2').toggleClass('hidden');
+            $('#add-1').toggleClass('hidden');
+            $('#add-2').toggleClass('hidden');
         }
     });
 
-    $(document).on('click', '#add-announcements-previous', function () {
-        $('#add-announcement-2').toggleClass('hidden');
-        $('#add-announcement-1').toggleClass('hidden');
+    $(document).on('click', '#add-previous', function () {
+        $('#add-2').toggleClass('hidden');
+        $('#add-1').toggleClass('hidden');
     });
 
     $(document).on('focusout', '.disable-next-button', function () {
@@ -118,8 +116,10 @@ var changePage = function(value) {
 }
 
 var areInputsTouchedAndCorrect = function () {
-    var isTitleCorrect = $('#Announcement_Title').valid();
-    var isDescriptionCorrect = $('#Announcement_Description').valid();
+    var isCorrect = true;
+    $("#add-1 :input.form-control").each((index, element) => {
+        isCorrect = !$(element).valid() ? false : isCorrect;
+    });
 
-    return isTitleCorrect && isDescriptionCorrect;
+    return isCorrect;
 }

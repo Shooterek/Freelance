@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Freelance.Core.Models;
 using Freelance.Infrastructure.ViewModels;
+using Freelance.Infrastructure.ViewModels.Announcements;
 
 namespace Freelance.Infrastructure.Services.Interfaces
 {
@@ -13,8 +14,8 @@ namespace Freelance.Infrastructure.Services.Interfaces
         Task<AnnouncementViewModel> AddAnnouncementAsync(AnnouncementViewModel announcement);
         Task UpdateAnnouncementAsync(AnnouncementViewModel announcement);
         Task RemoveAnnouncementAsync(int announcementId);
-        Task<ICollection<AnnouncementOffer>> GetPublishedOffersAsync(string userId);
-        Task<ICollection<AnnouncementOffer>> GetReceivedOffersAsync(string userId);
+        Task<ICollection<AnnouncementOfferViewModel>> GetPublishedOffersAsync(string userId);
+        Task<ICollection<AnnouncementOfferViewModel>> GetReceivedOffersAsync(string userId);
         Task<AnnouncementOfferViewModel> AddOfferAsync(AnnouncementOfferViewModel offer);
         Task RemoveOfferAsync(int id);
         Task AcceptOfferAsync(int offerId, string userId);

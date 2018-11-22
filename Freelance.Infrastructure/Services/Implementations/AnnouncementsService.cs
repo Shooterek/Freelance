@@ -10,6 +10,7 @@ using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Services.Interfaces;
 using Freelance.Infrastructure.Utils;
 using Freelance.Infrastructure.ViewModels;
+using Freelance.Infrastructure.ViewModels.Announcements;
 using WebGrease.Css.Extensions;
 
 namespace Freelance.Infrastructure.Services.Implementations
@@ -121,18 +122,18 @@ namespace Freelance.Infrastructure.Services.Implementations
             var result = await _announcementRepository.RemoveAsync(announcementId);
         }
 
-        public async Task<ICollection<AnnouncementOffer>> GetPublishedOffersAsync(string userId)
+        public async Task<ICollection<AnnouncementOfferViewModel>> GetPublishedOffersAsync(string userId)
         {
             var result = await _announcementRepository.GetPublishedOffersAsync(userId);
 
-            return result.Entity;
+            return _mapper.Map<ICollection<AnnouncementOfferViewModel>>(result.Entity);
         }
 
-        public async Task<ICollection<AnnouncementOffer>> GetReceivedOffersAsync(string userId)
+        public async Task<ICollection<AnnouncementOfferViewModel>> GetReceivedOffersAsync(string userId)
         {
             var result = await _announcementRepository.GetReceivedOffersAsync(userId);
 
-            return result.Entity;
+            return _mapper.Map<ICollection<AnnouncementOfferViewModel>>(result.Entity);
         }
 
         public async Task<AnnouncementOfferViewModel> AddOfferAsync(AnnouncementOfferViewModel offer)

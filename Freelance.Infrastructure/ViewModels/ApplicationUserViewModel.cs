@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Freelance.Core.Models;
+using Freelance.Infrastructure.ViewModels.Announcements;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Freelance.Infrastructure.ViewModels

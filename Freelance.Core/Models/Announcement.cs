@@ -24,7 +24,6 @@ namespace Freelance.Core.Models
         [Required]
         [StringLength(25)]
         [MinLength(6)]
-        [Display(Name = "Tytuł")]
         public string Title { get; set; }
 
         [Required]
@@ -35,6 +34,7 @@ namespace Freelance.Core.Models
         [Required]
         public decimal ExpectedHourlyWage { get; set; }
 
+        [StringLength(31)]
         public string Localization { get; set; }
         public DateTime PublicationDate { get; set; }
 

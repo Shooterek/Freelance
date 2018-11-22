@@ -1,0 +1,59 @@
+﻿@using Freelance.Core.Models
+@using Freelance.Infrastructure.Utils
+@model JobFilter
+
+<div class="spacer"></div>
+
+<h4>
+    Wynagrodzenie
+</h4>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        @Html.LabelFor(model => model.MinWage, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.MinWage, new { htmlAttributes = new { @class = "form-control round input-short" } })
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        @Html.LabelFor(model => model.MaxWage, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.MaxWage, new { htmlAttributes = new { @class = "form-control round input-short" } })
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        <h4>Dostępność</h4>
+        <div>
+            @(Html.CheckBoxListForEnum<JobFilter, Availability>(m => m.Availability, new { @class = "availability-menu" }))
+        </div>
+    </div>
+</div>
+
+<h4>
+    Inne
+</h4>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        @Html.LabelFor(model => model.ServiceTypeId, htmlAttributes: new { @class = "control-label" })
+        <div>
+            @Html.DropDownListFor(model => model.ServiceTypeId, Model.ServiceTypes, new { @class = "round" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        @Html.LabelFor(model => model.Localization, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.Localization, new { htmlAttributes = new { @class = "form-control round input-short" } })
+    </div>
+</div>
+
+<div class="center">
+    <button id="btn-show-announcements" class="btn btn-primary round">Filtruj</button>
+</div>
+
+<div class="spacer"></div>

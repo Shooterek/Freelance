@@ -125,17 +125,21 @@
     <Compile Include="Utils\AmountOfElementsAttribute.cs" />
     <Compile Include="Utils\AnnouncementFilter.cs" />
     <Compile Include="Utils\Constants.cs" />
+    <Compile Include="Utils\JobFilter.cs" />
     <Compile Include="Utils\PagingInfo.cs" />
     <Compile Include="Utils\Extensions.cs" />
-    <Compile Include="ViewModels\AddAnnouncementViewModel.cs" />
-    <Compile Include="ViewModels\AddJobViewModel.cs" />
-    <Compile Include="ViewModels\AnnouncementOffersListViewModel.cs" />
-    <Compile Include="ViewModels\AnnouncementOfferViewModel.cs" />
-    <Compile Include="ViewModels\AnnouncementViewModel.cs" />
+    <Compile Include="ViewModels\Announcements\AddAnnouncementViewModel.cs" />
+    <Compile Include="ViewModels\Jobs\AddJobViewModel.cs" />
+    <Compile Include="ViewModels\Announcements\AnnouncementOffersListViewModel.cs" />
+    <Compile Include="ViewModels\Announcements\AnnouncementOfferViewModel.cs" />
+    <Compile Include="ViewModels\Announcements\AnnouncementViewModel.cs" />
     <Compile Include="ViewModels\ApplicationUserViewModel.cs" />
+    <Compile Include="ViewModels\Jobs\JobOffersListViewModel.cs" />
+    <Compile Include="ViewModels\Jobs\JobOfferViewModel.cs" />
+    <Compile Include="ViewModels\Jobs\JobViewModel.cs" />
     <Compile Include="ViewModels\UserOffersListViewModel.cs" />
-    <Compile Include="ViewModels\AnnouncementsListViewModel.cs" />
-    <Compile Include="ViewModels\JobsListViewModel.cs" />
+    <Compile Include="ViewModels\Announcements\AnnouncementsListViewModel.cs" />
+    <Compile Include="ViewModels\Jobs\JobsListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Freelance.Core\Freelance.Core.csproj">

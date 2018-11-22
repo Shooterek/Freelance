@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Freelance.Core.Models;
 
-namespace Freelance.Infrastructure.ViewModels
+namespace Freelance.Infrastructure.ViewModels.Announcements
 {
     public class AnnouncementViewModel
     {
@@ -20,9 +16,8 @@ namespace Freelance.Infrastructure.ViewModels
         public string AdvertiserId { get; set; }
         public  ApplicationUserViewModel Advertiser { get; set; }
 
-        [Required]
-        [StringLength(25)]
-        [MinLength(6)]
+        [Required(ErrorMessage = "{0} jest wymagany")]
+        [StringLength(25, MinimumLength = 6, ErrorMessage = "Ilość znaków powinna wynosić od {2} do {1}")]
         [Display(Name = "Tytuł")]
         public string Title { get; set; }
 

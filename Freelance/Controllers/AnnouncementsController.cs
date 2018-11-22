@@ -11,12 +11,14 @@ using Freelance.Core.Models;
 using Freelance.Infrastructure;
 using Freelance.Infrastructure.Services.Interfaces;
 using Freelance.Infrastructure.ViewModels;
+using Freelance.Infrastructure.ViewModels.Announcements;
 using Freelance.Utilities;
 using Microsoft.AspNet.Identity;
 using WebGrease.Css.Extensions;
 
 namespace Freelance.Controllers
 {
+    [Authorize]
     public class AnnouncementsController : Controller
     {
         private readonly IAnnouncementsService _announcementService;
@@ -28,16 +30,16 @@ namespace Freelance.Controllers
             _announcementService = announcementService;
             _serviceTypesService = serviceTypesService;
         }
-
-        // GET: Announcements
-        public async Task<ActionResult> Index(int page, decimal minWage = Decimal.One, decimal maxWage = Decimal.MaxValue,
+        
+        [AllowAnonymous]
+        public async Task<ActionResult> Index(int page, decimal minWage = Decimal.Zero, decimal maxWage = Decimal.MaxValue,
             string[] availability = null, string localization = null, int? serviceType = null, string sort = null)
         {
             var result = await _announcementService.GetAnnouncementsAsync(page, PageSize, minWage, maxWage, availability, localization, serviceType, sort);
             return View(result);
         }
-
-        // GET: Announcements/Details/5
+        
+        [OutputCache(NoStore = true, Duration = 1)]
         public async Task<ActionResult> Details(int id)
         {
             var announcement = await _announcementService.GetAnnouncementByIdAsync(id);
@@ -47,8 +49,8 @@ namespace Freelance.Controllers
             }
             return View(announcement);
         }
-
-        [Authorize]
+        
+        [OutputCache(NoStore = true, Duration = 1)]
         public async Task<ActionResult> Add()
         {
             var serviceTypes = await _serviceTypesService.GetServiceTypesAsync();
@@ -60,6 +62,7 @@ namespace Freelance.Controllers
         }
         
         [HttpPost]
+        [OutputCache(NoStore = true, Duration = 1)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add([Bind(Exclude = "ServiceTypes")]AddAnnouncementViewModel viewModel)
         {
@@ -90,17 +93,16 @@ namespace Freelance.Controllers
 
             return View("Add", viewModel);
         }
-
-        [Authorize]
+        
         [ChildActionOnly]
-        public ActionResult AddOffer(int announcementId)
+        public ActionResult AddAnnouncementOffer(int announcementId)
         {
             return PartialView(
                 new AnnouncementOfferViewModel() {AnnouncementId = announcementId});
         }
-
-        [Authorize]
+        
         [HttpPost]
+        [OutputCache(NoStore = true, Duration = 1)]
         public async Task<ActionResult> SubmitOffer([Bind(Exclude = "SubmissionDate, OffererId")] AnnouncementOfferViewModel offer)
         {
             offer.OffererId = User.Identity.GetUserId();
@@ -108,22 +110,21 @@ namespace Freelance.Controllers
             var result = await _announcementService.AddOfferAsync(offer);
             return RedirectToAction("Details", new {id = offer.AnnouncementId});
         }
-
-        [Authorize]
+        
+        [HttpPost]
         public async Task<ActionResult> AcceptOffer(int id)
         {
             await _announcementService.AcceptOfferAsync(id, User.Identity.GetUserId());
             return RedirectToAction("Offers", "Account");
         }
         
-        [Authorize]
+        [HttpPost]
         public async Task<ActionResult> DeclineOffer(int id)
         {
             await _announcementService.DeclineOfferAsync(id, User.Identity.GetUserId());
             return RedirectToAction("Offers", "Account");
         }
-
-        [Authorize]
+        
         [HttpPost]
         public async Task<ActionResult> EndOffer(int id)
         {

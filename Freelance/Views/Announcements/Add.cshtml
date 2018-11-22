@@ -1,6 +1,7 @@
 ﻿@using Freelance.Core.Models
 @using Freelance.Infrastructure.ViewModels
-@model Freelance.Infrastructure.ViewModels.AddAnnouncementViewModel
+@using Freelance.Infrastructure.ViewModels.Announcements
+@model Freelance.Infrastructure.ViewModels.Announcements.AddAnnouncementViewModel
 
 <div class="row blue-strip">
     <div class="col-md-8 col-md-offset-2">
@@ -22,7 +23,7 @@
 
                 @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
-                <div id="add-announcement-1">
+                <div id="add-1">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Announcement.Title, htmlAttributes: new {@class = "control-label"})
                         @Html.EditorFor(model => model.Announcement.Title, new {htmlAttributes = new {@class = "form-control round disable-next-button"}})
@@ -39,14 +40,14 @@
                     
                     <div class="row">
                         <div class="col-xs-12">
-                            <button type="button" id="add-announcements-next" class="btn btn-primary pull-right">Do przodu</button>
+                            <button type="button" id="add-next" class="btn btn-primary pull-right">Do przodu</button>
                         </div>
                     </div>
 
                     <div class="spacer"></div>
                 </div>
 
-                <div id="add-announcement-2" class="hidden">
+                <div id="add-2" class="hidden">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Announcement.ExpectedHourlyWage, htmlAttributes: new { @class = "control-label" })
                         @Html.EditorFor(model => model.Announcement.ExpectedHourlyWage, new { htmlAttributes = new { @class = "form-control input-short" } })
@@ -77,7 +78,7 @@
 
                     <div class="row">
                         <div class="col-xs-12">
-                            <button type="button" class="btn btn-default" id="add-announcement-photos">Wybierz zdjęcia</button>
+                            <button type="button" class="btn btn-default" id="add-photos">Wybierz zdjęcia</button>
                             <input class="hide" name="Photos" type="file" multiple id="Photos" accept="image/*" data-max-amount="5"/>
 
                             <div class="spacer"></div>
@@ -93,7 +94,7 @@
 
                     <div class="row">
                         <div class="col-xs-6">
-                            <button type="button" id="add-announcements-previous" class="btn btn-primary pull-left">Wróć</button>
+                            <button type="button" id="add-previous" class="btn btn-primary pull-left">Wróć</button>
                         </div>
                         <div class="col-xs-6">
                             <input type="submit" value="Opublikuj" class="btn btn-success pull-right" />

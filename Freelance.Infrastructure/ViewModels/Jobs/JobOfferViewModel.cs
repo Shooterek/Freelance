@@ -6,15 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Freelance.Core.Models;
 
-namespace Freelance.Infrastructure.ViewModels
+namespace Freelance.Infrastructure.ViewModels.Jobs
 {
-    public class AnnouncementOfferViewModel
+    public class JobOfferViewModel
     {
-        public int AnnouncementOfferId { get; set; }
+        public int JobOfferId { get; set; }
 
         [Required]
-        public int AnnouncementId { get; set; }
-        public AnnouncementViewModel Announcement { get; set; }
+        public int JobId { get; set; }
+        public Job Job { get; set; }
 
         [Display(Name = "Data zgłoszenia")]
         public DateTime SubmissionDate { get; set; }
@@ -24,16 +24,17 @@ namespace Freelance.Infrastructure.ViewModels
         public ApplicationUserViewModel Offerer { get; set; }
 
         [Required(ErrorMessage = "{0} jest wymagana")]
-        [Range(0.01, Double.MaxValue, ErrorMessage = "Błędna wartość")]
-        [Display(Name = "Stawka")]
+        [Range(0.01, Double.MaxValue, ErrorMessage = "Błedna wartość")]
+        [Display(Name = "Zaproponowana stawka")]
         public decimal ProposedRate { get; set; }
 
         [Required(ErrorMessage = "{0} jest wymagana")]
-        [StringLength(255, ErrorMessage = "Zbyt długi tekst")]
+        [StringLength(255, ErrorMessage = "Maksymalna długość to {2}")]
         [Display(Name = "Wiadomość")]
         public string Message { get; set; }
 
         public bool IsAccepted { get; set; }
+
         public bool IsFinished { get; set; }
     }
 }

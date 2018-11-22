@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Freelance.Core.Models;
+using Freelance.Infrastructure.ViewModels.Announcements;
+using Freelance.Infrastructure.ViewModels.Jobs;
 
 namespace Freelance.Infrastructure.ViewModels
 {
     public class UserOffersListViewModel
     {
-        public UserOffersListViewModel(List<AnnouncementOffer> receivedAnnouncementOffers, List<AnnouncementOffer> publishedAnnouncementOffers,
-            List<JobOffer> receivedJobOffers, List<JobOffer> publishedJobOffers)
+        public UserOffersListViewModel(List<AnnouncementOfferViewModel> receivedAnnouncementOffers, List<AnnouncementOfferViewModel> publishedAnnouncementOffers,
+            List<JobOfferViewModel> receivedJobOffers, List<JobOfferViewModel> publishedJobOffers)
         {
             ReceivedAnnouncementOffers = receivedAnnouncementOffers;
             PublishedAnnouncementOffers = publishedAnnouncementOffers;
@@ -18,9 +20,9 @@ namespace Freelance.Infrastructure.ViewModels
             PublishedJobOffers = publishedJobOffers;
         }
 
-        public List<AnnouncementOffer> ReceivedAnnouncementOffers{ get; set; }
-        public List<AnnouncementOffer> PublishedAnnouncementOffers{ get; set; }
-        public List<JobOffer> ReceivedJobOffers { get; set; }
-        public List<JobOffer> PublishedJobOffers { get; set; }
+        public List<AnnouncementOfferViewModel> ReceivedAnnouncementOffers{ get; set; }
+        public List<AnnouncementOfferViewModel> PublishedAnnouncementOffers{ get; set; }
+        public List<JobOfferViewModel> ReceivedJobOffers { get; set; }
+        public List<JobOfferViewModel> PublishedJobOffers { get; set; }
     }
 }
