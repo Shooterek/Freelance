@@ -114,8 +114,8 @@ namespace Freelance.Controllers
         [HttpPost]
         public async Task<ActionResult> AcceptOffer(int id)
         {
-            await _announcementService.AcceptOfferAsync(id, User.Identity.GetUserId());
-            return RedirectToAction("Offers", "Account");
+            var result = await _announcementService.AcceptOfferAsync(id, User.Identity.GetUserId());
+            return RedirectToAction("Details", new {id = result.AnnouncementId});
         }
         
         [HttpPost]
@@ -126,11 +126,12 @@ namespace Freelance.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> EndOffer(int id)
         {
-            await _announcementService.EndOfferAsync(id, User.Identity.GetUserId());
+            var result = await _announcementService.EndOfferAsync(id, User.Identity.GetUserId());
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Details", new { id = result.AnnouncementId });
         }
     }
 }

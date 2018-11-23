@@ -6,6 +6,12 @@ namespace Freelance.Core.Models
     {
         public int OpinionId { get; set; }
 
+        public int? AnnouncementOfferId { get; set; }
+        public virtual AnnouncementOffer AnnouncementOffer { get; set; }
+
+        public int? JobOfferId { get; set; }
+        public virtual JobOffer JobOffer { get; set; }
+
         public string EvaluatedUserId { get; set; }
         public virtual ApplicationUser EvaluatedUser{ get; set; }
 

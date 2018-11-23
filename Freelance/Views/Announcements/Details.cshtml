@@ -5,6 +5,7 @@
 
 @{
     bool isAuthenticatedAndNotAdvertiser = Context.User.Identity.IsAuthenticated && !Context.User.Identity.GetUserId().Equals(Model.AdvertiserId);
+    bool isAuthor = Context.User.Identity.IsAuthenticated && Context.User.Identity.GetUserId().Equals(Model.AdvertiserId);
 }
 
 <div class="row blue-strip">
@@ -66,13 +67,14 @@
                                 Złożone oferty
                             </h4>
                             <div>
-                                @Html.Partial("AnnouncementOffersList", new AnnouncementOffersListViewModel {Offers = Model.Offers, ShowAll = false})
+                                @Html.Partial("AnnouncementOffersList",
+                                    new AnnouncementOffersListViewModel {Offers = Model.Offers, ShowAll = false, IsAuthor = isAuthor})
                             </div>
                         </div>
                     </div>
                 }
 
-                @if (Context.User.Identity.IsAuthenticated && Context.User.Identity.GetUserId() != Model.AdvertiserId)
+                @if (isAuthenticatedAndNotAdvertiser && Model.Offers.All(o => o.OffererId != Context.User.Identity.GetUserId()))
                 {
                     <br/>
                     <div class="row">

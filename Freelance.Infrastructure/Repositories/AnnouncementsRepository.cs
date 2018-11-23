@@ -163,7 +163,7 @@ namespace Freelance.Infrastructure.Repositories
             }
         }
 
-        public async Task<RepositoryActionResult<bool>> AcceptOfferAsync(int offerId, string userId)
+        public async Task<RepositoryActionResult<AnnouncementOffer>> AcceptOfferAsync(int offerId, string userId)
         {
             try
             {
@@ -171,22 +171,22 @@ namespace Freelance.Infrastructure.Repositories
 
                 if (offer == null)
                 {
-                    return new RepositoryActionResult<bool>(false, RepositoryStatus.NotFound);
+                    return new RepositoryActionResult<AnnouncementOffer>(null, RepositoryStatus.NotFound);
                 }
 
-                if (offer.Announcement.AdvertiserId != userId)
+                if (offer.Announcement.AdvertiserId != userId || offer.Announcement.Offers.Any(o => o.IsAccepted && !o.IsFinished))
                 {
-                    return new RepositoryActionResult<bool>(false, RepositoryStatus.BadRequest);
+                    return new RepositoryActionResult<AnnouncementOffer>(null, RepositoryStatus.BadRequest);
                 }
 
                 offer.IsAccepted = true;
                 await _context.SaveChangesAsync();
 
-                return new RepositoryActionResult<bool>(true, RepositoryStatus.Ok);
+                return new RepositoryActionResult<AnnouncementOffer>(offer, RepositoryStatus.Ok);
             }
             catch (Exception e)
             {
-                return new RepositoryActionResult<bool>(false, RepositoryStatus.Error);
+                return new RepositoryActionResult<AnnouncementOffer>(null, RepositoryStatus.Error);
             }
         }
 
@@ -217,7 +217,7 @@ namespace Freelance.Infrastructure.Repositories
             }
         }
 
-        public async Task<RepositoryActionResult<bool>> EndOfferAsync(int id, string userId)
+        public async Task<RepositoryActionResult<AnnouncementOffer>> EndOfferAsync(int id, string userId)
         {
             try
             {
@@ -225,22 +225,22 @@ namespace Freelance.Infrastructure.Repositories
 
                 if (offer == null)
                 {
-                    return new RepositoryActionResult<bool>(false, RepositoryStatus.NotFound);
+                    return new RepositoryActionResult<AnnouncementOffer>(null, RepositoryStatus.NotFound);
                 }
 
                 if (offer.Announcement.AdvertiserId != userId)
                 {
-                    return new RepositoryActionResult<bool>(false, RepositoryStatus.BadRequest);
+                    return new RepositoryActionResult<AnnouncementOffer>(null, RepositoryStatus.BadRequest);
                 }
 
                 offer.IsFinished = true;
                 await _context.SaveChangesAsync();
 
-                return new RepositoryActionResult<bool>(true, RepositoryStatus.Ok);
+                return new RepositoryActionResult<AnnouncementOffer>(offer, RepositoryStatus.Ok);
             }
             catch (Exception e)
             {
-                return new RepositoryActionResult<bool>(false, RepositoryStatus.Error);
+                return new RepositoryActionResult<AnnouncementOffer>(null, RepositoryStatus.Error);
             }
         }
     }

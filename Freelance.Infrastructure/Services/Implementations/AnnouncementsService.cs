@@ -154,9 +154,10 @@ namespace Freelance.Infrastructure.Services.Implementations
             var result = await _announcementRepository.RemoveOfferAsync(id);
         }
 
-        public async Task AcceptOfferAsync(int offerId, string userId)
+        public async Task<AnnouncementOfferViewModel> AcceptOfferAsync(int offerId, string userId)
         {
             var result = await _announcementRepository.AcceptOfferAsync(offerId, userId);
+            return _mapper.Map<AnnouncementOfferViewModel>(result.Entity);
         }
 
         public async Task DeclineOfferAsync(int offerId, string userId)
@@ -164,9 +165,11 @@ namespace Freelance.Infrastructure.Services.Implementations
             var result = await _announcementRepository.DeclineOfferAsync(offerId, userId);
         }
 
-        public async Task EndOfferAsync(int id, string userId)
+        public async Task<AnnouncementOfferViewModel> EndOfferAsync(int id, string userId)
         {
             var result = await _announcementRepository.EndOfferAsync(id, userId);
+
+            return _mapper.Map<AnnouncementOfferViewModel>(result.Entity);
         }
     }
 }

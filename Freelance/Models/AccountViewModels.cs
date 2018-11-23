@@ -51,7 +51,7 @@ namespace Freelance.Models
     {
         [Required]
         [Display(Name = "Email")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Niepoprawny format adresu email")]
         public string Email { get; set; }
 
         [Required]
@@ -66,19 +66,19 @@ namespace Freelance.Models
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "{0} jest wymagany")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Niepoprawny format adresu email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "{0} jest wymagane")]
-        [StringLength(100, ErrorMessage = "{0} musi mieć od {2} do {1} znaków.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} musi mieć od {2} do {1} znaków", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Potwierdź hasło")]
-        [Compare("Password", ErrorMessage = "Hasła się nie zgadzają.")]
+        [Compare("Password", ErrorMessage = "Hasła się nie zgadzają")]
         public string ConfirmPassword { get; set; }
 
         public HttpPostedFileBase Photo{ get; set; }
@@ -87,12 +87,12 @@ namespace Freelance.Models
     public class ResetPasswordViewModel
     {
         [Required(ErrorMessage = "{0} jest wymagany")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Niepoprawny format adresu email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "{0} jest wymagane")]
-        [StringLength(100, ErrorMessage = "{0} musi mieć przynajmniej {2} znaków.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} musi mieć przynajmniej {2} znaków", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
@@ -108,7 +108,7 @@ namespace Freelance.Models
     public class ForgotPasswordViewModel
     {
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Niepoprawny format adresu email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

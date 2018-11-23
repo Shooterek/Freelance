@@ -9,6 +9,11 @@ namespace Freelance.Core.Models
 {
     public class AnnouncementOffer
     {
+        public AnnouncementOffer()
+        {
+            Opinions = new List<Opinion>();
+        }
+
         public int AnnouncementOfferId { get; set; }
 
         [Required]
@@ -31,5 +36,7 @@ namespace Freelance.Core.Models
         
         public bool IsAccepted { get; set; }
         public bool IsFinished { get; set; }
+
+        public virtual ICollection<Opinion> Opinions { get; set; }
     }
 }

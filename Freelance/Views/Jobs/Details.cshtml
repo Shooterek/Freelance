@@ -73,7 +73,7 @@
                     </div>
                 }
 
-                @if (isAuthenticatedAndNotAdvertiser)
+                @if (isAuthenticatedAndNotAdvertiser && Model.Offers.All(o => o.OffererId != Context.User.Identity.GetUserId()))
                 {
                     <br />
                     <div class="row">
