@@ -36,5 +36,6 @@ namespace Freelance.Infrastructure.ViewModels.Jobs
         public bool IsAccepted { get; set; }
 
         public bool IsFinished { get; set; }
+        public ICollection<Opinion> Opinions { get; set; }
     }
 }

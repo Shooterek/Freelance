@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Freelance.Core.Models;
 
 namespace Freelance.Infrastructure.ViewModels.Announcements
 {
@@ -30,5 +32,7 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
 
         public bool IsAccepted { get; set; }
         public bool IsFinished { get; set; }
+        
+        public ICollection<Opinion> Opinions { get; set; }
     }
 }

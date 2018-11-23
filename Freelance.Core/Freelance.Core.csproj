@@ -125,6 +125,10 @@
     <Compile Include="Migrations\201811221119517_AddLocalizationToJob.Designer.cs">
       <DependentUpon>201811221119517_AddLocalizationToJob.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811232157317_AddNavigationPropertiesForAnOpinion.cs" />
+    <Compile Include="Migrations\201811232157317_AddNavigationPropertiesForAnOpinion.Designer.cs">
+      <DependentUpon>201811232157317_AddNavigationPropertiesForAnOpinion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
@@ -198,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811221119517_AddLocalizationToJob.resx">
       <DependentUpon>201811221119517_AddLocalizationToJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811232157317_AddNavigationPropertiesForAnOpinion.resx">
+      <DependentUpon>201811232157317_AddNavigationPropertiesForAnOpinion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

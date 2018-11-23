@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Freelance.Core.Models
 {
     public class JobOffer
     {
+        public JobOffer()
+        {
+            Opinions = new List<Opinion>();
+        }
+
         public int JobOfferId { get; set; }
 
         [Required]
@@ -28,5 +34,6 @@ namespace Freelance.Core.Models
         public bool IsAccepted { get; set; }
 
         public bool IsFinished { get; set; }
+        public virtual ICollection<Opinion> Opinions { get; set; }
     }
 }

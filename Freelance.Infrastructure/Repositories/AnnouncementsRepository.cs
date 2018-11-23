@@ -28,9 +28,7 @@ namespace Freelance.Infrastructure.Repositories
         public async Task<RepositoryActionResult<Announcement>> GetByIdAsync(int id)
         {
             var announcement = await _context.Announcements
-                .Include(a => a.Offers)
                 .Include(a => a.Offers.Select(o => o.Offerer))
-                .Include(a => a.Advertiser)
                 .Include(a => a.Advertiser.ReceivedOpinions)
                 .Include(a => a.Advertiser.Photo)
                 .FirstOrDefaultAsync(a => a.AnnouncementId == id);
