@@ -16,11 +16,13 @@ namespace Freelance.Core.Models
         public virtual ApplicationUser EvaluatedUser{ get; set; }
 
         [Range(1, 5)]
-        [Required]
+        [Required(ErrorMessage = "{0} jest wymagana")]
+        [Display(Name = "Ocena")]
         public int Rating { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required(ErrorMessage = "{0} jest wymagany")]
+        [StringLength(100, ErrorMessage = "Maksymalna ilośc znaków to {1}")]
+        [Display(Name = "Opis")]
         public string Review { get; set; }
     }
 }

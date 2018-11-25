@@ -216,6 +216,7 @@
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\OpinionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -333,6 +334,7 @@
     <Content Include="Views\Jobs\AddJobOffer.cshtml" />
     <Content Include="Views\Jobs\JobOffersList.cshtml" />
     <Content Include="Views\Jobs\Add.cshtml" />
+    <Content Include="Views\Opinions\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

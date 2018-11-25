@@ -4,8 +4,10 @@
 @using Microsoft.AspNet.Identity
 @model Freelance.Infrastructure.ViewModels.Jobs.JobViewModel
 
-@{
+@{    
     bool isAuthenticatedAndNotAdvertiser = Context.User.Identity.IsAuthenticated && !Context.User.Identity.GetUserId().Equals(Model.EmployerId);
+    bool isAuthor = Context.User.Identity.IsAuthenticated && Context.User.Identity.GetUserId().Equals(Model.EmployerId);
+    string currentUserId = Context.User.Identity.IsAuthenticated ? Context.User.Identity.GetUserId() : null;
 }
 
 <div class="row blue-strip">
@@ -67,7 +69,8 @@
                                 Złożone oferty
                             </h4>
                             <div>
-                                @Html.Partial("JobOffersList", new JobOffersListViewModel{ Offers = Model.Offers, ShowAll = false })
+                                @Html.Partial("JobOffersList", new JobOffersListViewModel{ Offers = Model.Offers, ShowAll = false,
+                                    IsAuthor = isAuthor, CurrentUserId = currentUserId})
                             </div>
                         </div>
                     </div>

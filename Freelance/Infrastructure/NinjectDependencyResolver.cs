@@ -56,10 +56,12 @@ namespace Freelance.Infrastructure
             kernel.Bind<IAnnouncementsRepository>().To<AnnouncementsRepository>().InRequestScope();
             kernel.Bind<IServiceTypesRepository>().To<ServiceTypesRepository>().InRequestScope();
             kernel.Bind<IJobsRepository>().To<JobsRepository>().InRequestScope();
+            kernel.Bind<IOpinionsRepository>().To<OpinionsRepository>().InRequestScope();
 
             kernel.Bind<IAnnouncementsService>().To<AnnouncementsService>().InRequestScope();
             kernel.Bind<IServiceTypesService>().To<ServiceTypesService>().InRequestScope();
             kernel.Bind<IJobsService>().To<JobsService>().InRequestScope();
+            kernel.Bind<IOpinionsService>().To<OpinionsService>().InRequestScope();
             kernel.Bind<IEmailService>().To<Services.Implementations.EmailService>().InRequestScope();
 
             kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();

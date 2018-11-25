@@ -3,6 +3,7 @@
     font-family: 'Lato', sans-serif;
     background-color: #eeeeee;
     font-size: 16px;
+    min-height: 100%;
 }
 
 label {
@@ -197,9 +198,10 @@ section > h2 {
 }
 
 #footer {
-    bottom:0;
+    position: fixed;
+    bottom: 0;
     margin-top: 15px;
-    margin-bottom: -15px;
+    padding-bottom: -15px;
     width: 100%;
     background-color: white;
 }

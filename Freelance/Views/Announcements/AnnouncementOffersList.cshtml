@@ -70,13 +70,17 @@
                          }
                          else if (offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
                          {
-                             <button class="btn btn-primary">Dodaj opinię</button>
+                             @Html.RouteLink("Oceń", "AddOpinion",
+                                 new {announcementOfferId = offers[x].AnnouncementOfferId, evaluatedUserId = offers[x].OffererId},
+                                 new { @class="btn btn-primary"})
                          }
                     }
                     else if (offers[x].OffererId.Equals(Model.CurrentUserId) 
                              && offers[x].Opinions.All(o => !o.AnnouncementOffer.Announcement.AdvertiserId.Equals(o.EvaluatedUserId)))
                     {
-                        <button class="btn btn-primary">Dodaj opinię o pracodawcy</button>
+                        @Html.RouteLink("Oceń", "AddOpinion",
+                            new {announcementOfferId = offers[x].AnnouncementOfferId, evaluatedUserId = offers[x].Announcement.AdvertiserId},
+                            new { @class="btn btn-primary"})
                     }
                 </div>
             </div>

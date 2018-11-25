@@ -1,0 +1,50 @@
+﻿@model Freelance.Infrastructure.ViewModels.AddOpinionViewModel
+
+<div class="row blue-strip">
+    <div class="col-md-8 col-md-offset-2">
+        <section id="header">
+            <h2><b>Dodaj opinię</b></h2>
+        </section>
+    </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 white-background menu">
+        <div class="col-sm-12">
+            <div class="spacer"></div>
+            @using (Html.BeginForm("Add", "Opinions", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(model => model.Opinion.AnnouncementOfferId)
+                @Html.HiddenFor(model => model.Opinion.JobOfferId)
+                @Html.HiddenFor(model => model.Opinion.EvaluatedUserId)
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Opinion.Rating, htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.Opinion.Rating, Model.PossibleGrades, new {@class = "form-control round input-short"})
+                        @Html.ValidationMessageFor(model => model.Opinion.Rating, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Opinion.Review, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Opinion.Review, new { htmlAttributes = new { @class = "form-control " } })
+                    @Html.ValidationMessageFor(model => model.Opinion.Review, "", new { @class = "text-danger" })
+                </div>
+                <div class="spacer"></div>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <input type="submit" value="Dodaj" class="btn btn-success pull-right" />
+                    </div>
+                </div>
+
+                <div class="spacer"></div>
+            }
+        </div>
+    </div>
+</div>
+

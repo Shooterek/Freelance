@@ -113,14 +113,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AnnouncementsRepository.cs" />
     <Compile Include="Repositories\JobsRepository.cs" />
+    <Compile Include="Repositories\OpinionsRepository.cs" />
     <Compile Include="Repositories\ServiceTypesRepository.cs" />
     <Compile Include="Services\Implementations\AnnouncementsService.cs" />
     <Compile Include="Services\Implementations\EmailService.cs" />
     <Compile Include="Services\Implementations\JobsService.cs" />
+    <Compile Include="Services\Implementations\OpinionsService.cs" />
     <Compile Include="Services\Implementations\ServiceTypesService.cs" />
     <Compile Include="Services\Interfaces\IAnnouncementsService.cs" />
     <Compile Include="Services\Interfaces\IEmailService.cs" />
     <Compile Include="Services\Interfaces\IJobsService.cs" />
+    <Compile Include="Services\Interfaces\IOpinionsService.cs" />
     <Compile Include="Services\Interfaces\IServiceTypesService.cs" />
     <Compile Include="Utils\AmountOfElementsAttribute.cs" />
     <Compile Include="Utils\AnnouncementFilter.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="Utils\JobFilter.cs" />
     <Compile Include="Utils\PagingInfo.cs" />
     <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="ViewModels\AddOpinionViewModel.cs" />
     <Compile Include="ViewModels\Announcements\AddAnnouncementViewModel.cs" />
     <Compile Include="ViewModels\Jobs\AddJobViewModel.cs" />
     <Compile Include="ViewModels\Announcements\AnnouncementOffersListViewModel.cs" />
