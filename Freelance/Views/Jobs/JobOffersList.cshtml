@@ -46,7 +46,7 @@
         <div class="col-xs-6">
             <br />
             <h4>Stawka: @offers[x].ProposedRate</h4>
-            <p>@offers[x].Message</p>
+            <p class="word-wrap">@offers[x].Message</p>
         </div>
         <div class="col-xs-3">
             <div class="row">
@@ -75,7 +75,7 @@
                         }
                     }
                     else if (offers[x].OffererId.Equals(Model.CurrentUserId)
-                             && offers[x].Opinions.All(o => !o.JobOffer.Job.EmployerId.Equals(o.EvaluatedUserId)))
+                             && offers[x].Opinions.All(o => !o.JobOffer.Job.EmployerId.Equals(o.EvaluatedUserId)) && offers[x].IsFinished)
                     {
                         @Html.RouteLink("Oceń", "AddOpinion",
                             new { jobOfferId = offers[x].JobOfferId, evaluatedUserId = offers[x].Job.EmployerId},
@@ -103,9 +103,9 @@
                 <div class="col-xs-3">
                     <div class="spacer"></div>
 
-                    <img class="img-responsive" width="120" height="120"
+                    <img class="img-responsive" width="120" height="120" alt="Zdjęcie użytkownika"
                          src="@(offers[x].Offerer.Photo != null ? String.Format("data:{0};base64,{1}", offers[x].Offerer.Photo.ContentType, Convert.ToBase64String(offers[x].Offerer.Photo.Content))
-                                    : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")" alt="Zdjęcie użytkownika" />
+                            : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")" />
                     <div class="word-wrap">
                         <span>@offers[x].Offerer.UserName</span>
                     </div>
@@ -133,10 +133,46 @@
                         }
                     </div>
                 </div>
-                <div class="col-xs-9">
+                <div class="col-xs-6">
                     <br />
                     <h4>Stawka: @offers[x].ProposedRate</h4>
-                    <p>@offers[x].Message</p>
+                    <p class="word-wrap">@offers[x].Message</p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @if (Model.IsAuthor)
+                    {
+                        if (offers[x].IsAccepted && !offers[x].IsFinished)
+                        {
+                                    <form method="post" action="/jobs/endoffer/@offers[x].JobOfferId">
+                                        @Html.AntiForgeryToken()
+                                        <input type="submit" value="Zakończ" class="btn btn-warning" />
+                                    </form>
+                                }
+                                else if (!offers[x].IsFinished && !offers.Any(o => o.IsAccepted && !o.IsFinished))
+                                {
+                                    <form method="post" action="/jobs/acceptoffer/@offers[x].JobOfferId">
+                                        @Html.AntiForgeryToken()
+                                        <input type="submit" value="Przyjmij" class="btn btn-success" />
+                                    </form>
+                                }
+                                else if (offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
+                                {
+                                    @Html.RouteLink("Oceń", "AddOpinion",
+                                 new { jobOfferId = offers[x].JobOfferId, evaluatedUserId = offers[x].OffererId },
+                                 new { @class = "btn btn-primary" })
+                                }
+                            }
+                            else if (offers[x].OffererId.Equals(Model.CurrentUserId)
+                                     && offers[x].Opinions.All(o => !o.JobOffer.Job.EmployerId.Equals(o.EvaluatedUserId)) && offers[x].IsFinished)
+                            {
+                                @Html.RouteLink("Oceń", "AddOpinion",
+                            new { jobOfferId = offers[x].JobOfferId, evaluatedUserId = offers[x].Job.EmployerId },
+                            new { @class = "btn btn-primary" })
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
             <hr />

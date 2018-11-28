@@ -259,8 +259,11 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\freelance - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Freelance - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\freelance - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Freelance - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\new.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

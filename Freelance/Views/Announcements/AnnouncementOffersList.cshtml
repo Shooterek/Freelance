@@ -47,7 +47,7 @@
         <div class="col-xs-6">
             <br/>
             <h4>Stawka: @offers[x].ProposedRate</h4>
-            <p>@offers[x].Message</p>
+            <p class="word-wrap">@offers[x].Message</p>
         </div>    
         <div class="col-xs-3">
             <div class="row">
@@ -76,7 +76,7 @@
                          }
                     }
                     else if (offers[x].OffererId.Equals(Model.CurrentUserId) 
-                             && offers[x].Opinions.All(o => !o.AnnouncementOffer.Announcement.AdvertiserId.Equals(o.EvaluatedUserId)))
+                             && offers[x].Opinions.All(o => !o.AnnouncementOffer.Announcement.AdvertiserId.Equals(o.EvaluatedUserId)) && offers[x].IsFinished)
                     {
                         @Html.RouteLink("Oceń", "AddOpinion",
                             new {announcementOfferId = offers[x].AnnouncementOfferId, evaluatedUserId = offers[x].Announcement.AdvertiserId},
@@ -97,19 +97,19 @@
         </a>
     </div>
     <div id="second-part" class="hidden">
-        @for(; x < offers.Length; x++)
+        @for (; x < offers.Length; x++)
         {
-            <br/>
+            <br />
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-xs-3">
                     <div class="spacer"></div>
 
-                    <img class="img-responsive" width="120" height="120"
-                         src="@(offers[x].Offerer.Photo != null ? String.Format("data:{0};base64,{1}", offers[x].Offerer.Photo.ContentType, Convert.ToBase64String(offers[x].Offerer.Photo.Content)) 
-                                    : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")" alt="Zdjęcie użytkownika"/>
+                    <img class="img-responsive" width="120" height="120" alt="Zdjęcie użytkownika"
+                         src="@(offers[x].Offerer.Photo != null ? String.Format("data:{0};base64,{1}", offers[x].Offerer.Photo.ContentType, Convert.ToBase64String(offers[x].Offerer.Photo.Content))
+                            : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")" />
                     <div class="word-wrap">
                         <span>@offers[x].Offerer.UserName</span>
-                    </div>  
+                    </div>
                     <div class="rating">
                         @if (offers[x].Offerer.ReceivedOpinionsCount > 0)
                         {
@@ -135,19 +135,48 @@
                     </div>
                 </div>
                 <div class="col-xs-6">
-                    <br/>
+                    <br />
                     <h4>Stawka: @offers[x].ProposedRate</h4>
-                    <p>@offers[x].Message</p>
+                    <p class="word-wrap">@offers[x].Message</p>
                 </div>
-                <div class="col-xs-2">
-                    <div class="col-xs-12">
-                        <form action="/announcements/acceptoffer/@offers[x].AnnouncementOfferId">
-                            <input type="submit" value="Przyjmij" class="btn btn-success"/>
-                        </form>
+                <div class="col-xs-3">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @if (Model.IsAuthor)
+                            {
+                                if (offers[x].IsAccepted && !offers[x].IsFinished)
+                                {
+                                    <form method="post" action="/announcements/endoffer/@offers[x].AnnouncementOfferId">
+                                        @Html.AntiForgeryToken()
+                                        <input type="submit" value="Zakończ" class="btn btn-warning" />
+                                    </form>
+                                }
+                                else if (!offers[x].IsFinished && !offers.Any(o => o.IsAccepted && !o.IsFinished))
+                                {
+                                    <form method="post" action="/announcements/acceptoffer/@offers[x].AnnouncementOfferId">
+                                        @Html.AntiForgeryToken()
+                                        <input type="submit" value="Przyjmij" class="btn btn-success" />
+                                    </form>
+                                }
+                                else if (offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
+                                {
+                                    @Html.RouteLink("Oceń", "AddOpinion",
+                                 new { announcementOfferId = offers[x].AnnouncementOfferId, evaluatedUserId = offers[x].OffererId },
+                                 new { @class = "btn btn-primary" })
+                                }
+                            }
+                            else if (offers[x].OffererId.Equals(Model.CurrentUserId)
+                                     && offers[x].Opinions.All(o => !o.AnnouncementOffer.Announcement.AdvertiserId.Equals(o.EvaluatedUserId)) && offers[x].IsFinished)
+                            {
+                                @Html.RouteLink("Oceń", "AddOpinion",
+                            new { announcementOfferId = offers[x].AnnouncementOfferId, evaluatedUserId = offers[x].Announcement.AdvertiserId },
+                            new { @class = "btn btn-primary" })
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-            <hr/>
+            <hr />
         }
     </div>
 }

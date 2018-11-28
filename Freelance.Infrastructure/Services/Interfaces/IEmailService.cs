@@ -11,5 +11,7 @@ namespace Freelance.Infrastructure.Services.Interfaces
     {
         Task Notify(JobOffer offer);
         Task Notify(AnnouncementOffer offer);
+        Task SendNotification(Announcement announcement);
+        Task SendNotification(Job job);
     }
 }
