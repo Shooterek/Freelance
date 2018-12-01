@@ -18,8 +18,8 @@ namespace Freelance.Core.Repositories
         Task<RepositoryActionResult<JobOffer>> AddOfferAsync(JobOffer entity);
         Task<RepositoryActionResult<ICollection<JobOffer>>> GetReceivedOffersAsync(string userId);
         Task<RepositoryActionResult<ICollection<JobOffer>>> GetPublishedOffersAsync(string userId);
-        Task<RepositoryActionResult<JobOffer>> RemoveOfferAsync(int id);
-        Task<RepositoryActionResult<bool>> DeclineOfferAsync(int offerId, string userId);
-        Task<RepositoryActionResult<bool>> AcceptOfferAsync(int offerId, string userId);
+        Task<RepositoryActionResult<JobOffer>> EndOfferAsync(JobOffer offer);
+        Task<RepositoryActionResult<JobOffer>> AcceptOfferAsync(JobOffer offer);
+        Task<RepositoryActionResult<JobOffer>> GetJobOfferAsync(int offerId);
     }
 }

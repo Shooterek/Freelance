@@ -9,7 +9,7 @@ namespace Freelance.Core.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Freelance.Core.Models.ApplicationDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<Freelance.Core.Models.ApplicationDbContext>
     {
         public Configuration()
         {

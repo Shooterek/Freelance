@@ -20,8 +20,7 @@ namespace Freelance.Infrastructure.Services.Interfaces
         Task<ICollection<JobOfferViewModel>> GetReceivedOffersAsync(string userId);
         Task<ICollection<JobOfferViewModel>> GetPublishedOffersAsync(string userId);
         Task<JobOfferViewModel> AddOfferAsync(JobOfferViewModel offer);
-        Task RemoveOfferAsync(int id);
-        Task DeclineOfferAsync(int id, string userId);
-        Task AcceptOfferAsync(int id, string userId);
+        Task<JobOfferViewModel> AcceptOfferAsync(int id, string userId);
+        Task<JobOfferViewModel> EndOfferAsync(int id, string userId);
     }
 }

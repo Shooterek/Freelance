@@ -30,7 +30,6 @@ namespace Freelance.Infrastructure.Repositories
             var job = await _context.Jobs
                 .Include(j => j.Offers)
                 .Include(j => j.Offers.Select(o => o.Offerer))
-                .Include(j => j.Employer)
                 .Include(j => j.Employer.ReceivedOpinions)
                 .Include(j => j.Employer.Photo)
                 .FirstOrDefaultAsync(j => j.JobId == id);
@@ -141,79 +140,46 @@ namespace Freelance.Infrastructure.Repositories
             return new RepositoryActionResult<ICollection<JobOffer>>(offers, RepositoryStatus.Ok);
         }
 
-        public async Task<RepositoryActionResult<JobOffer>> RemoveOfferAsync(int id)
+        public async Task<RepositoryActionResult<JobOffer>> AcceptOfferAsync(JobOffer offer)
         {
             try
             {
-                var offer = await _context.JobOffers.FirstOrDefaultAsync(a => a.JobOfferId== id);
-
-                if (offer == null)
-                {
-                    return new RepositoryActionResult<JobOffer>(null, RepositoryStatus.NotFound);
-                }
-
-                _context.JobOffers.Remove(offer);
-                await _context.SaveChangesAsync();
-
-                return new RepositoryActionResult<JobOffer>(offer, RepositoryStatus.Deleted);
-            }
-            catch (Exception e)
-            {
-                return new RepositoryActionResult<JobOffer>(null, RepositoryStatus.Error);
-            }
-        }
-
-        public async Task<RepositoryActionResult<bool>> DeclineOfferAsync(int offerId, string userId)
-        {
-            try
-            {
-                var offer = await _context.JobOffers.Include(o => o.Job).FirstOrDefaultAsync(a => a.JobOfferId == offerId);
-
-                if (offer == null)
-                {
-                    return new RepositoryActionResult<bool>(false, RepositoryStatus.NotFound);
-                }
-
-                if (offer.Job.EmployerId != userId)
-                {
-                    return new RepositoryActionResult<bool>(false, RepositoryStatus.BadRequest);
-                }
-
-                _context.JobOffers.Remove(offer);
-                await _context.SaveChangesAsync();
-
-                return new RepositoryActionResult<bool>(true, RepositoryStatus.Deleted);
-            }
-            catch (Exception e)
-            {
-                return new RepositoryActionResult<bool>(true, RepositoryStatus.Error);
-            }
-        }
-
-        public async Task<RepositoryActionResult<bool>> AcceptOfferAsync(int offerId, string userId)
-        {
-            try
-            {
-                var offer = await _context.JobOffers.Include(o => o.Job).FirstOrDefaultAsync(a => a.JobOfferId == offerId);
-
-                if (offer == null)
-                {
-                    return new RepositoryActionResult<bool>(false, RepositoryStatus.NotFound);
-                }
-
-                if (offer.Job.EmployerId != userId)
-                {
-                    return new RepositoryActionResult<bool>(false, RepositoryStatus.BadRequest);
-                }
-
                 offer.IsAccepted = true;
+                _context.Entry(offer).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
-                return new RepositoryActionResult<bool>(true, RepositoryStatus.Ok);
+                return new RepositoryActionResult<JobOffer>(offer, RepositoryStatus.Ok);
             }
             catch (Exception e)
             {
-                return new RepositoryActionResult<bool>(true, RepositoryStatus.Error);
+                return new RepositoryActionResult<JobOffer>(offer, RepositoryStatus.Error);
+            }
+        }
+
+        public async Task<RepositoryActionResult<JobOffer>> GetJobOfferAsync(int offerId)
+        {
+            var offer = await _context.JobOffers.Include(o => o.Job).FirstOrDefaultAsync(a => a.JobOfferId == offerId);
+
+            if (offer == null)
+            {
+                return new RepositoryActionResult<JobOffer>(null, RepositoryStatus.NotFound);
+            }
+            return new RepositoryActionResult<JobOffer>(offer, RepositoryStatus.Ok);
+        }
+
+        public async Task<RepositoryActionResult<JobOffer>> EndOfferAsync(JobOffer offer)
+        {
+            try
+            {
+                offer.IsFinished = true;
+                _context.Entry(offer).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return new RepositoryActionResult<JobOffer>(offer, RepositoryStatus.Ok);
+            }
+            catch (Exception e)
+            {
+                return new RepositoryActionResult<JobOffer>(offer, RepositoryStatus.Error);
             }
         }
     }

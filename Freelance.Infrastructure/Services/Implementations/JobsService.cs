@@ -9,6 +9,7 @@ using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Services.Interfaces;
 using Freelance.Infrastructure.Utils;
 using Freelance.Infrastructure.ViewModels;
+using Freelance.Infrastructure.ViewModels.Announcements;
 using Freelance.Infrastructure.ViewModels.Jobs;
 using WebGrease.Css.Extensions;
 
@@ -169,19 +170,31 @@ namespace Freelance.Infrastructure.Services.Implementations
             return null;
         }
 
-        public async Task RemoveOfferAsync(int id)
+        public async Task<JobOfferViewModel> AcceptOfferAsync(int offerId, string userId)
         {
-            var result = await _jobsRepository.RemoveAsync(id);
+            var offerResult = await _jobsRepository.GetJobOfferAsync(offerId);
+            var offer = offerResult.Entity;
+
+            if (offer == null || offer.Job.EmployerId != userId ||
+                offer.Job.Offers.Any(o => o.IsAccepted && !o.IsFinished)) return null;
+
+            var result = await _jobsRepository.AcceptOfferAsync(offer);
+            return _mapper.Map<JobOfferViewModel>(result.Entity);
+
         }
 
-        public async Task DeclineOfferAsync(int id, string userId)
+        public async Task<JobOfferViewModel> EndOfferAsync(int id, string userId)
         {
-            var result = await _jobsRepository.DeclineOfferAsync(id, userId);
-        }
+            var offer = await _jobsRepository.GetJobOfferAsync(id);
 
-        public async Task AcceptOfferAsync(int id, string userId)
-        {
-            var result = await _jobsRepository.AcceptOfferAsync(id, userId);
+            if (offer.Status == RepositoryStatus.Ok && offer.Entity.Job.EmployerId == userId)
+            {
+                var result = await _jobsRepository.EndOfferAsync(offer.Entity);
+
+                return _mapper.Map<JobOfferViewModel>(result.Entity);
+            }
+
+            return null;
         }
     }
 }

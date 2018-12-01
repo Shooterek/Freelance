@@ -24,7 +24,7 @@ namespace Freelance.Tests.Services
     public class AnnouncementsServiceTests
     {
         private AnnouncementsService _announcementsService;
-        private IMapper _mapper = AutoMapperFactory.AutoMapper(new Mock<IContext>().Object);
+        private IMapper _mapper;
         private int _existingId;
         private int _notExistingId;
         private int _initialAmount;
@@ -34,6 +34,7 @@ namespace Freelance.Tests.Services
         [SetUp]
         public void Initialize()
         {
+            _mapper = AutoMapperFactory.AutoMapper(new Mock<IContext>().Object);
             _existingId = 1;
             _notExistingId = 30000;
 
@@ -92,6 +93,16 @@ namespace Freelance.Tests.Services
 
             _announcementsService = new AnnouncementsService(announcementsRepositoryMock.Object,
                 emailServiceMock.Object, serviceTypesServiceMock.Object, _mapper);
+        }
+
+        #endregion
+
+        #region Teardown
+
+        [TearDown]
+        public void TearDown()
+        {
+            Mapper.Reset();
         }
 
         #endregion

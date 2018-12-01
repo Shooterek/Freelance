@@ -12,12 +12,10 @@ namespace Freelance.Infrastructure.Services.Interfaces
             string localization, int? serviceTypeId, string sort);
         Task<AnnouncementViewModel> GetAnnouncementByIdAsync(int announcementId);
         Task<AnnouncementViewModel> AddAnnouncementAsync(AnnouncementViewModel announcement);
-        Task UpdateAnnouncementAsync(AnnouncementViewModel announcement);
         Task RemoveAnnouncementAsync(int announcementId);
         Task<ICollection<AnnouncementOfferViewModel>> GetPublishedOffersAsync(string userId);
         Task<ICollection<AnnouncementOfferViewModel>> GetReceivedOffersAsync(string userId);
         Task<AnnouncementOfferViewModel> AddOfferAsync(AnnouncementOfferViewModel offer);
-        Task RemoveOfferAsync(int id);
         Task<AnnouncementOfferViewModel> AcceptOfferAsync(int offerId, string userId);
         Task DeclineOfferAsync(int offerId, string userId);
         Task<AnnouncementOfferViewModel> EndOfferAsync(int id, string userId);

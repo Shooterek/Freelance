@@ -119,13 +119,6 @@ namespace Freelance.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult> DeclineOffer(int id)
-        {
-            await _announcementService.DeclineOfferAsync(id, User.Identity.GetUserId());
-            return RedirectToAction("Offers", "Account");
-        }
-        
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EndOffer(int id)
         {

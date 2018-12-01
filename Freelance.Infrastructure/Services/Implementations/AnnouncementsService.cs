@@ -149,27 +149,41 @@ namespace Freelance.Infrastructure.Services.Implementations
             return null;
         }
 
-        public async Task RemoveOfferAsync(int id)
-        {
-            var result = await _announcementRepository.RemoveOfferAsync(id);
-        }
-
         public async Task<AnnouncementOfferViewModel> AcceptOfferAsync(int offerId, string userId)
         {
-            var result = await _announcementRepository.AcceptOfferAsync(offerId, userId);
+            var offerResult = await _announcementRepository.GetAnnouncementOfferAsync(offerId);
+            var offer = offerResult.Entity;
+
+            if (offer == null || offer.Announcement.AdvertiserId != userId ||
+                offer.Announcement.Offers.Any(o => o.IsAccepted && !o.IsFinished)) return null;
+
+            var result = await _announcementRepository.AcceptOfferAsync(offer);
             return _mapper.Map<AnnouncementOfferViewModel>(result.Entity);
+
         }
 
         public async Task DeclineOfferAsync(int offerId, string userId)
         {
-            var result = await _announcementRepository.DeclineOfferAsync(offerId, userId);
+            var offer = await _announcementRepository.GetAnnouncementOfferAsync(offerId);
+
+            if (offer.Status == RepositoryStatus.Ok && offer.Entity.Announcement.AdvertiserId == userId)
+            {
+                await _announcementRepository.DeclineOfferAsync(offer.Entity);
+            }
         }
 
         public async Task<AnnouncementOfferViewModel> EndOfferAsync(int id, string userId)
         {
-            var result = await _announcementRepository.EndOfferAsync(id, userId);
+            var offer = await _announcementRepository.GetAnnouncementOfferAsync(id);
 
-            return _mapper.Map<AnnouncementOfferViewModel>(result.Entity);
+            if (offer.Status == RepositoryStatus.Ok && offer.Entity.Announcement.AdvertiserId == userId)
+            {
+                var result = await _announcementRepository.EndOfferAsync(offer.Entity);
+
+                return _mapper.Map<AnnouncementOfferViewModel>(result.Entity);
+            }
+
+            return null;
         }
 
         public async Task<List<Announcement>> GetOldAnnouncementsAsync()

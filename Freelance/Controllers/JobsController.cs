@@ -106,23 +106,15 @@ namespace Freelance.Controllers
         [HttpPost]
         public async Task<ActionResult> AcceptOffer(int id)
         {
-            await _jobsService.AcceptOfferAsync(id, User.Identity.GetUserId());
-            return RedirectToAction("Offers", "Account");
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> DeclineOffer(int id)
-        {
-            await _jobsService.DeclineOfferAsync(id, User.Identity.GetUserId());
-            return RedirectToAction("Offers", "Account");
+            var result = await _jobsService.AcceptOfferAsync(id, User.Identity.GetUserId());
+            return RedirectToAction("Details", new { id = result.JobId });
         }
 
         [HttpPost]
         public async Task<ActionResult> EndOffer(int id)
         {
-            //await _jobsService.EndOfferAsync(id, User.Identity.GetUserId());
-
-            return RedirectToAction("Index", "Home");
+            var result = await _jobsService.EndOfferAsync(id, User.Identity.GetUserId());
+            return RedirectToAction("Details", new { id = result.JobId });
         }
     }
 }

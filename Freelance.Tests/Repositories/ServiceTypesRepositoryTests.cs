@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using Freelance.Core.Models;
 using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Repositories;
 using Moq;
 using NUnit.Framework;
+using Configuration = Freelance.Core.Migrations.Configuration;
 
 namespace Freelance.Tests.Repositories
 {
@@ -158,6 +161,28 @@ namespace Freelance.Tests.Repositories
 
             _announcementsDbSetMock.Verify(m => m.Remove(It.IsAny<ServiceType>()), Times.Never);
             _dbContextMock.Verify(m => m.SaveChangesAsync(), Times.Never);
+        }
+
+        [Test]
+        public async Task Test1()
+        {
+            var initializer = new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>();
+
+            // set DB initialiser to execute migrations
+            Database.SetInitializer(initializer);
+
+            var context = new ApplicationDbContext();
+            var repository = new ServiceTypesRepository(context);
+            using (var dbContextTransaction = context.Database.BeginTransaction())
+            {
+
+                await repository.AddAsync(new ServiceType() { Name = "Halohalo" });
+
+                var services = await repository.GetAllAsync();
+
+                Assert.AreEqual(1, services.Entity.Count);
+                dbContextTransaction.Rollback();
+            }
         }
     }
 }
