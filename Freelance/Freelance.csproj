@@ -125,6 +125,10 @@
       <HintPath>..\packages\Quartz.3.0.7\lib\net452\Quartz.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SendGrid, Version=9.10.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.9.10.0\lib\net452\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -229,6 +233,7 @@
     <Compile Include="ScheduledJobs\NinjectJobFactory.cs" />
     <Compile Include="ScheduledJobs\Schedulers\JobScheduler.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\AutoMapperFactory.cs" />
     <Compile Include="Utilities\HtmlHelpers.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Freelance.Core.Models;
 
@@ -8,7 +9,9 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
     {
         public AnnouncementViewModel()
         {
-            
+            Offers = new List<AnnouncementOfferViewModel>();
+            Photos = new List<Photo>();
+            PublicationDate = DateTime.Now;
         }
 
         public int AnnouncementId { get; set; }
@@ -38,6 +41,8 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
         [Required]
         [Display(Name = "Kategoria")]
         public int ServiceTypeId { get; set; }
+
+        public DateTime PublicationDate { get; set; }
 
         public ServiceType ServiceType { get; set; }
         public ICollection<AnnouncementOfferViewModel> Offers { get; set; }

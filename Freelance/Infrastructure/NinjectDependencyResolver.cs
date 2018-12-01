@@ -12,6 +12,7 @@ using Freelance.Infrastructure.ViewModels;
 using Freelance.Infrastructure.ViewModels.Announcements;
 using Freelance.Infrastructure.ViewModels.Jobs;
 using Freelance.ScheduledJobs;
+using Freelance.Utilities;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Web.Common;
@@ -65,28 +66,8 @@ namespace Freelance.Infrastructure
             kernel.Bind<IEmailService>().To<Services.Implementations.EmailService>().InRequestScope();
 
             kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
-            kernel.Bind<IMapper>().ToMethod(AutoMapper).InSingletonScope();
+            kernel.Bind<IMapper>().ToMethod(AutoMapperFactory.AutoMapper).InSingletonScope();
 
-        }
-
-        private IMapper AutoMapper(IContext context)
-        {
-            Mapper.Initialize(config =>
-            {
-                config.AllowNullCollections = true;
-                config.ConstructServicesUsing(type => kernel.Get(type));
-
-                config.CreateMap<Announcement, AnnouncementViewModel>();
-                config.CreateMap<AnnouncementOffer, AnnouncementOfferViewModel>();
-                config.CreateMap<ApplicationUser, ApplicationUserViewModel>()
-                    .ForMember(dest => dest.ReceivedOpinionsAverage, opt => opt.Ignore());
-
-                config.CreateMap<Job, JobViewModel>();
-                config.CreateMap<JobOffer, JobOfferViewModel>();
-
-            });
-            
-            return Mapper.Instance;
         }
     }
 }

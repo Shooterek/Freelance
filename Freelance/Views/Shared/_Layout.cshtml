@@ -38,6 +38,12 @@
                         <li><a href=@Url.Action("Add", "Announcements")>Opublikuj ogłoszenie</a></li>
                     </ul>
                 </li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li>
+                        @Html.ActionLink("Panel admina", "ServiceTypes", "Admin")
+                    </li>
+                }
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

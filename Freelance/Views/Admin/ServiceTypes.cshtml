@@ -18,6 +18,9 @@
         <div class="col-sm-12 white-background">
             <div class="spacer"></div>
             <div class="table-responsive">
+                @Html.ActionLink("Wyślij powiadomienia", "SendNotifications")
+                <br/>
+
                 <table class="table table-hover">
                     <tr>
                         <th>
@@ -28,7 +31,8 @@
                         </th>
                     </tr>
 
-                    @foreach (var item in Model) {
+                    @foreach (var item in Model)
+                    {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)

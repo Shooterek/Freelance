@@ -18,21 +18,24 @@ namespace Freelance.Infrastructure.Services.Implementations
     {
         public async Task Notify(AnnouncementOffer offer)
         {
-            var client = GetClient();
+            var message = new MailMessage();
+            message.To.Add("plokarzbartlomiej@gmail.com");
+            message.Subject = "New Offer";
+            message.IsBodyHtml = true;
+            message.Body = "<div>Otrzymałeś nową ofertę</div><div></div>";
 
-            var myMessage = new SendGridMessage();
-            myMessage.AddTo(new EmailAddress("plokarzbartlomiej@gmail.com"));
-            myMessage.SetFrom(new EmailAddress("Bachelors@degree.com", "Freelance"));
-            myMessage.SetSubject("New offer");
-            myMessage.AddContent(MimeType.Html, "<h1>hALO</h1>");
-            try
+            using (var smtp = new SmtpClient())
             {
-                var response = await client.SendEmailAsync(myMessage);
-            }
-            catch (Exception err)
-            {
-                Trace.TraceError("Failed to create Web transport: ." + err.Message);
-                await Task.FromResult(0);
+                var credentials = new NetworkCredential
+                {
+                    UserName = "apikey",
+                    Password = "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"
+                };
+                smtp.Credentials = credentials;
+                smtp.Host = "smtp.sendgrid.net";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(message);
             }
         }
 
@@ -44,7 +47,9 @@ namespace Freelance.Infrastructure.Services.Implementations
             myMessage.AddTo(new EmailAddress("plokarzbartlomiej@gmail.com"));
             myMessage.SetFrom(new EmailAddress("Bachelors@degree.com", "Freelance"));
             myMessage.SetSubject("Twoje ogłoszenie wkrótce wygaśnie");
-            myMessage.AddContent(MimeType.Html, );
+
+            var actionLink = String.Format("freelance.azurewebsites.net/announcements/details/{0}/activate", announcement.AnnouncementId);
+            myMessage.AddContent(MimeType.Html, String.Format("<div style=\"text-align:center\">Twoje ogłoszenie wkrótce wygaśnie.</div>\r\n<div style=\"text-align:center\">Aby temu zapobiec przejdź pod adres:</div>\r\n<div style=\"text-align:center\"><a href=\"{0}\">{0}</a></div>", actionLink));
             try
             {
                 var response = await client.SendEmailAsync(myMessage);
@@ -56,9 +61,26 @@ namespace Freelance.Infrastructure.Services.Implementations
             }
         }
 
-        public Task SendNotification(Job job)
+        public async Task SendNotification(Job job)
         {
-            throw new NotImplementedException();
+            var client = GetClient();
+
+            var myMessage = new SendGridMessage();
+            myMessage.AddTo(new EmailAddress("plokarzbartlomiej@gmail.com"));
+            myMessage.SetFrom(new EmailAddress("Bachelors@degree.com", "Freelance"));
+            myMessage.SetSubject("Twoje ogłoszenie wkrótce wygaśnie");
+
+            var actionLink = String.Format("freelance.azurewebsites.net/jobs/details/{0}/activate", job.JobId);
+            myMessage.AddContent(MimeType.Html, String.Format("<div style=\"text-align:center\">Twoje zlecenie wkrótce wygaśnie.</div>\r\n<div style=\"text-align:center\">Aby temu zapobiec przejdź pod adres:</div>\r\n<div style=\"text-align:center\"><a href=\"{0}\">{0}</a></div>", actionLink));
+            try
+            {
+                var response = await client.SendEmailAsync(myMessage);
+            }
+            catch (Exception err)
+            {
+                Trace.TraceError("Failed to create Web transport: ." + err.Message);
+                await Task.FromResult(0);
+            }
         }
 
         public async Task Notify(JobOffer offer)

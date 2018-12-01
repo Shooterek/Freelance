@@ -21,5 +21,6 @@ namespace Freelance.Infrastructure.Services.Interfaces
         Task<AnnouncementOfferViewModel> AcceptOfferAsync(int offerId, string userId);
         Task DeclineOfferAsync(int offerId, string userId);
         Task<AnnouncementOfferViewModel> EndOfferAsync(int id, string userId);
+        Task<List<Announcement>> GetOldAnnouncementsAsync();
     }
 }

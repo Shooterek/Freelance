@@ -14,10 +14,14 @@ namespace Freelance.Controllers
     public class AdminController : Controller
     {
         private IServiceTypesService _serviceTypesService;
+        private IAnnouncementsService _announcementsService;
+        private IEmailService _emailService;
 
-        public AdminController(IServiceTypesService serviceTypesService)
+        public AdminController(IServiceTypesService serviceTypesService, IAnnouncementsService announcementsService, IEmailService emailService)
         {
             _serviceTypesService = serviceTypesService;
+            _announcementsService = announcementsService;
+            _emailService = emailService;
         }
 
         public async Task<ActionResult> ServiceTypes()
@@ -25,8 +29,7 @@ namespace Freelance.Controllers
             var serviceTypes = await _serviceTypesService.GetServiceTypesAsync();
             return View(serviceTypes);
         }
-
-        //Admin/ServiceTypes/Edit/id
+        
         public async Task<ActionResult> EditServiceType(int id)
         {
             ViewBag.Method = "Edit";
@@ -39,8 +42,7 @@ namespace Freelance.Controllers
 
             return View("AddServiceType", serviceType);
         }
-
-        //Admin/ServiceTypes/Edit/id
+        
         [HttpPost]
         public async Task<ActionResult> EditServiceType(ServiceType serviceType)
         {
@@ -54,16 +56,14 @@ namespace Freelance.Controllers
 
             return View("AddServiceType", serviceType);
         }
-
-        //Admin/ServiceTypes/Add/id
+        
         public ActionResult AddServiceType()
         {
             ViewBag.Method = "Add";
 
             return View("AddServiceType", new ServiceType());
         }
-
-        //Admin/ServiceTypes/Add/id
+        
         [HttpPost]
         public async Task<ActionResult> AddServiceType(ServiceType serviceType)
         {
@@ -76,6 +76,18 @@ namespace Freelance.Controllers
             }
 
             return View("AddServiceType", serviceType);
+        }
+        
+        public async Task<ActionResult> SendNotifications()
+        {
+            var announcements = await _announcementsService.GetOldAnnouncementsAsync();
+
+            foreach (var announcement in announcements)
+            {
+                await _emailService.SendNotification(announcement);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -29,8 +29,6 @@ namespace Freelance.Infrastructure.Repositories
         {
             var announcement = await _context.Announcements
                 .Include(a => a.Offers.Select(o => o.Offerer))
-                .Include(a => a.Advertiser.ReceivedOpinions)
-                .Include(a => a.Advertiser.Photo)
                 .FirstOrDefaultAsync(a => a.AnnouncementId == id);
 
             if (announcement == null)
@@ -240,6 +238,15 @@ namespace Freelance.Infrastructure.Repositories
             {
                 return new RepositoryActionResult<AnnouncementOffer>(null, RepositoryStatus.Error);
             }
+        }
+
+        public async Task<List<Announcement>> GetOldAnnouncementsAsync()
+        {
+            var max = DateTime.Now.Subtract(new TimeSpan(336, 0, 0));
+            var announcements = await _context.Announcements
+                .Where(a => a.PublicationDate < max).ToListAsync();
+
+            return announcements;
         }
     }
 }

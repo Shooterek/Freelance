@@ -13,7 +13,9 @@ using Freelance.Infrastructure.Services.Implementations;
 using Freelance.Infrastructure.Services.Interfaces;
 using Freelance.Infrastructure.ViewModels;
 using Freelance.Infrastructure.ViewModels.Announcements;
+using Freelance.Utilities;
 using Moq;
+using Ninject.Activation;
 using NUnit.Framework;
 
 namespace Freelance.Tests.Services
@@ -22,6 +24,7 @@ namespace Freelance.Tests.Services
     public class AnnouncementsServiceTests
     {
         private AnnouncementsService _announcementsService;
+        private IMapper _mapper = AutoMapperFactory.AutoMapper(new Mock<IContext>().Object);
         private int _existingId;
         private int _notExistingId;
         private int _initialAmount;
@@ -88,7 +91,7 @@ namespace Freelance.Tests.Services
                 });
 
             _announcementsService = new AnnouncementsService(announcementsRepositoryMock.Object,
-                emailServiceMock.Object, serviceTypesServiceMock.Object, (IMapper)DependencyResolver.Current.GetService(typeof(IMapper)));
+                emailServiceMock.Object, serviceTypesServiceMock.Object, _mapper);
         }
 
         #endregion
@@ -147,7 +150,7 @@ namespace Freelance.Tests.Services
             var entity = await _announcementsService.GetAnnouncementByIdAsync(_notExistingId);
             var allEntities = await _announcementsService.GetAnnouncementsAsync(1, _initialAmount + 1, Decimal.Zero, Decimal.MaxValue, null, null, null, null);
 
-            Assert.AreEqual(result, entity);
+            Assert.AreEqual(result.AnnouncementId, entity.AnnouncementId);
             Assert.AreEqual(_initialAmount + 1, allEntities.Announcements.Count);
         }
     }

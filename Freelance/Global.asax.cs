@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Freelance.Core.Models;
 using Freelance.Infrastructure;
+using Freelance.ScheduledJobs;
 using Freelance.ScheduledJobs.Schedulers;
 
 namespace Freelance

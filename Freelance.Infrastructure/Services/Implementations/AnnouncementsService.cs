@@ -81,7 +81,7 @@ namespace Freelance.Infrastructure.Services.Implementations
             var serviceTypes = await _serviceTypesService.GetServiceTypesAsync();
             var servicesList = new List<SelectListItem> {new SelectListItem() {Value = "", Text = "", Selected = serviceTypeId == null} };
 
-            serviceTypes.ForEach(s => servicesList.Add(new SelectListItem() { Value = s.ServiceTypeId.ToString(), Text = s.Name,
+            serviceTypes?.ForEach(s => servicesList.Add(new SelectListItem() { Value = s.ServiceTypeId.ToString(), Text = s.Name,
                 Selected = serviceTypeId != null && s.ServiceTypeId == serviceTypeId.Value}));
 
             var filter = new AnnouncementFilter {Availability = availableDays, Localization = localization,
@@ -170,6 +170,13 @@ namespace Freelance.Infrastructure.Services.Implementations
             var result = await _announcementRepository.EndOfferAsync(id, userId);
 
             return _mapper.Map<AnnouncementOfferViewModel>(result.Entity);
+        }
+
+        public async Task<List<Announcement>> GetOldAnnouncementsAsync()
+        {
+            var result = await _announcementRepository.GetOldAnnouncementsAsync();
+
+            return result;
         }
     }
 }

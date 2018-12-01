@@ -42,7 +42,7 @@
         location.href = url;
     });
 
-    $(document).on('click', '#add-announcement-photos', function () {
+    $(document).on('click', '#add-photos', function () {
         $('#Photos').click();
     });
 

@@ -27,30 +27,16 @@ namespace Freelance.Tests.Repositories
         {
             _existingId = 1;
 
-            var data = new List<Announcement>
+            var announcements = new List<Announcement>
             {
-                new Announcement() {AnnouncementId = _existingId, Title = "Announcement1"},
-                new Announcement() {AnnouncementId = 2, Title = "Announcement2"},
-                new Announcement() {AnnouncementId = 3, Title = "Announcement3"}
-            }.AsQueryable();
+                new Announcement() {AnnouncementId = _existingId, Title = "Announcement1", AdvertiserId = "1"},
+                new Announcement() {AnnouncementId = 2, Title = "Announcement2", AdvertiserId = "2"},
+                new Announcement() {AnnouncementId = 3, Title = "Announcement3", AdvertiserId = "3"}
+            };
 
-            _initialAmount = data.Count();
-            _notExistingId = 300000;
-
-            _announcementsDbSetMock = new Mock<DbSet<Announcement>>();
-            _announcementsDbSetMock.As<IDbAsyncEnumerable<Announcement>>()
-                .Setup(m => m.GetAsyncEnumerator())
-                .Returns(new DbAsyncEnumerator<Announcement>(data.GetEnumerator()));
-
-            _announcementsDbSetMock.As<IQueryable<Announcement>>()
-                .Setup(m => m.Provider)
-                .Returns(new DbAsyncQueryProvider<Announcement>(data.Provider));
-
-            _announcementsDbSetMock.As<IQueryable<Announcement>>().Setup(m => m.Expression).Returns(data.Expression);
-            _announcementsDbSetMock.As<IQueryable<Announcement>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            _announcementsDbSetMock.As<IQueryable<Announcement>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
+            _initialAmount = announcements.Count;
             _dbContextMock = new Mock<ApplicationDbContext>();
+            _announcementsDbSetMock = announcements.GetMockSet();
             _dbContextMock.Setup(c => c.Announcements).Returns(_announcementsDbSetMock.Object);
         }
 

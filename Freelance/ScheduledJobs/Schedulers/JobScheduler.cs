@@ -24,7 +24,7 @@ namespace Freelance.ScheduledJobs.Schedulers
                 (s =>
                     s.WithIntervalInHours(24)
                         .OnEveryDay()
-                        .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(2, 0))
+                        .StartingDailyAt(new TimeOfDay(09, 52))
                 )
                 .Build();
 
