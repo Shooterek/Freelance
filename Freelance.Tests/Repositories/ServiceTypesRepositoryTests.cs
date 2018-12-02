@@ -162,27 +162,5 @@ namespace Freelance.Tests.Repositories
             _announcementsDbSetMock.Verify(m => m.Remove(It.IsAny<ServiceType>()), Times.Never);
             _dbContextMock.Verify(m => m.SaveChangesAsync(), Times.Never);
         }
-
-        [Test]
-        public async Task Test1()
-        {
-            var initializer = new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>();
-
-            // set DB initialiser to execute migrations
-            Database.SetInitializer(initializer);
-
-            var context = new ApplicationDbContext();
-            var repository = new ServiceTypesRepository(context);
-            using (var dbContextTransaction = context.Database.BeginTransaction())
-            {
-
-                await repository.AddAsync(new ServiceType() { Name = "Halohalo" });
-
-                var services = await repository.GetAllAsync();
-
-                Assert.AreEqual(1, services.Entity.Count);
-                dbContextTransaction.Rollback();
-            }
-        }
     }
 }
