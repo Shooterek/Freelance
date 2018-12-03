@@ -19,7 +19,8 @@
             <div class="word-wrap">
                 <span>@offers[x].Offerer.UserName</span>
             </div>
-            <div class="rating">
+            <div class="@(offers[x].Offerer.ReceivedOpinions.Any() ? "rating pointer" : "rating")"
+                 data-user-id="@offers[x].OffererId" data-user="@offers[x].Offerer.Email">
                 @if (offers[x].Offerer.ReceivedOpinionsCount > 0)
                 {
                     int i = 1;
@@ -67,7 +68,7 @@
                                 <input type="submit" value="Przyjmij" class="btn btn-success" />
                             </form>
                         }
-                        else if (offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
+                        else if (offers[x].IsFinished && offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
                         {
                             @Html.RouteLink("Oceń", "AddOpinion",
                                  new { jobOfferId = offers[x].JobOfferId, evaluatedUserId = offers[x].OffererId },
@@ -109,7 +110,8 @@
                     <div class="word-wrap">
                         <span>@offers[x].Offerer.UserName</span>
                     </div>
-                    <div class="rating">
+                    <div class="@(offers[x].Offerer.ReceivedOpinions.Any() ? "rating pointer" : "rating")"
+                         data-user-id="@offers[x].OffererId" data-user="@offers[x].Offerer.Email">
                         @if (offers[x].Offerer.ReceivedOpinionsCount > 0)
                         {
                             int i = 1;
@@ -157,7 +159,7 @@
                                         <input type="submit" value="Przyjmij" class="btn btn-success" />
                                     </form>
                                 }
-                                else if (offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
+                                else if (offers[x].IsFinished && offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
                                 {
                                     @Html.RouteLink("Oceń", "AddOpinion",
                                  new { jobOfferId = offers[x].JobOfferId, evaluatedUserId = offers[x].OffererId },

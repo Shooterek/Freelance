@@ -20,7 +20,8 @@
             <div class="word-wrap">
                 <span>@offers[x].Offerer.UserName</span>
             </div>
-            <div class="rating">
+            <div class="@(offers[x].Offerer.ReceivedOpinions.Any() ? "rating pointer" : "rating")"
+                 data-user-id="@offers[x].OffererId" data-user ="@offers[x].Offerer.Email">
                 @if (offers[x].Offerer.ReceivedOpinionsCount > 0)
                 {
                     int i = 1;
@@ -68,7 +69,7 @@
                                  <input type="submit" value="Przyjmij" class="btn btn-success" />
                              </form>
                          }
-                         else if (offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
+                         else if (offers[x].IsFinished && offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
                          {
                              @Html.RouteLink("Oceń", "AddOpinion",
                                  new {announcementOfferId = offers[x].AnnouncementOfferId, evaluatedUserId = offers[x].OffererId},
@@ -110,7 +111,8 @@
                     <div class="word-wrap">
                         <span>@offers[x].Offerer.UserName</span>
                     </div>
-                    <div class="rating">
+                    <div class="@(offers[x].Offerer.ReceivedOpinions.Any() ? "rating pointer" : "rating")"
+                         data-user-id="@offers[x].OffererId" data-user="@offers[x].Offerer.Email">
                         @if (offers[x].Offerer.ReceivedOpinionsCount > 0)
                         {
                             int i = 1;
@@ -142,36 +144,36 @@
                 <div class="col-xs-3">
                     <div class="row">
                         <div class="col-xs-12">
-                            @if (Model.IsAuthor)
-                            {
-                                if (offers[x].IsAccepted && !offers[x].IsFinished)
-                                {
-                                    <form method="post" action="/announcements/endoffer/@offers[x].AnnouncementOfferId">
-                                        @Html.AntiForgeryToken()
-                                        <input type="submit" value="Zakończ" class="btn btn-warning" />
-                                    </form>
-                                }
-                                else if (!offers[x].IsFinished && !offers.Any(o => o.IsAccepted && !o.IsFinished))
-                                {
-                                    <form method="post" action="/announcements/acceptoffer/@offers[x].AnnouncementOfferId">
-                                        @Html.AntiForgeryToken()
-                                        <input type="submit" value="Przyjmij" class="btn btn-success" />
-                                    </form>
-                                }
-                                else if (offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
-                                {
-                                    @Html.RouteLink("Oceń", "AddOpinion",
-                                 new { announcementOfferId = offers[x].AnnouncementOfferId, evaluatedUserId = offers[x].OffererId },
-                                 new { @class = "btn btn-primary" })
-                                }
-                            }
-                            else if (offers[x].OffererId.Equals(Model.CurrentUserId)
-                                     && offers[x].Opinions.All(o => !o.AnnouncementOffer.Announcement.AdvertiserId.Equals(o.EvaluatedUserId)) && offers[x].IsFinished)
-                            {
-                                @Html.RouteLink("Oceń", "AddOpinion",
-                            new { announcementOfferId = offers[x].AnnouncementOfferId, evaluatedUserId = offers[x].Announcement.AdvertiserId },
-                            new { @class = "btn btn-primary" })
-                            }
+                    @if (Model.IsAuthor)
+                    {
+                         if (offers[x].IsAccepted && !offers[x].IsFinished)
+                         {
+                             <form method="post" action="/announcements/endoffer/@offers[x].AnnouncementOfferId">
+                                 @Html.AntiForgeryToken()
+                                 <input type="submit" value="Zakończ" class="btn btn-warning"/>
+                             </form>
+                         }
+                         else if (!offers[x].IsFinished && !offers.Any(o => o.IsAccepted && !o.IsFinished))
+                         {
+                             <form method="post" action="/announcements/acceptoffer/@offers[x].AnnouncementOfferId">
+                                 @Html.AntiForgeryToken()
+                                 <input type="submit" value="Przyjmij" class="btn btn-success" />
+                             </form>
+                         }
+                         else if (offers[x].IsFinished && offers[x].Opinions.All(o => o.EvaluatedUserId != offers[x].OffererId))
+                         {
+                             @Html.RouteLink("Oceń", "AddOpinion",
+                                 new {announcementOfferId = offers[x].AnnouncementOfferId, evaluatedUserId = offers[x].OffererId},
+                                 new { @class="btn btn-primary"})
+                         }
+                    }
+                    else if (offers[x].OffererId.Equals(Model.CurrentUserId) 
+                             && offers[x].Opinions.All(o => !o.AnnouncementOffer.Announcement.AdvertiserId.Equals(o.EvaluatedUserId)) && offers[x].IsFinished)
+                    {
+                        @Html.RouteLink("Oceń", "AddOpinion",
+                            new {announcementOfferId = offers[x].AnnouncementOfferId, evaluatedUserId = offers[x].Announcement.AdvertiserId},
+                            new { @class="btn btn-primary"})
+                    }
                         </div>
                     </div>
                 </div>

@@ -15,10 +15,12 @@ namespace Freelance.Infrastructure.ViewModels.Jobs
             Offers = new List<JobOfferViewModel>();
             Photos = new List<Photo>();
             PublicationDate = DateTime.Now;
+            LastActivation = DateTime.Now;
         }
 
         public int JobId { get; set; }
-
+        
+        [Required]
         public string EmployerId { get; set; }
         public ApplicationUserViewModel Employer { get; set; }
 
@@ -55,6 +57,8 @@ namespace Freelance.Infrastructure.ViewModels.Jobs
         [Display(Name = "Lokalizacja")]
         [StringLength(31, ErrorMessage = "Maksymalna długość to {1}")]
         public string Localization { get; set; }
+
+        public DateTime LastActivation { get; set; }
 
         public virtual ICollection<JobOfferViewModel> Offers { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }

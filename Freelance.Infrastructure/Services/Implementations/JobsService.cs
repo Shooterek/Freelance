@@ -196,5 +196,12 @@ namespace Freelance.Infrastructure.Services.Implementations
 
             return null;
         }
+
+        public async Task<List<Job>> GetOldJobsAsync()
+        {
+            var result = await _jobsRepository.GetOldJobsAsync();
+
+            return result;
+        }
     }
 }

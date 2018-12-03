@@ -12,6 +12,7 @@ namespace Freelance.Core.Models
         public AnnouncementOffer()
         {
             Opinions = new List<Opinion>();
+            SubmissionDate = DateTime.Now;
         }
 
         public int AnnouncementOfferId { get; set; }

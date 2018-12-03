@@ -104,7 +104,8 @@
                  src="@(Model.Advertiser.Photo != null ? String.Format("data:{0};base64,{1}", Model.Advertiser.Photo.ContentType, Convert.ToBase64String(Model.Advertiser.Photo.Content)) 
                             : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")"/>
             <p>@Model.Advertiser.UserName</p>
-            <div class="@(isAuthenticatedAndNotAdvertiser && Model.Advertiser.ReceivedOpinions.Any() ? "rating pointer" : "rating")">
+            <div class="@(Model.Advertiser.ReceivedOpinions.Any() ? "rating pointer" : "rating")"
+                 data-user="@Model.Advertiser.Email" data-user-id="@Model.AdvertiserId">
                 @if (Model.Advertiser.ReceivedOpinionsCount > 0)
                 {
                     int i = 1;
@@ -131,19 +132,17 @@
     </div>
 </div>
 
-@if (Model.Advertiser.ReceivedOpinions.Any())
-{
-    <div class="modal fade" id="opinionsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Opinie o @Model.Advertiser.UserName</h4>
-                </div>
-                <div class="modal-body">
-                    @Html.Partial("OpinionsList", Model.Advertiser.ReceivedOpinions)
-                </div>
+<div class="modal fade" id="opinionsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+
+                </h4>
+            </div>
+            <div class="modal-body" id="modalBody">
             </div>
         </div>
     </div>
-}
+</div>

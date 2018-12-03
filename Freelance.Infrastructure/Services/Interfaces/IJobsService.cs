@@ -22,5 +22,6 @@ namespace Freelance.Infrastructure.Services.Interfaces
         Task<JobOfferViewModel> AddOfferAsync(JobOfferViewModel offer);
         Task<JobOfferViewModel> AcceptOfferAsync(int id, string userId);
         Task<JobOfferViewModel> EndOfferAsync(int id, string userId);
+        Task<List<Job>> GetOldJobsAsync();
     }
 }

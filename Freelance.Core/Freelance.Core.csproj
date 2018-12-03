@@ -129,6 +129,14 @@
     <Compile Include="Migrations\201811232157317_AddNavigationPropertiesForAnOpinion.Designer.cs">
       <DependentUpon>201811232157317_AddNavigationPropertiesForAnOpinion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812031929060_ChangeAdvertiserAndEmployerIdsNullability.cs" />
+    <Compile Include="Migrations\201812031929060_ChangeAdvertiserAndEmployerIdsNullability.Designer.cs">
+      <DependentUpon>201812031929060_ChangeAdvertiserAndEmployerIdsNullability.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812031951033_AddLastActivationField.cs" />
+    <Compile Include="Migrations\201812031951033_AddLastActivationField.Designer.cs">
+      <DependentUpon>201812031951033_AddLastActivationField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
@@ -206,6 +214,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811232157317_AddNavigationPropertiesForAnOpinion.resx">
       <DependentUpon>201811232157317_AddNavigationPropertiesForAnOpinion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812031929060_ChangeAdvertiserAndEmployerIdsNullability.resx">
+      <DependentUpon>201812031929060_ChangeAdvertiserAndEmployerIdsNullability.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812031951033_AddLastActivationField.resx">
+      <DependentUpon>201812031951033_AddLastActivationField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

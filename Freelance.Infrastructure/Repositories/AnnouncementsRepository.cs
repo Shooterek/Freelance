@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Freelance.Core.Models;
 using Freelance.Core.Repositories;
-using WebGrease.Css.Extensions;
 
 namespace Freelance.Infrastructure.Repositories
 {
@@ -36,13 +35,6 @@ namespace Freelance.Infrastructure.Repositories
                 return new RepositoryActionResult<Announcement>(null, RepositoryStatus.NotFound);
             }
             return new RepositoryActionResult<Announcement>(announcement, RepositoryStatus.Ok);
-        }
-
-        public async Task<RepositoryActionResult<ICollection<Announcement>>> GetByServiceTypeAsync(ServiceType serviceType)
-        {
-            var announcements = await _context.Announcements.Where(a => a.ServiceTypeId == serviceType.ServiceTypeId).ToListAsync();
-
-            return new RepositoryActionResult<ICollection<Announcement>>(announcements, RepositoryStatus.Ok);
         }
 
         public async Task<RepositoryActionResult<Announcement>> UpdateAsync(Announcement entity)
@@ -123,20 +115,6 @@ namespace Freelance.Infrastructure.Repositories
             }
         }
 
-        public async Task<RepositoryActionResult<ICollection<AnnouncementOffer>>> GetPublishedOffersAsync(string userId)
-        {
-            var offers = await _context.AnnouncementOffers.Where(o => o.OffererId == userId).ToListAsync();
-
-            return new RepositoryActionResult<ICollection<AnnouncementOffer>>(offers, RepositoryStatus.Ok);
-        }
-
-        public async Task<RepositoryActionResult<ICollection<AnnouncementOffer>>> GetReceivedOffersAsync(string userId)
-        {
-            var offers = await _context.AnnouncementOffers.Where(o => o.Announcement.AdvertiserId == userId).ToListAsync();
-
-            return new RepositoryActionResult<ICollection<AnnouncementOffer>>(offers, RepositoryStatus.Ok);
-        }
-
         public async Task<RepositoryActionResult<AnnouncementOffer>> AcceptOfferAsync(AnnouncementOffer offer)
         {
             try
@@ -184,9 +162,16 @@ namespace Freelance.Infrastructure.Repositories
 
         public async Task<List<Announcement>> GetOldAnnouncementsAsync()
         {
-            var max = DateTime.Now.Subtract(new TimeSpan(336, 0, 0));
+            var maxCorrect = DateTime.Now.Subtract(new TimeSpan(336, 0, 0));
+            var maxCorrectPlusDay = DateTime.Now.Subtract(new TimeSpan(360, 0, 0));
+            var maxTime = DateTime.Now.Subtract(new TimeSpan(408, 0, 0));
+
+            var announcementsToDelete = await _context.Announcements.Where(a => a.LastActivation < maxTime).ToListAsync();
+            _context.Announcements.RemoveRange(announcementsToDelete);
+            await _context.SaveChangesAsync();
+
             var announcements = await _context.Announcements
-                .Where(a => a.PublicationDate < max).ToListAsync();
+                .Where(a => a.LastActivation < maxCorrect && a.LastActivation > maxCorrectPlusDay).ToListAsync();
 
             return announcements;
         }

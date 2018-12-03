@@ -11,10 +11,12 @@ namespace Freelance.Core.Models
             Offers = new List<JobOffer>();
             Photos = new List<Photo>();
             PublicationDate = DateTime.Now;
+            LastActivation = DateTime.Now;
         }
 
         public int JobId { get; set; }
-
+        
+        [Required]
         public string EmployerId { get; set; }
         public ApplicationUser Employer { get; set; }
 
@@ -44,6 +46,8 @@ namespace Freelance.Core.Models
 
         [StringLength(31)]
         public string Localization { get; set; }
+
+        public DateTime LastActivation { get; set; }
 
         public virtual ICollection<JobOffer> Offers { get; set; }
         public virtual ICollection<Photo> Photos{ get; set; }

@@ -14,10 +14,12 @@ namespace Freelance.Core.Models
             Offers = new List<AnnouncementOffer>();
             Photos = new List<Photo>();
             PublicationDate = DateTime.Now;
+            LastActivation = DateTime.Now;
         }
 
         public int AnnouncementId { get; set; }
 
+        [Required]
         public string AdvertiserId { get; set; }
         public virtual ApplicationUser Advertiser { get; set; }
 
@@ -40,6 +42,8 @@ namespace Freelance.Core.Models
 
         [Required]
         public int ServiceTypeId { get; set; }
+
+        public DateTime LastActivation { get; set; }
 
         public virtual ServiceType ServiceType { get; set; }
         public virtual ICollection<AnnouncementOffer> Offers { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Freelance.Core.Models;
 using Freelance.Core.Repositories;
 using Freelance.Infrastructure.Services.Interfaces;
@@ -31,6 +32,13 @@ namespace Freelance.Infrastructure.Services.Implementations
             }
 
             return null;
+        }
+
+        public async Task<List<Opinion>> GetOpinionsByEvaluatedUserId(string userId)
+        {
+            var result = await _opinionsRepository.GetOpinionsByEvaluatedUserId(userId);
+
+            return new List<Opinion>(result.Entity);
         }
     }
 }

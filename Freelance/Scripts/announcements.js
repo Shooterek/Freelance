@@ -99,8 +99,19 @@
         $('#second-part').toggleClass('hidden');
     });
 
-    $(document).on('click', 'div.rating.pointer', function () {
-        $('#opinionsModal').modal('show');
+    $(document).on('click', 'div.rating.pointer', function (event) {
+        var userId = $(this).attr('data-user-id');
+        var user = $(this).attr('data-user');
+        $.ajax({
+            type: "GET",
+            url: "/opinions/getopinions?userId=" + userId,
+            success: function (result2) {
+                var modal = $('#opinionsModal');
+                modal.find('.modal-title').text('Opinie o użytkowniku ' + user);
+                $('#modalBody').html(result2);
+                $('#opinionsModal').modal('show');
+            }
+        });
     });
 
 });

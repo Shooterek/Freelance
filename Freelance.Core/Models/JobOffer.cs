@@ -9,6 +9,7 @@ namespace Freelance.Core.Models
         public JobOffer()
         {
             Opinions = new List<Opinion>();
+            SubmissionDate = DateTime.Now;
         }
 
         public int JobOfferId { get; set; }

@@ -70,5 +70,12 @@ namespace Freelance.Infrastructure.Repositories
                 return new RepositoryActionResult<Opinion>(opinion, RepositoryStatus.Error);
             }
         }
+
+        public async Task<RepositoryActionResult<ICollection<Opinion>>> GetOpinionsByEvaluatedUserId(string userId)
+        {
+            var opinions = await _context.Opinions.Where(o => o.EvaluatedUserId == userId).ToListAsync();
+
+            return new RepositoryActionResult<ICollection<Opinion>>(opinions, RepositoryStatus.Ok);
+        }
     }
 }

@@ -16,17 +16,11 @@ namespace Freelance.Infrastructure.ViewModels
 
         public int ReceivedOpinionsCount { get; set; }
         public double ReceivedOpinionsAverage => ReceivedOpinions.Average(o => o.Rating);
-
-        public ICollection<AnnouncementViewModel> PublishedAnnouncements { get; set; }
-        public ICollection<Job> PublishedJobs { get; set; }
-        public ICollection<JobOffer> ProposedOffers { get; set; }
+        
         public ICollection<Opinion> ReceivedOpinions { get; set; }
 
         public ApplicationUserViewModel()
         {
-            PublishedAnnouncements = new List<AnnouncementViewModel>();
-            PublishedJobs = new List<Job>();
-            ProposedOffers = new List<JobOffer>();
             ReceivedOpinions = new List<Opinion>();
         }
     }

@@ -41,13 +41,6 @@ namespace Freelance.Infrastructure.Repositories
             return new RepositoryActionResult<Job>(job, RepositoryStatus.Ok);
         }
 
-        public async Task<RepositoryActionResult<ICollection<Job>>> GetByServiceTypeAsync(ServiceType serviceType)
-        {
-            var jobs = await _context.Jobs.Where(a => a.ServiceTypeId == serviceType.ServiceTypeId).ToListAsync();
-
-            return new RepositoryActionResult<ICollection<Job>>(jobs, RepositoryStatus.Ok);
-        }
-
         public async Task<RepositoryActionResult<Job>> UpdateAsync(Job entity)
         {
             try
@@ -126,20 +119,6 @@ namespace Freelance.Infrastructure.Repositories
             }
         }
 
-        public async Task<RepositoryActionResult<ICollection<JobOffer>>> GetReceivedOffersAsync(string userId)
-        {
-            var offers = await _context.JobOffers.Where(o => o.Job.EmployerId == userId).ToListAsync();
-        
-            return new RepositoryActionResult<ICollection<JobOffer>>(offers, RepositoryStatus.Ok);
-        }
-
-        public async Task<RepositoryActionResult<ICollection<JobOffer>>> GetPublishedOffersAsync(string userId)
-        {
-            var offers = await _context.JobOffers.Where(o => o.OffererId == userId).ToListAsync();
-
-            return new RepositoryActionResult<ICollection<JobOffer>>(offers, RepositoryStatus.Ok);
-        }
-
         public async Task<RepositoryActionResult<JobOffer>> AcceptOfferAsync(JobOffer offer)
         {
             try
@@ -165,6 +144,22 @@ namespace Freelance.Infrastructure.Repositories
                 return new RepositoryActionResult<JobOffer>(null, RepositoryStatus.NotFound);
             }
             return new RepositoryActionResult<JobOffer>(offer, RepositoryStatus.Ok);
+        }
+
+        public async Task<List<Job>> GetOldJobsAsync()
+        {
+            var maxCorrect = DateTime.Now.Subtract(new TimeSpan(336, 0, 0));
+            var maxCorrectPlusDay = DateTime.Now.Subtract(new TimeSpan(360, 0, 0));
+            var maxTime = DateTime.Now.Subtract(new TimeSpan(408, 0, 0));
+
+            var jobsToDelete = await _context.Jobs.Where(a => a.LastActivation < maxTime).ToListAsync();
+            _context.Jobs.RemoveRange(jobsToDelete);
+            await _context.SaveChangesAsync();
+
+            var jobs = await _context.Jobs
+                .Where(a => a.LastActivation < maxCorrect && a.LastActivation > maxCorrectPlusDay).ToListAsync();
+
+            return jobs;
         }
 
         public async Task<RepositoryActionResult<JobOffer>> EndOfferAsync(JobOffer offer)

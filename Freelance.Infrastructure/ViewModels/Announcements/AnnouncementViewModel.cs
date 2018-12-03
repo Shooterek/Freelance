@@ -12,10 +12,12 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
             Offers = new List<AnnouncementOfferViewModel>();
             Photos = new List<Photo>();
             PublicationDate = DateTime.Now;
+            LastActivation = DateTime.Now;
         }
 
         public int AnnouncementId { get; set; }
 
+        [Required]
         public string AdvertiserId { get; set; }
         public  ApplicationUserViewModel Advertiser { get; set; }
 
@@ -43,6 +45,8 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
         public int ServiceTypeId { get; set; }
 
         public DateTime PublicationDate { get; set; }
+
+        public DateTime LastActivation { get; set; }
 
         public ServiceType ServiceType { get; set; }
         public ICollection<AnnouncementOfferViewModel> Offers { get; set; }

@@ -335,7 +335,7 @@
     <Content Include="Views\Account\Offers.cshtml" />
     <Content Include="Views\Admin\ServiceTypes.cshtml" />
     <Content Include="Views\Admin\AddServiceType.cshtml" />
-    <Content Include="Views\Shared\OpinionsList.cshtml" />
+    <Content Include="Views\Opinions\OpinionsList.cshtml" />
     <Content Include="Views\Jobs\Index.cshtml" />
     <Content Include="Views\Shared\JobsFilter.cshtml" />
     <Content Include="Views\Jobs\Details.cshtml" />
@@ -353,7 +353,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Freelance.Core\Freelance.Core.csproj">
-      <Project>{11C8FBBB-1C4B-4B66-A156-F9AB5EB0205E}</Project>
+      <Project>{11c8fbbb-1c4b-4b66-a156-f9ab5eb0205e}</Project>
       <Name>Freelance.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Freelance.Infrastructure\Freelance.Infrastructure.csproj">
