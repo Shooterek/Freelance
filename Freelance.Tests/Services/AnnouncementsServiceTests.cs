@@ -143,14 +143,14 @@ namespace Freelance.Tests.Services
             Assert.AreEqual(_initialAmount, result.PagingInfo.TotalItems);
         }
 
-        [Test]
-        public async Task GetByIdAsync_ShouldReturnItemWithSpecifiedId_IfContainsItemWithSpecifiedId()
-        {
-            var result = await _announcementsService.GetAnnouncementByIdAsync(_existingId);
+[Test]
+public async Task GetByIdAsync_ShouldReturnItemWithSpecifiedId_IfContainsSuchItem()
+{
+    var result = await _announcementsService.GetAnnouncementByIdAsync(_existingId);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(_existingId, result.AnnouncementId);
-        }
+    Assert.IsNotNull(result);
+    Assert.AreEqual(_existingId, result.AnnouncementId);
+}
 
         [Test]
         public async Task AddAsync_ShouldAddSpecifiedElement()
