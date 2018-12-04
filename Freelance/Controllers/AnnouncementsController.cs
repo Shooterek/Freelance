@@ -118,6 +118,12 @@ namespace Freelance.Controllers
             return RedirectToAction("Details", new {id = result.AnnouncementId});
         }
         
+        public async Task<ActionResult> Activate(int id)
+        {
+            var result = await _announcementService.ActivateAnnouncementAsync(id, User.Identity.GetUserId());
+            return RedirectToAction("Details", new { id = result.AnnouncementId });
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EndOffer(int id)

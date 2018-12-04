@@ -9,5 +9,6 @@ namespace Freelance.Infrastructure.Services.Interfaces
     {
         Task<bool> CanAddOpinion(string reviewerId, string evaluatedUserId, int offerId, string offerType);
         Task<Opinion> AddOpinionAsync(Opinion opinion);
+        Task<List<Opinion>> GetOpinionsByEvaluatedUserId(string userId);
     }
 }

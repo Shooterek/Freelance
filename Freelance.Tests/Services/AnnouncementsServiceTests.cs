@@ -60,15 +60,6 @@ namespace Freelance.Tests.Services
 
                     return new RepositoryActionResult<Announcement>(entity, status);
                 });
-
-            announcementsRepositoryMock.Setup(r => r.GetByServiceTypeAsync(It.IsAny<ServiceType>()))
-                .ReturnsAsync((ServiceType x) =>
-                {
-                    var entities = data.Where(a => a.ServiceTypeId == x.ServiceTypeId).ToList();
-
-                    return new RepositoryActionResult<ICollection<Announcement>>(entities, RepositoryStatus.Ok);
-                });
-
             announcementsRepositoryMock.Setup(r => r.AddAsync(It.IsNotNull<Announcement>()))
                 .Callback((Announcement entity) => data.Add(entity))
                 .ReturnsAsync((Announcement entity) => new RepositoryActionResult<Announcement>(entity, RepositoryStatus.Created));

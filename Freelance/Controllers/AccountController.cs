@@ -446,27 +446,6 @@ namespace Freelance.Controllers
             base.Dispose(disposing);
         }
 
-        [Authorize]
-        public async Task<ActionResult> Offers()
-        {
-            var userId = User.Identity.GetUserId();
-            var publishedJobOffers = await _jobsService.GetPublishedOffersAsync(userId);
-            var publishedAnnouncementOffers = await _announcementsService.GetPublishedOffersAsync(userId);
-            var receivedJobOffers = await _jobsService.GetReceivedOffersAsync(userId);
-            var receivedAnnouncementOffers = await _announcementsService.GetReceivedOffersAsync(userId);
-
-            return View(new UserOffersListViewModel(receivedAnnouncementOffers.ToList(),
-                publishedAnnouncementOffers.ToList(), receivedJobOffers.ToList(), publishedJobOffers.ToList()));
-        }
-
-        [Authorize]
-        public async Task<ActionResult> Opinions()
-        {
-            //TODO
-
-            return View();
-        }
-
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

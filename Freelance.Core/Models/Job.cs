@@ -49,6 +49,8 @@ namespace Freelance.Core.Models
 
         public DateTime LastActivation { get; set; }
 
+        public bool WasNotified { get; set; }
+
         public virtual ICollection<JobOffer> Offers { get; set; }
         public virtual ICollection<Photo> Photos{ get; set; }
     }

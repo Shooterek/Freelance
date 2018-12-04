@@ -17,11 +17,10 @@ namespace Freelance.Infrastructure.Services.Interfaces
         Task<JobViewModel> AddJobAsync(JobViewModel job);
         Task UpdateJobAsync(JobViewModel job);
         Task RemoveJobAsync(int jobId);
-        Task<ICollection<JobOfferViewModel>> GetReceivedOffersAsync(string userId);
-        Task<ICollection<JobOfferViewModel>> GetPublishedOffersAsync(string userId);
         Task<JobOfferViewModel> AddOfferAsync(JobOfferViewModel offer);
         Task<JobOfferViewModel> AcceptOfferAsync(int id, string userId);
         Task<JobOfferViewModel> EndOfferAsync(int id, string userId);
-        Task<List<Job>> GetOldJobsAsync();
+        Task<List<JobViewModel>> GetOldJobsAsync();
+        Task<JobViewModel> ActivateJobAsync(int id, string userId);
     }
 }

@@ -112,28 +112,16 @@ namespace Freelance.Infrastructure.Services.Implementations
             return null;
         }
 
-        public async Task UpdateAnnouncementAsync(AnnouncementViewModel announcement)
+        public async Task<AnnouncementViewModel> UpdateAnnouncementAsync(AnnouncementViewModel announcement)
         {
             var result = await _announcementRepository.UpdateAsync(_mapper.Map<Announcement>(announcement));
+
+            return _mapper.Map<AnnouncementViewModel>(result.Entity);
         }
 
         public async Task RemoveAnnouncementAsync(int announcementId)
         {
             var result = await _announcementRepository.RemoveAsync(announcementId);
-        }
-
-        public async Task<ICollection<AnnouncementOfferViewModel>> GetPublishedOffersAsync(string userId)
-        {
-            var result = await _announcementRepository.GetPublishedOffersAsync(userId);
-
-            return _mapper.Map<ICollection<AnnouncementOfferViewModel>>(result.Entity);
-        }
-
-        public async Task<ICollection<AnnouncementOfferViewModel>> GetReceivedOffersAsync(string userId)
-        {
-            var result = await _announcementRepository.GetReceivedOffersAsync(userId);
-
-            return _mapper.Map<ICollection<AnnouncementOfferViewModel>>(result.Entity);
         }
 
         public async Task<AnnouncementOfferViewModel> AddOfferAsync(AnnouncementOfferViewModel offer)
@@ -186,11 +174,28 @@ namespace Freelance.Infrastructure.Services.Implementations
             return null;
         }
 
-        public async Task<List<Announcement>> GetOldAnnouncementsAsync()
+        public async Task<List<AnnouncementViewModel>> GetOldAnnouncementsAsync()
         {
             var result = await _announcementRepository.GetOldAnnouncementsAsync();
 
-            return result;
+            return _mapper.Map<List<AnnouncementViewModel>>(result);
+        }
+
+        public async Task<AnnouncementViewModel> ActivateAnnouncementAsync(int id, string userId)
+        {
+            var result = await _announcementRepository.GetByIdAsync(id);
+            var announcement = result.Entity;
+
+            if (announcement.AdvertiserId != userId || announcement.WasNotified == false)
+            {
+                return null;
+            }
+
+            announcement.LastActivation = DateTime.Now;
+            announcement.WasNotified = false;
+            var result2 = await _announcementRepository.UpdateAsync(announcement);
+
+            return _mapper.Map<AnnouncementViewModel>(result2.Entity);
         }
     }
 }

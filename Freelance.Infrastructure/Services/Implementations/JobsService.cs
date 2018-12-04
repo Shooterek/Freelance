@@ -144,20 +144,6 @@ namespace Freelance.Infrastructure.Services.Implementations
             var result = await _jobsRepository.RemoveAsync(jobId);
         }
 
-        public async Task<ICollection<JobOfferViewModel>> GetReceivedOffersAsync(string userId)
-        {
-            var result = await _jobsRepository.GetReceivedOffersAsync(userId);
-
-            return _mapper.Map<List<JobOfferViewModel>>(result.Entity);
-        }
-
-        public async Task<ICollection<JobOfferViewModel>> GetPublishedOffersAsync(string userId)
-        {
-            var result = await _jobsRepository.GetPublishedOffersAsync(userId);
-
-            return _mapper.Map<ICollection<JobOfferViewModel>>(result.Entity);
-        }
-
         public async Task<JobOfferViewModel> AddOfferAsync(JobOfferViewModel offer)
         {
             var result = await _jobsRepository.AddOfferAsync(_mapper.Map<JobOffer>(offer));
@@ -197,11 +183,31 @@ namespace Freelance.Infrastructure.Services.Implementations
             return null;
         }
 
-        public async Task<List<Job>> GetOldJobsAsync()
+
+
+        public async Task<JobViewModel> ActivateJobAsync(int id, string userId)
+        {
+            var result = await _jobsRepository.GetByIdAsync(id);
+            var job = result.Entity;
+
+            if (job.EmployerId != userId || job.WasNotified == false)
+            {
+                return null;
+            }
+
+            job.LastActivation = DateTime.Now;
+            job.WasNotified = false;
+
+            var result2 = await _jobsRepository.UpdateAsync(job);
+
+            return _mapper.Map<JobViewModel>(result2.Entity);
+        }
+
+        public async Task<List<JobViewModel>> GetOldJobsAsync()
         {
             var result = await _jobsRepository.GetOldJobsAsync();
 
-            return result;
+            return _mapper.Map<List<JobViewModel>>(result);
         }
     }
 }

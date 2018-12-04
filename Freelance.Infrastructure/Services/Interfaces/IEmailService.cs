@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Freelance.Core.Models;
+using Freelance.Infrastructure.ViewModels.Announcements;
+using Freelance.Infrastructure.ViewModels.Jobs;
 
 namespace Freelance.Infrastructure.Services.Interfaces
 {
@@ -11,7 +13,7 @@ namespace Freelance.Infrastructure.Services.Interfaces
     {
         Task Notify(JobOffer offer);
         Task Notify(AnnouncementOffer offer);
-        Task SendNotification(Announcement announcement);
-        Task SendNotification(Job job);
+        Task SendNotification(AnnouncementViewModel announcement);
+        Task SendNotification(JobViewModel job);
     }
 }

@@ -48,6 +48,8 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
 
         public DateTime LastActivation { get; set; }
 
+        public bool WasNotified { get; set; }
+
         public ServiceType ServiceType { get; set; }
         public ICollection<AnnouncementOfferViewModel> Offers { get; set; }
         public ICollection<Photo> Photos { get; set; }

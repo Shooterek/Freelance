@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Freelance.Core.Models;
 using Freelance.Infrastructure.Services.Interfaces;
+using Freelance.Infrastructure.ViewModels.Announcements;
+using Freelance.Infrastructure.ViewModels.Jobs;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
@@ -39,7 +41,7 @@ namespace Freelance.Infrastructure.Services.Implementations
             }
         }
 
-        public async Task SendNotification(Announcement announcement)
+        public async Task SendNotification(AnnouncementViewModel announcement)
         {
             var client = GetClient();
 
@@ -48,7 +50,7 @@ namespace Freelance.Infrastructure.Services.Implementations
             myMessage.SetFrom(new EmailAddress("Bachelors@degree.com", "Freelance"));
             myMessage.SetSubject("Twoje ogłoszenie wkrótce wygaśnie");
 
-            var actionLink = String.Format("freelance.azurewebsites.net/announcements/details/{0}/activate", announcement.AnnouncementId);
+            var actionLink = String.Format("freelance.azurewebsites.net/announcements/{0}/activate", announcement.AnnouncementId);
             myMessage.AddContent(MimeType.Html, String.Format("<div style=\"text-align:center\">Twoje ogłoszenie wkrótce wygaśnie.</div>\r\n<div style=\"text-align:center\">Aby temu zapobiec przejdź pod adres:</div>\r\n<div style=\"text-align:center\"><a href=\"{0}\">{0}</a></div>", actionLink));
             try
             {
@@ -61,16 +63,16 @@ namespace Freelance.Infrastructure.Services.Implementations
             }
         }
 
-        public async Task SendNotification(Job job)
+        public async Task SendNotification(JobViewModel job)
         {
             var client = GetClient();
 
             var myMessage = new SendGridMessage();
             myMessage.AddTo(new EmailAddress("plokarzbartlomiej@gmail.com"));
             myMessage.SetFrom(new EmailAddress("Bachelors@degree.com", "Freelance"));
-            myMessage.SetSubject("Twoje ogłoszenie wkrótce wygaśnie");
+            myMessage.SetSubject("Twoje zlecenie wkrótce wygaśnie");
 
-            var actionLink = String.Format("freelance.azurewebsites.net/jobs/details/{0}/activate", job.JobId);
+            var actionLink = String.Format("freelance.azurewebsites.net/jobs/{0}/activate", job.JobId);
             myMessage.AddContent(MimeType.Html, String.Format("<div style=\"text-align:center\">Twoje zlecenie wkrótce wygaśnie.</div>\r\n<div style=\"text-align:center\">Aby temu zapobiec przejdź pod adres:</div>\r\n<div style=\"text-align:center\"><a href=\"{0}\">{0}</a></div>", actionLink));
             try
             {

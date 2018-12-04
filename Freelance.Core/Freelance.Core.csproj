@@ -137,6 +137,10 @@
     <Compile Include="Migrations\201812031951033_AddLastActivationField.Designer.cs">
       <DependentUpon>201812031951033_AddLastActivationField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812041103011_AddWasNotifiedField.cs" />
+    <Compile Include="Migrations\201812041103011_AddWasNotifiedField.Designer.cs">
+      <DependentUpon>201812041103011_AddWasNotifiedField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
@@ -220,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812031951033_AddLastActivationField.resx">
       <DependentUpon>201812031951033_AddLastActivationField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812041103011_AddWasNotifiedField.resx">
+      <DependentUpon>201812041103011_AddWasNotifiedField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

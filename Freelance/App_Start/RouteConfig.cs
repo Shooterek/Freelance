@@ -13,6 +13,11 @@ namespace Freelance
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "Activate",
+                url: "{controller}/{id}/activate",
+                defaults: new { action = "Activate"}
+            );
 
             routes.MapRoute(
                 name: "AddOpinion",

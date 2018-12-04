@@ -60,6 +60,8 @@ namespace Freelance.Infrastructure.ViewModels.Jobs
 
         public DateTime LastActivation { get; set; }
 
+        public bool WasNotified { get; set; }
+
         public virtual ICollection<JobOfferViewModel> Offers { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
     }

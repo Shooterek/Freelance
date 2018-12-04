@@ -149,7 +149,6 @@ namespace Freelance.Infrastructure.Repositories
         public async Task<List<Job>> GetOldJobsAsync()
         {
             var maxCorrect = DateTime.Now.Subtract(new TimeSpan(336, 0, 0));
-            var maxCorrectPlusDay = DateTime.Now.Subtract(new TimeSpan(360, 0, 0));
             var maxTime = DateTime.Now.Subtract(new TimeSpan(408, 0, 0));
 
             var jobsToDelete = await _context.Jobs.Where(a => a.LastActivation < maxTime).ToListAsync();
@@ -157,7 +156,7 @@ namespace Freelance.Infrastructure.Repositories
             await _context.SaveChangesAsync();
 
             var jobs = await _context.Jobs
-                .Where(a => a.LastActivation < maxCorrect && a.LastActivation > maxCorrectPlusDay).ToListAsync();
+                .Where(a => a.LastActivation < maxCorrect && a.WasNotified == false).ToListAsync();
 
             return jobs;
         }

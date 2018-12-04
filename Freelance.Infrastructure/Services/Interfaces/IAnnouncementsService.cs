@@ -13,12 +13,12 @@ namespace Freelance.Infrastructure.Services.Interfaces
         Task<AnnouncementViewModel> GetAnnouncementByIdAsync(int announcementId);
         Task<AnnouncementViewModel> AddAnnouncementAsync(AnnouncementViewModel announcement);
         Task RemoveAnnouncementAsync(int announcementId);
-        Task<ICollection<AnnouncementOfferViewModel>> GetPublishedOffersAsync(string userId);
-        Task<ICollection<AnnouncementOfferViewModel>> GetReceivedOffersAsync(string userId);
         Task<AnnouncementOfferViewModel> AddOfferAsync(AnnouncementOfferViewModel offer);
         Task<AnnouncementOfferViewModel> AcceptOfferAsync(int offerId, string userId);
         Task DeclineOfferAsync(int offerId, string userId);
         Task<AnnouncementOfferViewModel> EndOfferAsync(int id, string userId);
-        Task<List<Announcement>> GetOldAnnouncementsAsync();
+        Task<List<AnnouncementViewModel>> GetOldAnnouncementsAsync();
+        Task<AnnouncementViewModel> ActivateAnnouncementAsync(int id, string userId);
+        Task<AnnouncementViewModel> UpdateAnnouncementAsync(AnnouncementViewModel announcement);
     }
 }

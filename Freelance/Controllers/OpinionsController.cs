@@ -70,6 +70,13 @@ namespace Freelance.Controllers
             return View(new AddOpinionViewModel {Opinion = opinion, PossibleGrades = GetPossibleGrades()});
         }
 
+        public async Task<ActionResult> GetOpinions(string userId)
+        {
+            var opinions = await _opinionsService.GetOpinionsByEvaluatedUserId(userId);
+
+            return PartialView("OpinionsList", opinions);
+        }
+
         private IEnumerable<SelectListItem> GetPossibleGrades()
         {
             return new List<SelectListItem>()
