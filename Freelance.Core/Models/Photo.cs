@@ -11,7 +11,7 @@ namespace Freelance.Core.Models
     public class Photo
     {
         public int PhotoId { get; set; }
-        [StringLength(31)]
+        [StringLength(32)]
         public string ContentType { get; set; }
         public byte[] Content { get; set; }
         public int? AnnouncementId { get; set; }

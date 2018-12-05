@@ -20,8 +20,8 @@ namespace Freelance.Core.Models
         [Display(Name = "Ocena")]
         public int Rating { get; set; }
 
-        [Required(ErrorMessage = "{0} jest wymagany")]
-        [StringLength(100, ErrorMessage = "Maksymalna ilośc znaków to {1}")]
+        [Required]
+        [StringLength(128, ErrorMessage = "Maksymalna ilośc znaków to {1}")]
         [Display(Name = "Opis")]
         public string Review { get; set; }
     }

@@ -19,13 +19,15 @@ namespace Freelance.Infrastructure.Services.Implementations
     {
         private IJobsRepository _jobsRepository;
         private IServiceTypesService _serviceTypesService;
+        private IEmailService _emailService;
         private IMapper _mapper;
 
-        public JobsService(IJobsRepository jobsRepository, IServiceTypesService serviceTypesService, IMapper mapper)
+        public JobsService(IJobsRepository jobsRepository, IServiceTypesService serviceTypesService, IMapper mapper, IEmailService emailService)
         {
             _jobsRepository = jobsRepository;
             _serviceTypesService = serviceTypesService;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         public async Task<JobsListViewModel> GetJobsAsync(int page, int amount, decimal minWage, decimal maxWage, string[] availability,
@@ -150,6 +152,7 @@ namespace Freelance.Infrastructure.Services.Implementations
 
             if (result.Status == RepositoryStatus.Created)
             {
+                await _emailService.Notify(result.Entity);
                 return _mapper.Map<JobOfferViewModel>(result.Entity);
             }
 

@@ -88,26 +88,26 @@ namespace Freelance.Tests.IntegrationTests
             }
         }
 
-[Test]
-public async Task AddOfferAsync_ShouldAddNewOffer()
-{
-    var context = new ApplicationDbContext();
-    var repository = new AnnouncementsRepository(context);
-    using (var dbContextTransaction = context.Database.BeginTransaction())
-    {
-        var user = context.Users.First();
-        var result = await repository.AddOfferAsync(new AnnouncementOffer()
+        [Test]
+        public async Task AddOfferAsync_ShouldAddNewOffer()
         {
-            OffererId = user.Id, AnnouncementId = 1, Message = "Message", ProposedRate = 40M
-        });
+            var context = new ApplicationDbContext();
+            var repository = new AnnouncementsRepository(context);
+            using (var dbContextTransaction = context.Database.BeginTransaction())
+            {
+                var user = context.Users.First();
+                var result = await repository.AddOfferAsync(new AnnouncementOffer()
+                {
+                    OffererId = user.Id, AnnouncementId = 1, Message = "Message", ProposedRate = 40M
+                });
 
-        var announcement = context.Announcements.First();
-        
-        Assert.AreEqual(1, announcement.Offers.Count);
+                var announcement = context.Announcements.First(a => a.AnnouncementId == 1);
+                
+                Assert.AreEqual(1, announcement.Offers.Count);
 
-        dbContextTransaction.Rollback();
-    }
-}
+                dbContextTransaction.Rollback();
+            }
+        }
 
         [Test]
         public async Task AcceptOfferAsync_ShouldSetOffersIsAcceptedToTrue()

@@ -24,7 +24,7 @@ namespace Freelance.Core.Models
         public virtual ApplicationUser Advertiser { get; set; }
 
         [Required]
-        [StringLength(25)]
+        [StringLength(128)]
         [MinLength(6)]
         public string Title { get; set; }
 
@@ -36,7 +36,7 @@ namespace Freelance.Core.Models
         [Required]
         public decimal ExpectedHourlyWage { get; set; }
 
-        [StringLength(31)]
+        [StringLength(32)]
         public string Localization { get; set; }
         public DateTime PublicationDate { get; set; }
 

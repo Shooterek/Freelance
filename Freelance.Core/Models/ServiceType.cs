@@ -12,7 +12,7 @@ namespace Freelance.Core.Models
         public int ServiceTypeId { get; set; }
 
         [Required]
-        [StringLength(30)]
+        [StringLength(32)]
         public string Name { get; set; }
     }
 }

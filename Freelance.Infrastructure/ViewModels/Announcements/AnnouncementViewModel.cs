@@ -16,13 +16,12 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
         }
 
         public int AnnouncementId { get; set; }
-
-        [Required]
+        
         public string AdvertiserId { get; set; }
         public  ApplicationUserViewModel Advertiser { get; set; }
 
         [Required(ErrorMessage = "{0} jest wymagany")]
-        [StringLength(25, MinimumLength = 6, ErrorMessage = "Ilość znaków powinna wynosić od {2} do {1}")]
+        [StringLength(128, MinimumLength = 6, ErrorMessage = "Ilość znaków powinna wynosić od {2} do {1}")]
         [Display(Name = "Tytuł")]
         public string Title { get; set; }
 
@@ -34,10 +33,11 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
         public Availability Availability { get; set; }
 
         [Required]
-        [Display(Name = "Oczekiwana stawka godzinowa")]
+        [Display(Name = "Oczekiwana stawka [zł/h]")]
         public decimal ExpectedHourlyWage { get; set; }
 
         [Display(Name = "Lokalizacja")]
+        [StringLength(32, ErrorMessage = "Maksymalna długość to {1}")]
         public string Localization { get; set; }
 
         [Required]

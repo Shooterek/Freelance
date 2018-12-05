@@ -235,6 +235,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\AutoMapperFactory.cs" />
     <Compile Include="Utilities\HtmlHelpers.cs" />
+    <Compile Include="App_GlobalResources\ValidationResources.Designer.cs">
+      <DependentUpon>ValidationResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -360,6 +365,12 @@
       <Project>{C37B4166-89CA-4167-818A-385237C2D419}</Project>
       <Name>Freelance.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\ValidationResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -24,6 +24,8 @@ namespace Freelance
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ModelBinders.Binders.DefaultBinder = new AvailabilityModelBinder();
+            ClientDataTypeModelValidatorProvider.ResourceClassKey = "ValidationResources";
+            DefaultModelBinder.ResourceClassKey = "ValidationResources";
             Task.Run(JobScheduler.Start);
         }
     }

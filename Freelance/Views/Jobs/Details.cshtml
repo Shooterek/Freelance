@@ -1,5 +1,4 @@
 ﻿@using System.Web.Mvc.Html
-@using Freelance.Infrastructure.ViewModels.Announcements
 @using Freelance.Infrastructure.ViewModels.Jobs
 @using Microsoft.AspNet.Identity
 @model Freelance.Infrastructure.ViewModels.Jobs.JobViewModel
@@ -43,7 +42,7 @@
                             <img id=@photo.PhotoId class="img-responsive preview"
                                  src="@String.Format("data:{0};base64,{1}", photo.ContentType, Convert.ToBase64String(photo.Content))" />
                                 <div class="modal fade" id=@("photo" + photo.PhotoId) tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

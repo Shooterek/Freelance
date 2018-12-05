@@ -25,7 +25,7 @@ namespace Freelance.Core.Models
         public ServiceType ServiceType { get; set; }
 
         [Required]
-        [StringLength(25)]
+        [StringLength(128)]
         [MinLength(6)]
         public string Title { get; set; }
         
@@ -44,7 +44,7 @@ namespace Freelance.Core.Models
         [Range(0.01, Double.MaxValue)]
         public decimal MaximumWage { get; set; }
 
-        [StringLength(31)]
+        [StringLength(32)]
         public string Localization { get; set; }
 
         public DateTime LastActivation { get; set; }

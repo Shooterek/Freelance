@@ -20,24 +20,25 @@ namespace Freelance.Infrastructure.Services.Implementations
     {
         public async Task Notify(AnnouncementOffer offer)
         {
-            var message = new MailMessage();
-            message.To.Add("plokarzbartlomiej@gmail.com");
-            message.Subject = "New Offer";
-            message.IsBodyHtml = true;
-            message.Body = "<div>Otrzymałeś nową ofertę</div><div></div>";
+            var client = GetClient();
 
-            using (var smtp = new SmtpClient())
+            var myMessage = new SendGridMessage();
+            myMessage.AddTo(new EmailAddress(offer.Announcement.Advertiser.Email));
+            myMessage.SetFrom(new EmailAddress("freelance@aspnetapplication.com", "Freelance"));
+            myMessage.SetSubject("Nowa oferta");
+
+            var actionLink = String.Format("freelance.azurewebsites.net/announcements/details/{0}", offer.AnnouncementId);
+            myMessage.AddContent(MimeType.Html,
+                String.Format("<div>Dostałeś nową ofertę do ogłoszenia: '{0}'.</div>\r\n</br>\r\n<div><a href=\"{1}\">Przejdź do ogłoszenia</a></div>",
+                    offer.Announcement.Title, actionLink));
+            try
             {
-                var credentials = new NetworkCredential
-                {
-                    UserName = "apikey",
-                    Password = "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"
-                };
-                smtp.Credentials = credentials;
-                smtp.Host = "smtp.sendgrid.net";
-                smtp.Port = 587;
-                smtp.EnableSsl = true;
-                await smtp.SendMailAsync(message);
+                var response = await client.SendEmailAsync(myMessage);
+            }
+            catch (Exception err)
+            {
+                Trace.TraceError("Failed to create Web transport: ." + err.Message);
+                await Task.FromResult(0);
             }
         }
 
@@ -46,12 +47,14 @@ namespace Freelance.Infrastructure.Services.Implementations
             var client = GetClient();
 
             var myMessage = new SendGridMessage();
-            myMessage.AddTo(new EmailAddress("plokarzbartlomiej@gmail.com"));
-            myMessage.SetFrom(new EmailAddress("Bachelors@degree.com", "Freelance"));
+            myMessage.AddTo(new EmailAddress(announcement.Advertiser.Email));
+            myMessage.SetFrom(new EmailAddress("freelance@aspnetapplication.com", "Freelance"));
             myMessage.SetSubject("Twoje ogłoszenie wkrótce wygaśnie");
 
             var actionLink = String.Format("freelance.azurewebsites.net/announcements/{0}/activate", announcement.AnnouncementId);
-            myMessage.AddContent(MimeType.Html, String.Format("<div style=\"text-align:center\">Twoje ogłoszenie wkrótce wygaśnie.</div>\r\n<div style=\"text-align:center\">Aby temu zapobiec przejdź pod adres:</div>\r\n<div style=\"text-align:center\"><a href=\"{0}\">{0}</a></div>", actionLink));
+            myMessage.AddContent(MimeType.Html, 
+                String.Format("<div>Twoje ogłoszenie '{0}' wkrótce wygaśnie.</div>\r\n</br>\r\n<div><a href=\"{1}\">Kliknij aby ponownie aktywować</a></div>",
+                announcement.Title, actionLink));
             try
             {
                 var response = await client.SendEmailAsync(myMessage);
@@ -68,12 +71,14 @@ namespace Freelance.Infrastructure.Services.Implementations
             var client = GetClient();
 
             var myMessage = new SendGridMessage();
-            myMessage.AddTo(new EmailAddress("plokarzbartlomiej@gmail.com"));
-            myMessage.SetFrom(new EmailAddress("Bachelors@degree.com", "Freelance"));
+            myMessage.AddTo(new EmailAddress(job.Employer.Email));
+            myMessage.SetFrom(new EmailAddress("freelance@aspnetapplication.com", "Freelance"));
             myMessage.SetSubject("Twoje zlecenie wkrótce wygaśnie");
 
             var actionLink = String.Format("freelance.azurewebsites.net/jobs/{0}/activate", job.JobId);
-            myMessage.AddContent(MimeType.Html, String.Format("<div style=\"text-align:center\">Twoje zlecenie wkrótce wygaśnie.</div>\r\n<div style=\"text-align:center\">Aby temu zapobiec przejdź pod adres:</div>\r\n<div style=\"text-align:center\"><a href=\"{0}\">{0}</a></div>", actionLink));
+            myMessage.AddContent(MimeType.Html,
+                String.Format("<div>Twoje zlecenie '{0}' wkrótce wygaśnie.</div>\r\n</br>\r\n<div><a href=\"{1}\">Kliknij aby ponownie aktywować</a></div>",
+                    job.Title, actionLink));
             try
             {
                 var response = await client.SendEmailAsync(myMessage);
@@ -87,24 +92,25 @@ namespace Freelance.Infrastructure.Services.Implementations
 
         public async Task Notify(JobOffer offer)
         {
-            var message = new MailMessage();
-            message.To.Add(offer.Offerer.Email);
-            message.Subject = "New Offer";
-            message.IsBodyHtml = true;
-            message.Body = "<h1>hALO</h1>";
+            var client = GetClient();
 
-            using (var smtp = new SmtpClient())
+            var myMessage = new SendGridMessage();
+            myMessage.AddTo(new EmailAddress(offer.Job.Employer.Email));
+            myMessage.SetFrom(new EmailAddress("freelance@aspnetapplication.com", "Freelance"));
+            myMessage.SetSubject("Nowa oferta");
+
+            var actionLink = String.Format("freelance.azurewebsites.net/jobs/details/{0}", offer.JobId);
+            myMessage.AddContent(MimeType.Html,
+                String.Format("<div>Dostałeś nową ofertę do zlecenia: '{0}'.</div>\r\n</br>\r\n<div><a href=\"{1}\">Przejdź do zlecenia</a></div>",
+                    offer.Job.Title, actionLink));
+            try
             {
-                var credentials = new NetworkCredential
-                {
-                    UserName = ConfigurationManager.AppSettings["email-address"],
-                    Password = ConfigurationManager.AppSettings["email-password"]
-                };
-                smtp.Credentials = credentials;
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.EnableSsl = true;
-                await smtp.SendMailAsync(message);
+                var response = await client.SendEmailAsync(myMessage);
+            }
+            catch (Exception err)
+            {
+                Trace.TraceError("Failed to create Web transport: ." + err.Message);
+                await Task.FromResult(0);
             }
         }
 

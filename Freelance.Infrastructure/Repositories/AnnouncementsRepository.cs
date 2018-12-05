@@ -27,7 +27,8 @@ namespace Freelance.Infrastructure.Repositories
         public async Task<RepositoryActionResult<Announcement>> GetByIdAsync(int id)
         {
             var announcement = await _context.Announcements
-                .Include(a => a.Offers.Select(o => o.Offerer))
+                .Include(a => a.Advertiser.Photo)
+                .Include(a => a.Offers.Select(o => o.Offerer.Photo))
                 .FirstOrDefaultAsync(a => a.AnnouncementId == id);
 
             if (announcement == null)
@@ -107,7 +108,10 @@ namespace Freelance.Infrastructure.Repositories
                 var offer = _context.AnnouncementOffers.Add(entity);
                 await _context.SaveChangesAsync();
 
-                return new RepositoryActionResult<AnnouncementOffer>(offer, RepositoryStatus.Created);
+                var addedOffer = await _context.AnnouncementOffers.Include(o => o.Announcement.Advertiser)
+                    .FirstOrDefaultAsync(o => o.AnnouncementOfferId == offer.AnnouncementOfferId);
+
+                return new RepositoryActionResult<AnnouncementOffer>(addedOffer, RepositoryStatus.Created);
             }
             catch (Exception e)
             {

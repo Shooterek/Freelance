@@ -32,7 +32,7 @@ namespace Freelance.Core.Models
         public decimal ProposedRate { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(256)]
         public string Message { get; set; }
         
         public bool IsAccepted { get; set; }

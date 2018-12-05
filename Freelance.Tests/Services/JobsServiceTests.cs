@@ -83,7 +83,7 @@ namespace Freelance.Tests.Services
                     }
                 });
 
-            _jobsService = new JobsService(jobsRepositoryMock.Object, serviceTypesServiceMock.Object, _mapper);
+            _jobsService = new JobsService(jobsRepositoryMock.Object, serviceTypesServiceMock.Object, _mapper, emailServiceMock.Object);
         }
 
         #endregion

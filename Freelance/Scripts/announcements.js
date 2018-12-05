@@ -21,19 +21,19 @@
         }
     });
 
-    $(document).on('click touchstart', '#next-page', function (event) {
+    $(document).on('click', '#next-page', function (event) {
         event.preventDefault();
         var pageNumber = $('#next-page').attr('data-page-number');
         changePage(pageNumber);
     });
 
-    $(document).on('click touchstart', '#previous-page', function (event) {
+    $(document).on('click', '#previous-page', function (event) {
         event.preventDefault();
         var pageNumber = $('#previous-page').attr('data-page-number');
         changePage(pageNumber);
     });
 
-    $(document).on('click touchstart', '.item', function (event) {
+    $(document).on('click', '.item', function (event) {
         event.currentTarget.children[1].children[0].children[0].children[0].click();
     });
 
@@ -42,11 +42,11 @@
         location.href = url;
     });
 
-    $(document).on('click touchstart', '#add-photos', function () {
+    $(document).on('click', '#add-photos', function () {
         $('#Photos').click();
     });
 
-    $(document).on('click touchstart', '#Photos', function () {
+    $(document).on('click', '#Photos', function () {
         $(this).val("");
     });
 
@@ -72,20 +72,20 @@
         }
     });
 
-    $(document).on('click touchstart', '.preview', function () {
+    $(document).on('click', '.preview', function () {
         var id = $(this).attr('id');
         var selector = `#photo${id}`;
         $(selector).modal('show');
     });
 
-    $(document).on('click touchstart', '#add-next', function () {
+    $(document).on('click', '#add-next', function () {
         if (areInputsTouchedAndCorrect()) {
             $('#add-1').toggleClass('hidden');
             $('#add-2').toggleClass('hidden');
         }
     });
 
-    $(document).on('click touchstart', '#add-previous', function () {
+    $(document).on('click', '#add-previous', function () {
         $('#add-2').toggleClass('hidden');
         $('#add-1').toggleClass('hidden');
     });
@@ -94,12 +94,12 @@
         $(this).toggleClass('disable-next-button');
     });
 
-    $(document).on('click touchstart', '#show-more-offers', function () {
+    $(document).on('click', '#show-more-offers', function () {
         $(this).addClass('hidden');
         $('#second-part').toggleClass('hidden');
     });
 
-    $(document).on('click touchstart', 'div.rating.pointer', function (event) {
+    $(document).on('click', 'div.rating.pointer', function (event) {
         var userId = $(this).attr('data-user-id');
         var user = $(this).attr('data-user');
         $.ajax({

@@ -59,7 +59,7 @@
                                             <span class="glyphicon glyphicon-chevron-left"></span>
                                         </a>
                                     }
-                                    <input id="page-number" type="number" value=@pagingInfo.CurrentPage min="1" max=@pagingInfo.TotalPages data-url=@Url.Action("Index", "Jobs") />
+                                    <input id="page-number" type="number" value=@pagingInfo.CurrentPage min="1" max=@pagingInfo.TotalPages data-url="/jobs/index/1/" />
                                     <span>z @(pagingInfo.TotalPages == 0 ? 1 : pagingInfo.TotalPages)</span>
                                     @if (pagingInfo.CurrentPage < pagingInfo.TotalPages)
                                     {

@@ -20,7 +20,6 @@ namespace Freelance.Infrastructure.ViewModels.Jobs
 
         public int JobId { get; set; }
         
-        [Required]
         public string EmployerId { get; set; }
         public ApplicationUserViewModel Employer { get; set; }
 
@@ -29,33 +28,33 @@ namespace Freelance.Infrastructure.ViewModels.Jobs
         public int ServiceTypeId { get; set; }
         public ServiceType ServiceType { get; set; }
 
-        [Required(ErrorMessage = "{0} jest wymagany")]
-        [StringLength(25, MinimumLength = 6, ErrorMessage = "Ilość znaków powinna wynosić od {2} do {1}")]
+        [Required]
+        [StringLength(128, MinimumLength = 6, ErrorMessage = "Ilość znaków powinna wynosić od {2} do {1}")]
         [Display(Name = "Tytuł")]
         public string Title { get; set; }
 
         [Display(Name = "Dostępność")]
         public Availability Availability { get; set; }
 
-        [Required(ErrorMessage = "{0} jest wymagany")]
+        [Required]
         [Display(Name = "Opis")]
         public string Description { get; set; }
 
         [Display(Name = "Data publikacji")]
         public DateTime PublicationDate { get; set; }
 
-        [Required(ErrorMessage = "{0} jest wymagana")]
+        [Required]
         [Range(0.01, Double.MaxValue)]
-        [Display(Name = "Stawka minimalna")]
+        [Display(Name = "Stawka minimalna [zł/h]")]
         public decimal MinimumWage { get; set; }
 
-        [Required(ErrorMessage = "{0} jest wymagana")]
-        [Range(0.01, Double.MaxValue, ErrorMessage = "Błędna wartość")]
-        [Display(Name = "Stawka maksymalna")]
+        [Required]
+        [Range(0.01, Double.MaxValue)]
+        [Display(Name = "Stawka maksymalna [zł/h]")]
         public decimal MaximumWage { get; set; }
 
         [Display(Name = "Lokalizacja")]
-        [StringLength(31, ErrorMessage = "Maksymalna długość to {1}")]
+        [StringLength(32, ErrorMessage = "Maksymalna długość to {1}")]
         public string Localization { get; set; }
 
         public DateTime LastActivation { get; set; }

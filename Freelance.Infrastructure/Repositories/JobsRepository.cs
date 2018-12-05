@@ -111,6 +111,9 @@ namespace Freelance.Infrastructure.Repositories
                 var job = _context.JobOffers.Add(entity);
                 await _context.SaveChangesAsync();
 
+                var addedJob = await _context.JobOffers.Include(o => o.Job.Employer)
+                    .FirstOrDefaultAsync(o => o.JobOfferId == job.JobOfferId);
+
                 return new RepositoryActionResult<JobOffer>(entity, RepositoryStatus.Created);
             }
             catch (Exception e)

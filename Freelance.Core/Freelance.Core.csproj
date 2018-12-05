@@ -141,6 +141,10 @@
     <Compile Include="Migrations\201812041103011_AddWasNotifiedField.Designer.cs">
       <DependentUpon>201812041103011_AddWasNotifiedField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812041724323_ChangeFieldsLength.cs" />
+    <Compile Include="Migrations\201812041724323_ChangeFieldsLength.Designer.cs">
+      <DependentUpon>201812041724323_ChangeFieldsLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
@@ -162,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812041103011_AddWasNotifiedField.resx">
       <DependentUpon>201812041103011_AddWasNotifiedField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812041724323_ChangeFieldsLength.resx">
+      <DependentUpon>201812041724323_ChangeFieldsLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
