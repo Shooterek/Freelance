@@ -2,30 +2,35 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div id="body-container">
+    <div class="jumbotron">
+        <h2>Znajdź najlepszego freelancera już dziś. </h2>
+        <p class="lead">Bądź jedną z pierwszych osób, które skorzystają z najnowszego serwisu dla freelancerów.</p>
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Zatrudniaj</h2>
+            <p>
+                Szukasz wykonawcy dla swojego zlecenia? Sprawdź w zakładce Zatrudnij -> Przeglądaj ogłoszenia.
+                Być może freelancer tylko czeka na ofertę od Ciebie. Jeśli nie uda Ci się znaleźć odpowiedniego freelancera
+            </p>
+            <p>@Html.ActionLink("Opublikuj zlecenie", "Add", "Jobs", null, new {@class="btn btn-default round"})</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Pracuj</h2>
+            <p>
+                Uważasz, że dzięki swoim zdolnościom możesz pomóc innym użytkownikom przy okazji zarabiając pieniądze?
+                Znajdź pracodawców w zakładce Znajdź pracę -> Przeglądaj zlecenia. Jeśli obecnie nie ma tam zlecenia odpowiedniego dla Ciebie, to
+            </p>
+            <p>@Html.ActionLink("Dodaj ogłoszenie", "Add", "Announcements", null, new {@class="btn btn-default round"})</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Oceniaj</h2>
+            <p>Jeśli właśnie zakończyłeś współpracę z innym użytkownikiem, to poświęć chwilę na jego ocenę.
+                Poleć go, jeśli uważasz, że dobrze Wasza współpraca przebiegła pomyślnie.
+                W przeciwnym razie ostrzeż przed nim innych użytkowników.
+            </p>
+        </div>
     </div>
 </div>

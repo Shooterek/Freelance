@@ -239,6 +239,7 @@
       <DependentUpon>ValidationResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +250,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\backgroundPhoto.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -270,8 +272,10 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\freelance - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\freelance - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\Freelance - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\freelance - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\freelance - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\Freelance - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\new.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -368,8 +372,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\ValidationResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationResources.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

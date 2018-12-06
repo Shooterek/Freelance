@@ -108,7 +108,11 @@ namespace Freelance.Controllers
             offer.OffererId = User.Identity.GetUserId();
             offer.SubmissionDate = DateTime.Now;
             var result = await _announcementService.AddOfferAsync(offer);
-            return RedirectToAction("Details", new {id = offer.AnnouncementId});
+            if (result == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.Created);
         }
         
         [HttpPost]

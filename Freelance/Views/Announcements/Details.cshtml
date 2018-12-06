@@ -79,7 +79,8 @@
                     </div>
                 }
 
-                @if (isAuthenticatedAndNotAdvertiser && Model.Offers.All(o => o.OffererId != Context.User.Identity.GetUserId()))
+                @if (isAuthenticatedAndNotAdvertiser && Model.Offers.All(o => 
+                    o.OffererId == Context.User.Identity.GetUserId() && o.IsFinished || o.OffererId != Context.User.Identity.GetUserId()))
                 {
                     <br/>
                     <div class="row">

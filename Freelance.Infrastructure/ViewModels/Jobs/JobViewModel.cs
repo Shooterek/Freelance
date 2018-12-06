@@ -23,12 +23,12 @@ namespace Freelance.Infrastructure.ViewModels.Jobs
         public string EmployerId { get; set; }
         public ApplicationUserViewModel Employer { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Kategoria")]
         public int ServiceTypeId { get; set; }
         public ServiceType ServiceType { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [StringLength(128, MinimumLength = 6, ErrorMessage = "Ilość znaków powinna wynosić od {2} do {1}")]
         [Display(Name = "Tytuł")]
         public string Title { get; set; }
@@ -36,19 +36,19 @@ namespace Freelance.Infrastructure.ViewModels.Jobs
         [Display(Name = "Dostępność")]
         public Availability Availability { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Opis")]
         public string Description { get; set; }
 
         [Display(Name = "Data publikacji")]
         public DateTime PublicationDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [Range(0.01, Double.MaxValue)]
         [Display(Name = "Stawka minimalna [zł/h]")]
         public decimal MinimumWage { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [Range(0.01, Double.MaxValue)]
         [Display(Name = "Stawka maksymalna [zł/h]")]
         public decimal MaximumWage { get; set; }

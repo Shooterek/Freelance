@@ -20,13 +20,13 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
         public string OffererId { get; set; }
         public ApplicationUserViewModel Offerer { get; set; }
 
-        [Required(ErrorMessage = "{0} jest wymagana")]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [Range(0.01, Double.MaxValue, ErrorMessage = "Błędna wartość")]
         [Display(Name = "Stawka")]
         public decimal ProposedRate { get; set; }
 
-        [Required(ErrorMessage = "{0} jest wymagana")]
-        [StringLength(255, ErrorMessage = "Zbyt długi tekst")]
+        [Required(ErrorMessage = "Pole jest wymagane")]
+        [StringLength(255, ErrorMessage = "Maksymalna długość to {2}")]
         [Display(Name = "Wiadomość")]
         public string Message { get; set; }
 

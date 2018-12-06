@@ -74,7 +74,7 @@ namespace Freelance.Tests.Repositories
         }
 
         [Test]
-        public async Task GetByIdAsync_ShouldReturnRepositoryStatusNotFound_WhenNotContainingEntityWithSpecifiedId()
+        public async Task GetByIdAsync_ShouldReturnRepositoryStatusNotFound_IfEntityWithSpecifiedIdDoesNotExist()
         {
             var repository = new AnnouncementsRepository(_dbContextMock.Object);
 
@@ -115,7 +115,7 @@ namespace Freelance.Tests.Repositories
         }
 
         [Test]
-        public async Task RemoveAsync_ShouldReturnRepositoryStatusDeleted_WhenContainingEntityWithSpecifiedId()
+        public async Task RemoveAsync_ShouldReturnRepositoryStatusDeleted_IfEntityWithSpecifiedIdExists()
         {
             var repository = new AnnouncementsRepository(_dbContextMock.Object);
 

@@ -20,27 +20,28 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
         public string AdvertiserId { get; set; }
         public  ApplicationUserViewModel Advertiser { get; set; }
 
-        [Required(ErrorMessage = "{0} jest wymagany")]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [StringLength(128, MinimumLength = 6, ErrorMessage = "Ilość znaków powinna wynosić od {2} do {1}")]
         [Display(Name = "Tytuł")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Opis")]
         public string Description { get; set; }
 
         [Display(Name = "Dostępność")]
         public Availability Availability { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Oczekiwana stawka [zł/h]")]
+        [Range(0.01, Double.MaxValue)]
         public decimal ExpectedHourlyWage { get; set; }
 
         [Display(Name = "Lokalizacja")]
         [StringLength(32, ErrorMessage = "Maksymalna długość to {1}")]
         public string Localization { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Kategoria")]
         public int ServiceTypeId { get; set; }
 

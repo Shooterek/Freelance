@@ -204,7 +204,7 @@ section > h2 {
     padding-bottom: -15px;
     width: 100%;
     background-color: white;
-    text-align: center;
+    padding-left: 10px;
 }
 
 footer > p {
@@ -225,7 +225,20 @@ footer > p {
 
 .word-wrap {
     overflow-wrap: break-word;
+}
+
+.text-center {
     text-align: center;
+}
+
+#body-container {
+    /* color: white; */
+    /* background: linear-gradient(#3b5998, teal); */
+
+    /* background-image: url("Images/backgroundPhoto.jpg"); */
+    /* background-color: #cccccc; */
+    /* background-size: cover; */
+    /* background-repeat: no-repeat; */
 }
 
 /* Bootstrap */

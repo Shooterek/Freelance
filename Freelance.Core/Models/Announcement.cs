@@ -34,6 +34,7 @@ namespace Freelance.Core.Models
         public Availability Availability { get; set; }
 
         [Required]
+        [Range(0.01, Double.MaxValue)]
         public decimal ExpectedHourlyWage { get; set; }
 
         [StringLength(32)]

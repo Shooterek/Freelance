@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Job.ServiceTypeId, "ServiceTypeId", htmlAttributes: new { @class = "control-label" })
+                        @Html.LabelFor(model => model.Job.ServiceTypeId, htmlAttributes: new { @class = "control-label" })
                         <div>
                             @Html.DropDownListFor(model => model.Job.ServiceTypeId, Model.ServiceTypes)
                             @Html.ValidationMessageFor(model => model.Job.ServiceTypeId, "", new { @class = "text-danger" })
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Job.Availability, "Availability", htmlAttributes: new { @class = "control-label" })
+                        @Html.LabelFor(model => model.Job.Availability, htmlAttributes: new { @class = "control-label" })
                         <div>
                             @(Html.CheckBoxListForEnum<AddJobViewModel, Availability>(model => model.Job.Availability, "Availability"))
                             @Html.ValidationMessageFor(model => model.Job.Availability, "", new { @class = "text-danger" })

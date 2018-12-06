@@ -1,7 +1,7 @@
 ﻿@model Freelance.Infrastructure.ViewModels.Jobs.JobOfferViewModel
 
 
-@using (Html.BeginForm("SubmitOffer", "Jobs"))
+@using (Html.BeginForm("SubmitOffer", "Jobs", null, FormMethod.Post, new { id = "add-offer-form" }))
 {
     @Html.AntiForgeryToken()
 

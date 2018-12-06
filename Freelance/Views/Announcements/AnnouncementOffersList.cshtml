@@ -17,7 +17,7 @@
             <img class="img-responsive" width="120" height="120" alt="Zdjęcie użytkownika"
                  src="@(offers[x].Offerer.Photo != null ? String.Format("data:{0};base64,{1}", offers[x].Offerer.Photo.ContentType, Convert.ToBase64String(offers[x].Offerer.Photo.Content)) 
                             : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")"/>
-            <div class="word-wrap">
+            <div class="word-wrap text-center">
                 <span>@offers[x].Offerer.UserName</span>
             </div>
             <div class="@(offers[x].Offerer.ReceivedOpinions.Any() ? "rating pointer" : "rating")"
@@ -108,7 +108,7 @@
                     <img class="img-responsive" width="120" height="120" alt="Zdjęcie użytkownika"
                          src="@(offers[x].Offerer.Photo != null ? String.Format("data:{0};base64,{1}", offers[x].Offerer.Photo.ContentType, Convert.ToBase64String(offers[x].Offerer.Photo.Content))
                             : "http://stjohntruck.com/wp-content/uploads/2018/01/person-placeholder.jpg")" />
-                    <div class="word-wrap">
+                    <div class="word-wrap text-center">
                         <span>@offers[x].Offerer.UserName</span>
                     </div>
                     <div class="@(offers[x].Offerer.ReceivedOpinions.Any() ? "rating pointer" : "rating")"

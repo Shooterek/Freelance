@@ -79,10 +79,29 @@
     });
 
     $(document).on('click', '#add-next', function () {
-        if (areInputsTouchedAndCorrect()) {
+        if (areInputsTouchedAndCorrect("#add-1 :input.form-control")) {
             $('#add-1').toggleClass('hidden');
             $('#add-2').toggleClass('hidden');
         }
+    });
+
+    $("#add-offer-form").submit(function (e) {
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), // serializes the form's elements.
+            success: function (data, textStatus, xhr) {
+                location.href = location.href;
+            },
+            error: function(data) {
+                alert("Nie udało się dodać oferty");
+            }
+        });
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
     });
 
     $(document).on('click', '#add-previous', function () {
@@ -126,9 +145,9 @@ var changePage = function(value) {
     location.href = url;
 }
 
-var areInputsTouchedAndCorrect = function () {
+var areInputsTouchedAndCorrect = function (selector) {
     var isCorrect = true;
-    $("#add-1 :input.form-control").each((index, element) => {
+    $(selector).each((index, element) => {
         isCorrect = !$(element).valid() ? false : isCorrect;
     });
 

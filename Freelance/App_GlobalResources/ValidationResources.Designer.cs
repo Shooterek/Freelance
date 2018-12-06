@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Freelance.Core {
+namespace Resources {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace Freelance.Core {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ValidationResources {
+    public class ValidationResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace Freelance.Core {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Freelance.Core.ValidationResources", typeof(ValidationResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Freelance.App_GlobalResources.ValidationResources", typeof(ValidationResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Freelance.Core {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Freelance.Core {
         /// <summary>
         ///   Looks up a localized string similar to Pole {0} musi być datą.
         /// </summary>
-        internal static string FieldMustBeDate {
+        public static string FieldMustBeDate {
             get {
                 return ResourceManager.GetString("FieldMustBeDate", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Freelance.Core {
         /// <summary>
         ///   Looks up a localized string similar to Pole {0} musi być liczbą.
         /// </summary>
-        internal static string FieldMustBeNumeric {
+        public static string FieldMustBeNumeric {
             get {
                 return ResourceManager.GetString("FieldMustBeNumeric", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Freelance.Core {
         /// <summary>
         ///   Looks up a localized string similar to Wartość &apos;{0}&apos; jest niepoprawna dla {1}.
         /// </summary>
-        internal static string PropertyValueInvalid {
+        public static string PropertyValueInvalid {
             get {
                 return ResourceManager.GetString("PropertyValueInvalid", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Freelance.Core {
         /// <summary>
         ///   Looks up a localized string similar to Pole jest wymagane.
         /// </summary>
-        internal static string PropertyValueRequired {
+        public static string PropertyValueRequired {
             get {
                 return ResourceManager.GetString("PropertyValueRequired", resourceCulture);
             }

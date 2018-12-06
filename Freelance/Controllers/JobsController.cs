@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Freelance.Core.Models;
@@ -12,6 +13,7 @@ using WebGrease.Css.Extensions;
 
 namespace Freelance.Controllers
 {
+    [Authorize]
     public class JobsController : Controller
     {
         private IJobsService _jobsService;
@@ -100,7 +102,13 @@ namespace Freelance.Controllers
             offer.OffererId = User.Identity.GetUserId();
             offer.SubmissionDate = DateTime.Now;
             var result = await _jobsService.AddOfferAsync(offer);
-            return RedirectToAction("Details", new { id = offer.JobId });
+
+            if (result == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.Created);
         }
 
         [HttpPost]
