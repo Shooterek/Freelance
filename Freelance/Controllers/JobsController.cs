@@ -27,7 +27,7 @@ namespace Freelance.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<ActionResult> Index(int page, decimal minWage = Decimal.One, decimal maxWage = Decimal.MaxValue,
+        public async Task<ActionResult> Index(int page, int minWage = 1, int maxWage = Int32.MaxValue,
             string[] availability = null, string localization = null, int? serviceType = null, string sort = null)
         {
             var result = await _jobsService.GetJobsAsync(page, PageSize, minWage, maxWage, availability, localization, serviceType, sort);
@@ -61,9 +61,13 @@ namespace Freelance.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add([Bind(Exclude = "ServiceTypes")]AddJobViewModel viewModel)
         {
+            var job = viewModel.Job;
+            if (job.MinimumWage > job.MaximumWage)
+            {
+                ModelState.AddModelError("Job.MaximumWage", "Maksymalna stawka musi być większa od stawki minimalnej");
+            }
             if (ModelState.IsValid)
             {
-                var job = viewModel.Job;
                 job.EmployerId = User.Identity.GetUserId();
 
                 viewModel.Photos.Where(p => p != null).ForEach(p =>

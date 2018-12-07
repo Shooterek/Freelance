@@ -32,7 +32,7 @@ namespace Freelance.Controllers
         }
         
         [AllowAnonymous]
-        public async Task<ActionResult> Index(int page, decimal minWage = Decimal.Zero, decimal maxWage = Decimal.MaxValue,
+        public async Task<ActionResult> Index(int page, int minWage = 1, int maxWage = Int32.MaxValue,
             string[] availability = null, string localization = null, int? serviceType = null, string sort = null)
         {
             var result = await _announcementService.GetAnnouncementsAsync(page, PageSize, minWage, maxWage, availability, localization, serviceType, sort);

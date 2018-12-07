@@ -23,7 +23,7 @@ namespace Freelance.Tests.IntegrationTests
                 var initialAmount = context.Announcements.Count();
                 var user = context.Users.First();
                 var title = "Title1";
-                var result = await repository.AddAsync(new Announcement() {Title = title, Description = "Description", ExpectedHourlyWage = 10M, ServiceTypeId = 1, AdvertiserId = user.Id});
+                var result = await repository.AddAsync(new Announcement() {Title = title, Description = "Description", ExpectedHourlyWage = 10, ServiceTypeId = 1, AdvertiserId = user.Id});
 
                 var announcements = await repository.GetAllAsync();
 
@@ -98,7 +98,7 @@ namespace Freelance.Tests.IntegrationTests
                 var user = context.Users.First();
                 var result = await repository.AddOfferAsync(new AnnouncementOffer()
                 {
-                    OffererId = user.Id, AnnouncementId = 1, Message = "Message", ProposedRate = 40M
+                    OffererId = user.Id, AnnouncementId = 1, Message = "Message", ProposedRate = 40
                 });
 
                 var announcement = context.Announcements.First(a => a.AnnouncementId == 1);
@@ -122,7 +122,7 @@ namespace Freelance.Tests.IntegrationTests
                     OffererId = user.Id,
                     AnnouncementId = 1,
                     Message = "Message",
-                    ProposedRate = 40M
+                    ProposedRate = 40
                 });
 
                 await repository.AcceptOfferAsync(result.Entity);
@@ -147,7 +147,7 @@ namespace Freelance.Tests.IntegrationTests
                     OffererId = user.Id,
                     AnnouncementId = 1,
                     Message = "Message",
-                    ProposedRate = 40M
+                    ProposedRate = 40
                 });
 
                 var acceptedOffer = await repository.AcceptOfferAsync(result.Entity);
@@ -179,7 +179,7 @@ namespace Freelance.Tests.IntegrationTests
                         Title = "Title1",
                         Description = msg,
                         ServiceTypeId = 1,
-                        ExpectedHourlyWage = 10M,
+                        ExpectedHourlyWage = 10,
                         AdvertiserId = user.Id,
                         LastActivation = DateTime.Now.Subtract(new TimeSpan(i * 100, 0, 0))
                     });
@@ -189,8 +189,8 @@ namespace Freelance.Tests.IntegrationTests
                         Title = "Title1",
                         Description = msg,
                         ServiceTypeId = 1,
-                        MinimumWage = 10M,
-                        MaximumWage = 20M,
+                        MinimumWage = 10,
+                        MaximumWage = 20,
                         EmployerId = user.Id,
                         LastActivation = DateTime.Now.Subtract(new TimeSpan(i * 100, 0, 0))
                     });

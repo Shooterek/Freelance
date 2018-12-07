@@ -25,7 +25,7 @@ namespace Freelance.Tests.IntegrationTests
                 var title = "Title1";
                 var result = await repository.AddAsync(new Job()
                 {
-                    Title = title, Description = "Description", MinimumWage = 10M, MaximumWage = 30M, ServiceTypeId = 1,
+                    Title = title, Description = "Description", MinimumWage = 10, MaximumWage = 30, ServiceTypeId = 1,
                     EmployerId = user.Id
                 });
 
@@ -104,7 +104,7 @@ namespace Freelance.Tests.IntegrationTests
                     OffererId = user.Id,
                     JobId = 1,
                     Message = "Message",
-                    ProposedRate = 40M,
+                    ProposedRate = 40,
                     SubmissionDate = DateTime.Now
                 });
 
@@ -129,7 +129,7 @@ namespace Freelance.Tests.IntegrationTests
                     OffererId = user.Id,
                     JobId = 1,
                     Message = "Message",
-                    ProposedRate = 40M,
+                    ProposedRate = 40,
                     SubmissionDate = DateTime.Now
                 });
 
@@ -156,7 +156,7 @@ namespace Freelance.Tests.IntegrationTests
                     OffererId = user.Id,
                     JobId = 1,
                     Message = "Message",
-                    ProposedRate = 40M,
+                    ProposedRate = 40,
                     SubmissionDate = DateTime.Now
                 });
 

@@ -75,7 +75,7 @@
                                     <div>
                                         <h4>@Html.ActionLink(announcements[i].Title, "Details", new {id = announcements[i].AnnouncementId})</h4>
                                     </div>
-                                    <div>
+                                    <div class="word-wrap">
                                         <p>@announcements[i].Description.GetFirstCharacters(240)</p>
                                     </div>
                                 </div>

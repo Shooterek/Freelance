@@ -30,7 +30,7 @@ namespace Freelance.Infrastructure.Services.Implementations
             _emailService = emailService;
         }
 
-        public async Task<JobsListViewModel> GetJobsAsync(int page, int amount, decimal minWage, decimal maxWage, string[] availability,
+        public async Task<JobsListViewModel> GetJobsAsync(int page, int amount, int minWage, int maxWage, string[] availability,
             string localization, int? serviceTypeId, string sort)
         {
             var result = await _jobsRepository.GetAllAsync();
@@ -42,7 +42,7 @@ namespace Freelance.Infrastructure.Services.Implementations
             }
 
             var entities = result.Entity.Where(a => (a.Localization == localization || localization == null)
-                                                    && (a.MinimumWage > minWage || a.MaximumWage < maxWage)
+                                                    && !(a.MaximumWage < minWage || a.MinimumWage > maxWage)
                                                     && (serviceTypeId == null || a.ServiceTypeId == serviceTypeId)).ToList();
 
             if (availability != null)

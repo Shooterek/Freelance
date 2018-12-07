@@ -42,9 +42,9 @@ namespace Freelance.Tests.Services
 
             var data = new List<Job>()
             {
-                new Job() {JobId = _existingId, Title = "Job1", ServiceTypeId = 1, EmployerId = "User1", Availability = Availability.Monday, MinimumWage = 10.0M},
-                new Job() {JobId = 2, Title = "Job2", ServiceTypeId = 1, EmployerId = "User2", Availability = Availability.Tuesday, MinimumWage = 20.0M},
-                new Job() {JobId = 3, Title = "Job3", ServiceTypeId = 2, EmployerId = "User1", Availability = Availability.Wednesday, MinimumWage = 30.0M}
+                new Job() {JobId = _existingId, Title = "Job1", ServiceTypeId = 1, EmployerId = "User1", Availability = Availability.Monday, MinimumWage = 10, MaximumWage = 15},
+                new Job() {JobId = 2, Title = "Job2", ServiceTypeId = 1, EmployerId = "User2", Availability = Availability.Tuesday, MinimumWage = 20, MaximumWage = 25},
+                new Job() {JobId = 3, Title = "Job3", ServiceTypeId = 2, EmployerId = "User1", Availability = Availability.Wednesday, MinimumWage = 30, MaximumWage = 54}
             };
             _initialAmount = data.Count;
 
@@ -105,7 +105,7 @@ namespace Freelance.Tests.Services
             int amountOfItemsToGet = 5;
             int page = 1;
 
-            var result = await _jobsService.GetJobsAsync(page, amountOfItemsToGet, Decimal.Zero, Decimal.MaxValue, null, null, null, null);
+            var result = await _jobsService.GetJobsAsync(page, amountOfItemsToGet, 1, Int32.MaxValue, null, null, null, null);
 
             Assert.AreEqual(_initialAmount, result.Jobs.Count);
         }
@@ -116,7 +116,7 @@ namespace Freelance.Tests.Services
             int amountOfItemsToGet = 2;
             int page = 1;
 
-            var result = await _jobsService.GetJobsAsync(page, amountOfItemsToGet, Decimal.Zero, Decimal.MaxValue, null, null, null, null);
+            var result = await _jobsService.GetJobsAsync(page, amountOfItemsToGet, 1, Int32.MaxValue, null, null, null, null);
 
             Assert.AreEqual(amountOfItemsToGet, result.Jobs.Count);
         }
@@ -127,7 +127,7 @@ namespace Freelance.Tests.Services
             int amountOfItemsToGet = 2;
             int page = 2;
 
-            var result = await _jobsService.GetJobsAsync(page, amountOfItemsToGet, Decimal.Zero, Decimal.MaxValue, null, null, null, null);
+            var result = await _jobsService.GetJobsAsync(page, amountOfItemsToGet, 1, Int32.MaxValue, null, null, null, null);
 
             Assert.AreEqual(amountOfItemsToGet, result.PagingInfo.ItemsPerPage);
             Assert.AreEqual(page, result.PagingInfo.CurrentPage);
@@ -147,10 +147,10 @@ namespace Freelance.Tests.Services
         public async Task AddAsync_ShouldAddSpecifiedElement()
         {
             var result =
-                await _jobsService.AddJobAsync(new JobViewModel() { JobId = _notExistingId, Availability = Availability.Monday, MinimumWage = 1230 });
+                await _jobsService.AddJobAsync(new JobViewModel() { JobId = _notExistingId, Availability = Availability.Monday, MinimumWage = 1230, MaximumWage = 3000});
 
             var entity = await _jobsService.GetJobByIdAsync(_notExistingId);
-            var allEntities = await _jobsService.GetJobsAsync(1, _initialAmount + 1, Decimal.Zero, Decimal.MaxValue, null, null, null, null);
+            var allEntities = await _jobsService.GetJobsAsync(1, _initialAmount + 1, 1, Int32.MaxValue, null, null, null, null);
 
             Assert.AreEqual(result.JobId, entity.JobId);
             Assert.AreEqual(_initialAmount + 1, allEntities.Jobs.Count);

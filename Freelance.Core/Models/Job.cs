@@ -37,12 +37,12 @@ namespace Freelance.Core.Models
         public DateTime PublicationDate { get; set; }
 
         [Required]
-        [Range(0.01, Double.MaxValue)]
-        public decimal MinimumWage { get; set; }
+        [Range(1, Int32.MaxValue)]
+        public int MinimumWage { get; set; }
 
         [Required]
-        [Range(0.01, Double.MaxValue)]
-        public decimal MaximumWage { get; set; }
+        [Range(1, Int32.MaxValue)]
+        public int MaximumWage { get; set; }
 
         [StringLength(32)]
         public string Localization { get; set; }

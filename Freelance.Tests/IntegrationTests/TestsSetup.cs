@@ -26,8 +26,8 @@ namespace Freelance.Tests.IntegrationTests
             context.ServiceTypes.Add(new ServiceType() {Name = "Default"});
             context.SaveChanges();
             context.Announcements.Add(new Announcement()
-                {Title = "123456", Description = "123", ServiceTypeId = 1, ExpectedHourlyWage = 10M, AdvertiserId = user.Id});
-            context.Jobs.Add(new Job() {Title = "123456", Description = "1234", ServiceTypeId = 1, MinimumWage = 10M, MaximumWage = 20M, EmployerId = user.Id});
+                {Title = "123456", Description = "123", ServiceTypeId = 1, ExpectedHourlyWage = 10, AdvertiserId = user.Id});
+            context.Jobs.Add(new Job() {Title = "123456", Description = "1234", ServiceTypeId = 1, MinimumWage = 10, MaximumWage = 20, EmployerId = user.Id});
             context.SaveChanges();
         }
 

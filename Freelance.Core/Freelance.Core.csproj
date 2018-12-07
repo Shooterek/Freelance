@@ -145,6 +145,10 @@
     <Compile Include="Migrations\201812041724323_ChangeFieldsLength.Designer.cs">
       <DependentUpon>201812041724323_ChangeFieldsLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812072145593_ChangeDecimalToInt.cs" />
+    <Compile Include="Migrations\201812072145593_ChangeDecimalToInt.Designer.cs">
+      <DependentUpon>201812072145593_ChangeDecimalToInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementOffer.cs" />
@@ -236,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812041724323_ChangeFieldsLength.resx">
       <DependentUpon>201812041724323_ChangeFieldsLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812072145593_ChangeDecimalToInt.resx">
+      <DependentUpon>201812072145593_ChangeDecimalToInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

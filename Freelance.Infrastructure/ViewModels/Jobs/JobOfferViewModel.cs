@@ -24,9 +24,9 @@ namespace Freelance.Infrastructure.ViewModels.Jobs
         public ApplicationUserViewModel Offerer { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
-        [Range(0.01, Double.MaxValue, ErrorMessage = "Błedna wartość")]
+        [Range(1, Int32.MaxValue, ErrorMessage = "Błedna wartość")]
         [Display(Name = "Zaproponowana stawka")]
-        public decimal ProposedRate { get; set; }
+        public int ProposedRate { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
         [StringLength(255, ErrorMessage = "Maksymalna długość to {2}")]

@@ -30,7 +30,7 @@ namespace Freelance.Infrastructure.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, decimal minWage, decimal maxWage,
+        public async Task<AnnouncementsListViewModel> GetAnnouncementsAsync(int page, int amount, int minWage, int maxWage,
             string[] availability, string localization, int? serviceTypeId, string sortOrder)
         {
             var result = await _announcementRepository.GetAllAsync();

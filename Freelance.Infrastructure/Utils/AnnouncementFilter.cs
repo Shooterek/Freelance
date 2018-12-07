@@ -13,11 +13,11 @@ namespace Freelance.Infrastructure.Utils
         public Availability Availability { get; set; }
 
         [Display(Name = "Stawka minimalna")]
-        public decimal? MinWage { get; set; }
+        public int? MinWage { get; set; }
 
 
         [Display(Name = "Stawka maksymalna")]
-        public decimal? MaxWage { get; set; }
+        public int? MaxWage { get; set; }
 
         [Display(Name = "Lokalizacja")]
         public string Localization { get; set; }

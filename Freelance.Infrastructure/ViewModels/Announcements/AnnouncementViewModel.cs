@@ -34,8 +34,8 @@ namespace Freelance.Infrastructure.ViewModels.Announcements
 
         [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Oczekiwana stawka [zł/h]")]
-        [Range(0.01, Double.MaxValue)]
-        public decimal ExpectedHourlyWage { get; set; }
+        [Range(1, Int32.MaxValue)]
+        public int ExpectedHourlyWage { get; set; }
 
         [Display(Name = "Lokalizacja")]
         [StringLength(32, ErrorMessage = "Maksymalna długość to {1}")]

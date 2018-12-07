@@ -44,14 +44,14 @@ namespace Freelance.Infrastructure.ViewModels.Jobs
         public DateTime PublicationDate { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
-        [Range(0.01, Double.MaxValue)]
+        [Range(1, Int32.MaxValue)]
         [Display(Name = "Stawka minimalna [zł/h]")]
-        public decimal MinimumWage { get; set; }
+        public int MinimumWage { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane")]
-        [Range(0.01, Double.MaxValue)]
+        [Range(1, Int32.MaxValue)]
         [Display(Name = "Stawka maksymalna [zł/h]")]
-        public decimal MaximumWage { get; set; }
+        public int MaximumWage { get; set; }
 
         [Display(Name = "Lokalizacja")]
         [StringLength(32, ErrorMessage = "Maksymalna długość to {1}")]

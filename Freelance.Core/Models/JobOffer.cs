@@ -25,8 +25,8 @@ namespace Freelance.Core.Models
         public ApplicationUser Offerer { get; set; }
 
         [Required]
-        [Range(0.01, Double.MaxValue)]
-        public decimal ProposedRate { get; set; }
+        [Range(1, Int32.MaxValue)]
+        public int ProposedRate { get; set; }
         
         [Required]
         [StringLength(256)]

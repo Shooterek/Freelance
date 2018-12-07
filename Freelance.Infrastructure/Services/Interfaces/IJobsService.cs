@@ -11,7 +11,7 @@ namespace Freelance.Infrastructure.Services.Interfaces
 {
     public interface IJobsService
     {
-        Task<JobsListViewModel> GetJobsAsync(int page, int amount, decimal minWage, decimal maxWage, string[] availability,
+        Task<JobsListViewModel> GetJobsAsync(int page, int amount, int minWage, int maxWage, string[] availability,
             string localization, int? serviceTypeId, string sort);
         Task<JobViewModel> GetJobByIdAsync(int jobId);
         Task<JobViewModel> AddJobAsync(JobViewModel job);

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
+using System.Web.Security;
 
 namespace Freelance.Models
 {
@@ -42,19 +43,19 @@ namespace Freelance.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [Display(Name = "Email")]
         [EmailAddress(ErrorMessage = "Niepoprawny format adresu email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole jest wymagane")]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
@@ -71,7 +72,9 @@ namespace Freelance.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "{0} jest wymagane")]
-        [StringLength(100, ErrorMessage = "{0} musi mieć od {2} do {1} znaków", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} musi mieć od {2} do {1} znaków", MinimumLength = 8)]
+        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!()*]).{8,}$",
+            ErrorMessage = "Wymagana długość hasła to 8 znaków w tym znak specjalny, cyfra i wielka litera")]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }

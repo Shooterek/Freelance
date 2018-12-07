@@ -40,7 +40,7 @@
                     
                     <div class="row">
                         <div class="col-xs-12">
-                            <button type="button" id="add-next" class="btn btn-primary pull-right">Do przodu</button>
+                            <button type="button" id="add-next" class="btn btn-primary pull-right round">Do przodu</button>
                         </div>
                     </div>
 
@@ -50,20 +50,20 @@
                 <div id="add-2" class="hidden">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Announcement.ExpectedHourlyWage, htmlAttributes: new { @class = "control-label" })
-                        @Html.EditorFor(model => model.Announcement.ExpectedHourlyWage, new { htmlAttributes = new { @class = "form-control input-short"} })
+                        @Html.EditorFor(model => model.Announcement.ExpectedHourlyWage, new { htmlAttributes = new { @class = "form-control input-short round" } })
                         @Html.ValidationMessageFor(model => model.Announcement.ExpectedHourlyWage, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Announcement.Localization, htmlAttributes: new { @class = "control-label" })
-                        @Html.EditorFor(model => model.Announcement.Localization, new { htmlAttributes = new { @class = "form-control input-short" } })
+                        @Html.EditorFor(model => model.Announcement.Localization, new { htmlAttributes = new { @class = "form-control input-short round" } })
                         @Html.ValidationMessageFor(model => model.Announcement.Localization, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Announcement.ServiceTypeId, htmlAttributes: new { @class = "control-label" })
                         <div>
-                            @Html.DropDownListFor(model => model.Announcement.ServiceTypeId, Model.ServiceTypes)
+                            @Html.DropDownListFor(model => model.Announcement.ServiceTypeId, Model.ServiceTypes, new {@class="round"})
                             @Html.ValidationMessageFor(model => model.Announcement.ServiceTypeId, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -94,10 +94,10 @@
 
                     <div class="row">
                         <div class="col-xs-6">
-                            <button type="button" id="add-previous" class="btn btn-primary pull-left">Wróć</button>
+                            <button type="button" id="add-previous" class="btn btn-primary pull-left round">Wróć</button>
                         </div>
                         <div class="col-xs-6">
-                            <input type="submit" value="Opublikuj" class="btn btn-success pull-right" />
+                            <input type="submit" value="Opublikuj" class="btn btn-success pull-right round" />
                         </div>
                     </div>
                     

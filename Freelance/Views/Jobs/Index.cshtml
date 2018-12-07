@@ -80,7 +80,7 @@
                                     <div>
                                         <h4>@Html.ActionLink(jobs[i].Title, "Details", new { id = jobs[i].JobId })</h4>
                                     </div>
-                                    <div>
+                                    <div class="word-wrap">
                                         <p>@jobs[i].Description.GetFirstCharacters(240)</p>
                                     </div>
                                 </div>
